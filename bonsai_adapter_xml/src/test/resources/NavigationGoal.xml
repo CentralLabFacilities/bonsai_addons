@@ -1,0 +1,13 @@
+<NAVIGATIONGOAL>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <POSITION ref="world" kind="absolute" x="234.5" y="-6345.42" theta="0.34"/>
+    <TOLERANCES>
+        <DR quant="0.77"/>
+        <DTHETA quant="0.5"/>
+    </TOLERANCES>
+    <TYPE>GLOBAL</TYPE>
+</NAVIGATIONGOAL>

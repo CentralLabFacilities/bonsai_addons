@@ -1,0 +1,44 @@
+<COMMANDDATA>
+
+    <GENERATOR>test</GENERATOR>
+
+    <TIMESTAMP>
+        <INSERTED value="123"/>
+        <UPDATED value="456"/>
+    </TIMESTAMP>
+
+    <ACTION>bring</ACTION>
+
+    <LOCATION>appliance</LOCATION>
+
+    <SECONDLOCATION>location</SECONDLOCATION>
+
+    <PREPOSITION></PREPOSITION>
+
+    <OBJECT>drink</OBJECT>
+
+    <PERSON>person</PERSON>
+
+    <ROOM>kitchen</ROOM>
+
+    <OBJECTSET>TRUE</OBJECTSET>
+    <ACTIONSET>TRUE</ACTIONSET>
+    <SECONDLOCATIONSET>TRUE</SECONDLOCATIONSET>
+    <LOCATIONSET>TRUE</LOCATIONSET>
+    <PREPOSITIONSET>TRUE</PREPOSITIONSET>
+    <PERSONSET>TRUE</PERSONSET>
+    <ROOMSET>TRUE</ROOMSET>
+
+    <TREE>
+        <GRAMMARNONTERMINAL>
+            <GENERATOR>test</GENERATOR>
+            <TIMESTAMP>
+                <INSERTED value="123"/>
+                <UPDATED value="456"/>
+            </TIMESTAMP>
+            <GrammarNonTerminalData name=""/>
+        </GRAMMARNONTERMINAL>
+    </TREE>
+
+
+</COMMANDDATA>

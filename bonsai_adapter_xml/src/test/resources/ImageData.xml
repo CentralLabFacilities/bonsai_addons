@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<IMAGE>
+    <Info width="640" height="480" depth="1" color="RGB"/>
+    <Data>test</Data>
+    <TIMESTAMP>
+        <INSERTED value="1464095285645"/>
+        <UPDATED value="1464095285645"/>
+    </TIMESTAMP>
+    <GENERATOR>unknown</GENERATOR>
+    <FRAME_ID></FRAME_ID>
+</IMAGE>

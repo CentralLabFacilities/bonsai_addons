@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<BonsaiConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:noNamespaceSchemaLocation="BonsaiConfiguration.xsd">
+
+    <FactoryOptions factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory" />
+
+    
+    <Actuator key="SpeechActuator" factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory"
+              actuatorInterface="de.unibi.citec.clf.bonsai.actuators.SpeechActuator"
+              actuatorClass="de.unibi.citec.clf.bonsai.rsb.actuators.RsbSpeechActuator">
+        <Options>
+            <Option key="scope">/texttospeech/saysrv</Option>
+        </Options>
+    </Actuator>
+    
+</BonsaiConfiguration>

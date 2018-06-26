@@ -1,0 +1,7 @@
+<POINT3D x="1.0" y="2.0" z="3.0" scope="LOCAL">
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+</POINT3D>

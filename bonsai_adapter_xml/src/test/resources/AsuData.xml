@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<Utterance>
+    <TIMESTAMP>1257244616833</TIMESTAMP>
+    <GENERATOR>ASU</GENERATOR>
+    <MetaInfo>
+        <TimeStamp>1257244616833</TimeStamp>
+        <ProcessingStatus>FullUnderstanding</ProcessingStatus>
+        <ASRBehavior>normal</ASRBehavior>
+    </MetaInfo>
+    <SemanticInfo>
+        <PlainText>das ist eine Banane</PlainText>
+        <Category>description</Category>
+        <Content>
+            <Frame name="Existence">
+                <Word>ist</Word>
+                <Frame name="Object_kitchen" slot="Object">
+                    <Word>Banane</Word>
+                    <Frame name="Indefinite" slot="Definite">
+                        <Word>eine</Word>
+                    </Frame>
+                </Frame>
+                <Frame name="Maybe_gesture" slot="Maybe_gesture">
+                    <Word>das</Word>
+                </Frame>
+            </Frame>
+        </Content>
+    </SemanticInfo>
+    <Rating>1.0</Rating>
+</Utterance>

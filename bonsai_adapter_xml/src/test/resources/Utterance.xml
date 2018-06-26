@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<speech_hyp generator="pocketsphinxAdapter" origin="ordering" stable="1">
+    <GENERATOR>"pocketsphinxAdapter"</GENERATOR>
+    <TIMESTAMP>1448972928781000</TIMESTAMP>
+    <seq score="0">
+        <part type="word" id="0">tobi</part>
+        <part type="word" id="1">yes</part>
+        <part type="word" id="2"></part>
+    </seq>
+    <grammartree>
+        <confirm>
+            <confirm_yes>
+                <robot>
+                    <terminal refid="0">tobi</terminal>
+                </robot>
+                <yes_words>
+                    <terminal refid="1">yes</terminal>
+                </yes_words>
+            </confirm_yes>
+        </confirm>
+    </grammartree>
+</speech_hyp>

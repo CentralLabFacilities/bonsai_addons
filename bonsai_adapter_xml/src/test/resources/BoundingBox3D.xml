@@ -1,0 +1,35 @@
+<BOUNDINGBOX3D>
+    <GENERATOR>TestApp</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="253543797"/>
+        <UPDATED value="253543712"/>
+    </TIMESTAMP>
+    <POSE>
+        <POSE3D>
+            <TRANSLATION>
+                <POINT3D x="1.0" y="2.0" z="3.0" scope="LOCAL"/>
+            </TRANSLATION>
+            <ROTATION>
+                <ROTATION3D>
+                    <GENERATOR>TestApp</GENERATOR>
+                    <TIMESTAMP>
+                        <INSERTED value="253543797"/>
+                        <UPDATED value="253543712"/>
+                    </TIMESTAMP>
+                    <MATRIX a00="0.0" a01="1.0" a02="2.0" a10="3.0" a11="4.0"
+                            a12="5.0" a20="6.0" a21="7.0" a22="8.0"/>
+                </ROTATION3D>
+            </ROTATION>
+        </POSE3D>
+    </POSE>
+    <SIZE>
+        <POINT3D x="4.0" y="5.0" z="6.0" scope="LOCAL">
+            <GENERATOR>test</GENERATOR>
+            <TIMESTAMP>
+                <INSERTED value="12345"/>
+                <UPDATED value="67890"/>
+            </TIMESTAMP>
+        </POINT3D>
+    </SIZE>
+</BOUNDINGBOX3D>
+			

@@ -1,0 +1,28 @@
+<OBJECTSHAPE>
+    <GENERATOR>BoostDetector</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="253543797"/>
+        <UPDATED value="253543712"/>
+    </TIMESTAMP>
+    <HYPOTHESIS>
+        <GENERATOR>BoostDetector</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="253543797"/>
+            <UPDATED value="253543712"/>
+        </TIMESTAMP>
+        <CLASS id="-1">smacks</CLASS>
+        <RATING>
+            <RELIABILITY value="0.6"/>
+        </RATING>
+
+    </HYPOTHESIS>
+    <SHAPE width="4" height="1" depth="3" ID="0"/>
+    <POINT3D x="0" y="2" z="5" scope="LOCAL"/>
+    <SENSORTYPE>SONY_EVI</SENSORTYPE>
+    <POLYGON>
+        <POINT x="0" y="0"/>
+        <POINT x="1" y="1"/>
+        <POINT x="2" y="2"/>
+    </POLYGON>
+</OBJECTSHAPE>
+			

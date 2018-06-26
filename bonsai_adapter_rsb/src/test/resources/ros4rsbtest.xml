@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<BonsaiConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:noNamespaceSchemaLocation="../../main/resources/xml/bonsai_config/BonsaiConfiguration.xsd">
+
+    <FactoryOptions factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory">
+    </FactoryOptions>
+
+    <WorkingMemory key="WorkingMemory"
+                       factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory"
+                       workingMemoryClass="de.unibi.citec.clf.bonsai.rsb.RsbWorkingMemory">
+        <Options>
+            <Option key="memoryName">Scene</Option>
+        </Options>
+        <Slots>
+            <Slot slotClass="de.unibi.citec.clf.bonsai.rsb.slots.RsbBtlMemorySlot"
+                              dataTypeClass="de.unibi.citec.clf.btl.Type" />
+        </Slots>
+    </WorkingMemory>
+        
+    <Sensor key="PositionSensor" dataTypeClass="de.unibi.citec.clf.btl.data.navigation.PositionData"
+                    factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory" 
+                    sensorClass="de.unibi.citec.clf.bonsai.rsb.sensors.RsbBtlRstSensor">
+        <Options>
+            <Option key="scope">/ros4rsb/slampose</Option>
+            <Option key="rstType">rst.geometry.PoseType$Pose</Option>
+        </Options>
+    </Sensor>
+    
+    <Sensor key="OdomSensor" dataTypeClass="de.unibi.citec.clf.btl.data.navigation.PositionData"
+                    factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory" 
+                    sensorClass="de.unibi.citec.clf.bonsai.rsb.sensors.RsbBtlRstSensor">
+        <Options>
+            <Option key="scope">/ros4rsb/odometryData</Option>
+            <Option key="rstType">rst.geometry.PoseType$Pose</Option>
+        </Options>
+    </Sensor>
+    
+    <Sensor key="SpeedSensor" dataTypeClass="de.unibi.citec.clf.btl.data.navigation.SpeedData"
+                    factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory" 
+                    sensorClass="de.unibi.citec.clf.bonsai.rsb.sensors.RsbBtlRstSensor">
+        <Options>
+            <Option key="scope">/ros4rsb/speedData</Option>
+            <Option key="rstType">rst.kinematics.TwistType$Twist</Option>
+        </Options>
+    </Sensor>
+     
+     
+    <Sensor key="SlamMapSensor" dataTypeClass="de.unibi.citec.clf.btl.data.map.BinarySlamMap"
+                    factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory" 
+                    sensorClass="de.unibi.citec.clf.bonsai.rsb.sensors.RsbBtlRstSensor">
+        <Options>
+            <Option key="scope">/ros4rsb/slamMap</Option>
+            <Option key="rstType">rst.navigation.OccupancyGrid2DIntType$OccupancyGrid2DInt</Option>
+        </Options>
+    </Sensor>
+   
+    <Sensor key="GlobalPlanSensor" dataTypeClass="de.unibi.citec.clf.btl.data.navigation.GlobalPlan"
+                    factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory" 
+                    sensorClass="de.unibi.citec.clf.bonsai.rsb.sensors.RsbBtlRstSensor">
+        <Options>
+            <Option key="scope">/ros4rsb/globalplan</Option>
+            <Option key="rstType">rst.navigation.PathType$Path</Option>
+            
+        </Options>
+    </Sensor>
+</BonsaiConfiguration>

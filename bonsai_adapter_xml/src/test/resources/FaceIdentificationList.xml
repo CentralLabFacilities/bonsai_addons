@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<FACES>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <FACE>
+        <GENERATOR>test</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="12345"/>
+            <UPDATED value="67890"/>
+        </TIMESTAMP>
+        <REGION>
+            <CENTER x="156" y="175"/>
+            <RECTANGLE h="100" w="150" x="10" y="20"/>
+        </REGION>
+        <EYES>
+            <LEFT x="117" y="135"/>
+            <RIGHT x="191" y="120"/>
+        </EYES>
+        <MOUTH>
+            <REGION>
+                <CENTER x="163" y="210"/>
+                <RECTANGLE h="50" w="84" x="121" y="185"/>
+            </REGION>
+        </MOUTH>
+        <AGE from="20" to="22"/>
+        <GENDER class="FEMALE">
+        </GENDER>
+        <INFO name="A"/>
+        <NOSE x="160" y="161"/>
+        <META detectors="with_eyes" reliability="0.800000011920929"
+              trackingId="Person_0_5"/>
+        <AAM_PARAMETER_VECTOR model="model1.aamr">
+            <PARAVECTOR class-id="1" dx="6.474820143884892" dy="6.158273381294964"
+                        error="0.1884815293027749" length="41" normalized="1"
+                        sx="1.676258992805755" sy="1.892086330935252" videomode="0">86.7078
+                90.7468 33.4103 1.56166 138.691 87.3452 13.6264 14.2556 31.22
+                -8.69351 -14.9965 12.5231 -26.9609 10.609 27.2826 -2.90384 -24.0025
+                12.9054 0.322317 6.35663 -8.67357 -5.45192 -8.82824 14.9893 0.650889
+                -7.47801 -0.670775 8.92101 -5.2388 -4.1044 5.80338 7.12411 5.30568
+                -10.4608 0.130674 8.67457 -8.26062 8.6555 2.15596 -3.61898 4.61406
+            </PARAVECTOR>
+        </AAM_PARAMETER_VECTOR>
+        <CLASS class-id="1" class-result="classified"/>
+    </FACE>
+    <FACE>
+        <GENERATOR>test</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="12345"/>
+            <UPDATED value="67890"/>
+        </TIMESTAMP>
+        <REGION>
+            <CENTER x="156" y="175"/>
+            <RECTANGLE h="200" w="250" x="30" y="40"/>
+        </REGION>
+        <EYES>
+            <LEFT x="117" y="135"/>
+            <RIGHT x="191" y="120"/>
+        </EYES>
+        <AGE from="20" to="22"/>
+        <MOUTH>
+            <REGION>
+                <CENTER x="163" y="210"/>
+                <RECTANGLE h="50" w="84" x="121" y="185"/>
+            </REGION>
+        </MOUTH>
+        <GENDER class="FEMALE">
+        </GENDER>
+        <NOSE x="160" y="161"/>
+        <META detectors="with_eyes" reliability="0.800000011920929"
+              trackingId="Person_0_5"/>
+        <AAM_PARAMETER_VECTOR model="model1.aamr">
+            <PARAVECTOR class-id="1" dx="6.474820143884892" dy="6.158273381294964"
+                        error="0.1884815293027749" length="41" normalized="1"
+                        sx="1.676258992805755" sy="1.892086330935252" videomode="0">86.7078
+                90.7468 33.4103 1.56166 138.691 87.3452 13.6264 14.2556 31.22
+                -8.69351 -14.9965 12.5231 -26.9609 10.609 27.2826 -2.90384 -24.0025
+                12.9054 0.322317 6.35663 -8.67357 -5.45192 -8.82824 14.9893 0.650889
+                -7.47801 -0.670775 8.92101 -5.2388 -4.1044 5.80338 7.12411 5.30568
+                -10.4608 0.130674 8.67457 -8.26062 8.6555 2.15596 -3.61898 4.61406
+            </PARAVECTOR>
+        </AAM_PARAMETER_VECTOR>
+        <CLASS class-id="rejected" class-result="unsure"/>
+    </FACE>
+    <FACE>
+        <GENERATOR>test</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="12345"/>
+            <UPDATED value="67890"/>
+        </TIMESTAMP>
+        <GENDER class="FEMALE">
+        </GENDER>
+        <AGE from="20" to="22"/>
+        <REGION>
+            <CENTER x="156" y="175"/>
+            <RECTANGLE h="300" w="350" x="50" y="60"/>
+        </REGION>
+        <EYES>
+            <LEFT x="117" y="135"/>
+            <RIGHT x="191" y="120"/>
+        </EYES>
+        <MOUTH>
+            <REGION>
+                <CENTER x="163" y="210"/>
+                <RECTANGLE h="50" w="84" x="121" y="185"/>
+            </REGION>
+        </MOUTH>
+        <NOSE x="160" y="161"/>
+        <META detectors="with_eyes" reliability="0.800000011920929"
+              trackingId="Person_0_5"/>
+        <AAM_PARAMETER_VECTOR model="model1.aamr">
+            <PARAVECTOR class-id="1" dx="6.474820143884892" dy="6.158273381294964"
+                        error="0.1884815293027749" length="41" normalized="1"
+                        sx="1.676258992805755" sy="1.892086330935252" videomode="0">86.7078
+                90.7468 33.4103 1.56166 138.691 87.3452 13.6264 14.2556 31.22
+                -8.69351 -14.9965 12.5231 -26.9609 10.609 27.2826 -2.90384 -24.0025
+                12.9054 0.322317 6.35663 -8.67357 -5.45192 -8.82824 14.9893 0.650889
+                -7.47801 -0.670775 8.92101 -5.2388 -4.1044 5.80338 7.12411 5.30568
+                -10.4608 0.130674 8.67457 -8.26062 8.6555 2.15596 -3.61898 4.61406
+            </PARAVECTOR>
+        </AAM_PARAMETER_VECTOR>
+        <CLASS class-id="rejected" class-result="unknown"/>
+    </FACE>
+    <FACE>
+        <AGE from="20" to="22"/>
+        <GENERATOR>test</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="12345"/>
+            <UPDATED value="67890"/>
+        </TIMESTAMP>
+        <GENDER class="FEMALE">
+        </GENDER>
+        <REGION>
+            <CENTER x="156" y="175"/>
+            <RECTANGLE h="400" w="450" x="70" y="80"/>
+        </REGION>
+        <EYES>
+            <LEFT x="117" y="135"/>
+            <RIGHT x="191" y="120"/>
+        </EYES>
+        <MOUTH>
+            <REGION>
+                <CENTER x="163" y="210"/>
+                <RECTANGLE h="50" w="84" x="121" y="185"/>
+            </REGION>
+        </MOUTH>
+        <NOSE x="160" y="161"/>
+        <META detectors="with_eyes" reliability="0.800000011920929"
+              trackingId="Person_0_5"/>
+        <AAM_PARAMETER_VECTOR model="model1.aamr">
+            <PARAVECTOR class-id="1" dx="6.474820143884892" dy="6.158273381294964"
+                        error="0.1884815293027749" length="41" normalized="1"
+                        sx="1.676258992805755" sy="1.892086330935252" videomode="0">86.7078
+                90.7468 33.4103 1.56166 138.691 87.3452 13.6264 14.2556 31.22
+                -8.69351 -14.9965 12.5231 -26.9609 10.609 27.2826 -2.90384 -24.0025
+                12.9054 0.322317 6.35663 -8.67357 -5.45192 -8.82824 14.9893 0.650889
+                -7.47801 -0.670775 8.92101 -5.2388 -4.1044 5.80338 7.12411 5.30568
+                -10.4608 0.130674 8.67457 -8.26062 8.6555 2.15596 -3.61898 4.61406
+            </PARAVECTOR>
+        </AAM_PARAMETER_VECTOR>
+        <CLASS class-id="5" class-result="classified"/>
+    </FACE>
+</FACES>

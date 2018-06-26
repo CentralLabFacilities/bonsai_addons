@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<BonsaiConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                     xsi:noNamespaceSchemaLocation="BonsaiConfiguration.xsd">
+
+    <FactoryOptions factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory" />
+
+    
+    <Sensor key="FaceSensor" 
+            dataTypeClass="de.unibi.citec.clf.btl.data.person.FaceIdentificationList"
+            factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory"
+            sensorClass="de.unibi.citec.clf.bonsai.rsb.sensors.RsbFaceIdentificationSensor">
+        <Options>
+            <Option key="scope">/faces</Option>
+            <Option key="scopeServer">/face_rec_control</Option>
+        </Options>
+    </Sensor>
+    
+</BonsaiConfiguration>

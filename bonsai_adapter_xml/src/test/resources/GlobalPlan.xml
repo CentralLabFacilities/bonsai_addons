@@ -1,0 +1,48 @@
+<GLOBALPLAN>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+
+    <NAVIGATIONGOAL>
+        <GENERATOR>test</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="12345"/>
+            <UPDATED value="67890"/>
+        </TIMESTAMP>
+        <POSITION ref="world" kind="absolute" x="1234.5" y="-16345.42" theta="0.134"/>
+        <TOLERANCES>
+            <DR quant="0.177"/>
+            <DTHETA quant="0.15"/>
+        </TOLERANCES>
+        <TYPE>LOCAL</TYPE>
+    </NAVIGATIONGOAL>
+    <NAVIGATIONGOAL>
+        <GENERATOR>test</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="12345"/>
+            <UPDATED value="67890"/>
+        </TIMESTAMP>
+        <POSITION ref="world" kind="absolute" x="2234.5" y="-26345.42" theta="0.234"/>
+        <TOLERANCES>
+            <DR quant="0.277"/>
+            <DTHETA quant="0.25"/>
+        </TOLERANCES>
+        <TYPE>LOCAL</TYPE>
+    </NAVIGATIONGOAL>
+    <NAVIGATIONGOAL>
+        <GENERATOR>test</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="12345"/>
+            <UPDATED value="67890"/>
+        </TIMESTAMP>
+        <POSITION ref="world" kind="absolute" x="3234.5" y="-36345.42" theta="0.334"/>
+        <TOLERANCES>
+            <DR quant="0.377"/>
+            <DTHETA quant="0.35"/>
+        </TOLERANCES>
+        <TYPE>LOCAL</TYPE>
+    </NAVIGATIONGOAL>
+
+</GLOBALPLAN>

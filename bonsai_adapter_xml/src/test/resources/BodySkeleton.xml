@@ -1,0 +1,70 @@
+<BODYSKELETON id="-1">
+    <GENERATOR>BodyTester</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <COM x="12" y="12" z="81" scope="GLOBAL"/>
+    <SKELETON>
+        <SKEL_HEAD>
+            <POSEWITHCONFIDENCE3D>
+                <GENERATOR>unknown</GENERATOR>
+                <TIMESTAMP>
+                    <INSERTED value="1378813169641"/>
+                    <UPDATED value="1378813169641"/>
+                </TIMESTAMP>
+                <TRANSLATION confidence="0.699999988079071">
+                    <POINT3D scope="GLOBAL" x="0" y="1" z="2">
+                        <GENERATOR>unknown</GENERATOR>
+                        <TIMESTAMP>
+                            <INSERTED value="1378813169644"/>
+                            <UPDATED value="1378813169644"/>
+                        </TIMESTAMP>
+                    </POINT3D>
+                </TRANSLATION>
+                <ROTATION confidence="0.5">
+                    <ROTATION3D>
+                        <GENERATOR>unknown</GENERATOR>
+                        <TIMESTAMP>
+                            <INSERTED value="1378813169641"/>
+                            <UPDATED value="1378813169641"/>
+                        </TIMESTAMP>
+                        <MATRIX a00="1" a01="0" a02="0" a10="0" a11="-1"
+                                a12="-1.224646799147353e-16" a20="0" a21="1.224646799147353e-16"
+                                a22="-1"/>
+                    </ROTATION3D>
+                </ROTATION>
+            </POSEWITHCONFIDENCE3D>
+        </SKEL_HEAD>
+        <SKEL_TORSO>
+            <POSEWITHCONFIDENCE3D>
+                <GENERATOR>unknown</GENERATOR>
+                <TIMESTAMP>
+                    <INSERTED value="1378813169642"/>
+                    <UPDATED value="1378813169642"/>
+                </TIMESTAMP>
+                <TRANSLATION confidence="0.300000011920929">
+                    <POINT3D scope="GLOBAL" x="0" y="1" z="0">
+                        <GENERATOR>unknown</GENERATOR>
+                        <TIMESTAMP>
+                            <INSERTED value="1378813169646"/>
+                            <UPDATED value="1378813169646"/>
+                        </TIMESTAMP>
+                    </POINT3D>
+                </TRANSLATION>
+                <ROTATION confidence="0.1000000014901161">
+                    <ROTATION3D>
+                        <GENERATOR>unknown</GENERATOR>
+                        <TIMESTAMP>
+                            <INSERTED value="1378813169641"/>
+                            <UPDATED value="1378813169641"/>
+                        </TIMESTAMP>
+                        <MATRIX a00="1" a01="0" a02="0" a10="0" a11="-1"
+                                a12="1.224646799147353e-16" a20="0" a21="-1.224646799147353e-16"
+                                a22="-1"/>
+                    </ROTATION3D>
+                </ROTATION>
+            </POSEWITHCONFIDENCE3D>
+        </SKEL_TORSO>
+    </SKELETON>
+</BODYSKELETON>

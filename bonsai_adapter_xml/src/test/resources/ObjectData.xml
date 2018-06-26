@@ -1,0 +1,20 @@
+<OBJECT>
+    <GENERATOR>BoostDetector</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="253543797"/>
+        <UPDATED value="253543712"/>
+    </TIMESTAMP>
+    <HYPOTHESIS>
+        <GENERATOR>BoostDetector</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="253543797"/>
+            <UPDATED value="253543712"/>
+        </TIMESTAMP>
+        <CLASS id="-1">smacks</CLASS>
+        <RATING>
+            <RELIABILITY value="0.6"/>
+        </RATING>
+    </HYPOTHESIS>
+
+</OBJECT>
+			

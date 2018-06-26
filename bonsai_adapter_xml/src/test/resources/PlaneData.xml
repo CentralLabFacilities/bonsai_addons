@@ -1,0 +1,28 @@
+<PLANE>
+    <GENERATOR>RegionDetector</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="253543797"/>
+        <UPDATED value="253543712"/>
+    </TIMESTAMP>
+    <SCOPE>LOCAL</SCOPE>
+    <PRECISEPOLYGON>
+        <GENERATOR>RegionDetector</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="253543797"/>
+            <UPDATED value="253543712"/>
+        </TIMESTAMP>
+        <POINT2D scope="GLOBAL" x="0.0" y="0.0"/>
+        <POINT2D scope="GLOBAL" x="1.0" y="1.0"/>
+        <POINT2D scope="GLOBAL" x="2.0" y="2.0"/>
+    </PRECISEPOLYGON>
+    <ORIGIN scope="GLOBAL" x="1.0" y="1.0" z="1.0"/>
+    <ROTATION3D>
+        <GENERATOR>TestApp</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="253543797"/>
+            <UPDATED value="253543712"/>
+        </TIMESTAMP>
+        <MATRIX a00="1.0" a01="0.0" a02="0.0" a10="0.0" a11="1.0" a12="0.0" a20="0.0" a21="0.0" a22="1.0"/>
+    </ROTATION3D>
+</PLANE>
+			

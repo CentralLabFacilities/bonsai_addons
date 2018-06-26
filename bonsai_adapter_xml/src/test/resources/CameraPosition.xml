@@ -1,0 +1,10 @@
+<CAMERAPOSITION>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <PAN rad="0.345"/>
+    <TILT rad="123"/>
+    <ZOOM qual="0.75"/>
+</CAMERAPOSITION>

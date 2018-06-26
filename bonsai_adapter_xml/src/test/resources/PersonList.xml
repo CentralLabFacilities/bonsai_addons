@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PERSONS>
+
+    <TIMESTAMP>
+        <INSERTED value="1271942726929"/>
+        <UPDATED value="1271942726929"/>
+    </TIMESTAMP>
+    <GENERATOR>test</GENERATOR>
+
+    <PERSON>
+        <TIMESTAMP>
+            <INSERTED value="127"/>
+            <UPDATED value="1271"/>
+        </TIMESTAMP>
+        <GENERATOR>test</GENERATOR>
+        <STATES ang="-19.7670439320134" dist="21.344" orientation="1234" facing="YES" gazing="286.07782710882003"
+                poi="NO" talking="YES" walking="NO"/>
+        <IDENT id="1234" name="peter" faceid="100" gender="MALE" ageFrom="12" ageTo="20"/>
+        <NEIGHBOUR dist="3.45" id="42"/>
+    </PERSON>
+
+</PERSONS>

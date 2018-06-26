@@ -1,0 +1,18 @@
+<CYLINDER>
+    <GENERATOR>TestApp</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="253543797"/>
+        <UPDATED value="253543712"/>
+    </TIMESTAMP>
+    <POSITION x="0.0" y="1.0" z="2.0"/>
+    <ROTATION3D>
+        <GENERATOR>TestApp</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="253543797"/>
+            <UPDATED value="253543712"/>
+        </TIMESTAMP>
+        <MATRIX a00="0.0" a01="1.0" a02="2.0" a10="3.0" a11="4.0" a12="5.0" a20="6.0" a21="7.0" a22="8.0"/>
+    </ROTATION3D>
+    <HEIGHT h="6.0"/>
+    <RADIUS r="7.0"/>
+</CYLINDER>

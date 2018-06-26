@@ -1,0 +1,8 @@
+<DYNAMICGRIDMAP uri="test/uri">
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <MAPPROPERTIES width="745" height="123" xorigin="74" yorigin="34" resolution="0.45"/>
+</DYNAMICGRIDMAP>

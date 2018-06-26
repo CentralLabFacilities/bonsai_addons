@@ -1,0 +1,662 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<frames>
+    <frame name="" topFrame=""/>
+    <frame name="Ability" topFrame="Task"/>
+    <frame name="Action" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+        <slot name="Indefinite"/>
+    </frame>
+    <frame name="Action_now" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+        <slot name="Indefinite"/>
+        <slot name="Time_vector"/>
+    </frame>
+    <frame name="Activity_finish" topFrame="Task">
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Actor" topFrame="Object"/>
+    <frame name="Adding" topFrame="Conjunction">
+        <slot name="Object"/>
+        <slot name="Object"/>
+    </frame>
+    <frame name="Arriving" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Direction"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Attribute" topFrame="Attribute">
+        <slot name="Color"/>
+        <slot name="Dimension"/>
+        <slot name="Position"/>
+    </frame>
+    <frame name="Avoiding" topFrame="">
+        <slot name="Object"/>
+    </frame>
+    <frame name="Awareness" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Away" topFrame="Position">
+        <slot name="Object"/>
+    </frame>
+    <frame name="Becoming_aware" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Behind" topFrame="Position">
+        <slot name="Object"/>
+    </frame>
+    <frame name="Being_obligated" topFrame=""/>
+    <frame name="Being_wet" topFrame="Attribute">
+        <slot name="Object"/>
+        <slot name="Social_interaction"/>
+    </frame>
+    <frame name="Beside" topFrame="Position">
+        <slot name="Object"/>
+    </frame>
+    <frame name="Building_subpart" topFrame="Object">
+        <slot name="Color"/>
+        <slot name="Dimension"/>
+        <slot name="Owner"/>
+        <slot name="Position"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Definite"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Calendric_unit" topFrame=""/>
+    <frame name="Capability" topFrame="Task"/>
+    <frame name="Card_number" topFrame=""/>
+    <frame name="Carrying" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Object"/>
+        <slot name="Position"/>
+        <slot name="Path_shape"/>
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Cause_to_be_wet" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Object"/>
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+    </frame>
+    <frame name="Caused" topFrame="Conjunction"/>
+    <frame name="Certainty" topFrame=""/>
+    <frame name="Change" topFrame="Action">
+        <slot name="Proxy_personal"/>
+        <slot name="Object"/>
+    </frame>
+    <frame name="Change_topic" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Social_interaction"/>
+        <slot name="Grant_permission"/>
+        <slot name="Time_vector"/>
+        <slot name="Indefinite_object"/>
+        <slot name="Theme"/>
+        <slot name="Topic"/>
+    </frame>
+    <frame name="Color" topFrame="Attribute"/>
+    <frame name="Color_intensity" topFrame="Attribute"/>
+    <frame name="Confirmation" topFrame="Confirmation">
+        <slot name="Name_personal"/>
+        <slot name="Name_personal"/>
+    </frame>
+    <frame name="Conjunction" topFrame="">
+        <slot name="Task"/>
+        <slot name="Task"/>
+        <slot name="Object"/>
+        <slot name="Object"/>
+    </frame>
+    <frame name="Conjunction_modal" topFrame="Conjunction">
+        <slot name="Task"/>
+        <slot name="Task"/>
+        <slot name="Object"/>
+        <slot name="Object"/>
+    </frame>
+    <frame name="Constricted" topFrame="Conjunction">
+        <slot name="Task"/>
+        <slot name="Task"/>
+        <slot name="Object"/>
+        <slot name="Object"/>
+    </frame>
+    <frame name="Container" topFrame="Object">
+        <slot name="Color"/>
+        <slot name="Dimension"/>
+        <slot name="Owner"/>
+        <slot name="Position"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Definite"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Conversation" topFrame="Task">
+        <slot name="Proxy"/>
+    </frame>
+    <frame name="Dancing" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+        <slot name="Name_personal"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Definite" topFrame="Definite"/>
+    <frame name="Deletion" topFrame="">
+        <slot name="Name_personal"/>
+        <slot name="Name_personal"/>
+    </frame>
+    <frame name="Demonstrative" topFrame="">
+        <slot name="Object"/>
+        <slot name="Position"/>
+        <slot name="Object"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Description" topFrame=""/>
+    <frame name="Difficulty" topFrame="Attribute"/>
+    <frame name="Dimension" topFrame="Attribute"/>
+    <frame name="Direction" topFrame=""/>
+    <frame name="Down" topFrame="Position">
+        <slot name="Object"/>
+    </frame>
+    <frame name="End" topFrame=""/>
+    <frame name="Entrance" topFrame="Building_subpart"/>
+    <frame name="Exclamation" topFrame=""/>
+    <frame name="Existence" topFrame="Description">
+        <slot name="Name_personal"/>
+        <slot name="Object"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Proxy"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Position"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Filling" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Object"/>
+        <slot name="Object"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Filling_water" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Object"/>
+        <slot name="Object"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Find" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Object"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="For_relation" topFrame="Attribute">
+        <slot name="Object"/>
+    </frame>
+    <frame name="Frequence" topFrame="Attribute"/>
+    <frame name="From_relation" topFrame="Attribute">
+        <slot name="Object"/>
+    </frame>
+    <frame name="Giving" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Proxy"/>
+        <slot name="Object"/>
+        <slot name="Social_interaction"/>
+        <slot name="Name_personal"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Grant_permission" topFrame="Social_interaction"/>
+    <frame name="Grasp" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Object"/>
+        <slot name="Grip"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Greeting" topFrame="Greeting">
+        <slot name="Name_personal"/>
+        <slot name="Proxy"/>
+        <slot name="Description"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Frequence"/>
+    </frame>
+    <frame name="Grip" topFrame="Grip">
+        <slot name="Modality"/>
+    </frame>
+    <frame name="Hindering" topFrame="Object"/>
+    <frame name="Humidity" topFrame="Attribute"/>
+    <frame name="In_between" topFrame="Position">
+        <slot name="Object"/>
+        <slot name="Object"/>
+    </frame>
+    <frame name="Indefinite" topFrame="Definite"/>
+    <frame name="Indefinite_object" topFrame="Object"/>
+    <frame name="Indefinite_person" topFrame="Actor"/>
+    <frame name="Interjection" topFrame="Constricted"/>
+    <frame name="Judgement_communication" topFrame="Socialisation">
+        <slot name="Proxy"/>
+        <slot name="Name_personal"/>
+    </frame>
+    <frame name="Location" topFrame="Socialisation">
+        <slot name="Name_personal"/>
+    </frame>
+    <frame name="Looking" topFrame="Task">
+        <slot name="Actor"/>
+        <slot name="Object"/>
+        <slot name="Position"/>
+        <slot name="Direction"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Manufacturing" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Object"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Maybe_gesture" topFrame=""/>
+    <frame name="Measure_degree" topFrame="Measure_unit">
+        <slot name="Card_number"/>
+    </frame>
+    <frame name="Measure_quantity" topFrame="Attribute">
+        <slot name="Object"/>
+    </frame>
+    <frame name="Measure_unit" topFrame=""/>
+    <frame name="Memory" topFrame="Description">
+        <slot name="Object"/>
+        <slot name="Task"/>
+    </frame>
+    <frame name="Memory_loss" topFrame="Deletion">
+        <slot name="Object"/>
+        <slot name="Actor"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Task"/>
+    </frame>
+    <frame name="Modality" topFrame="Modality"/>
+    <frame name="Modalverb" topFrame=""/>
+    <frame name="Motion" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Object"/>
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Move" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Position"/>
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+        <slot name="Name_personal"/>
+        <slot name="Ability"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Move_afterwards" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Position"/>
+        <slot name="Direction"/>
+        <slot name="Name_personal"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Move_in_place" topFrame="Task">
+        <slot name="Object"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+        <slot name="Name_personal"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Move_to" topFrame="Task">
+        <slot name="Position"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+        <slot name="Name_personal"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Name_bearing" topFrame="Description">
+        <slot name="Name_personal"/>
+        <slot name="Naming"/>
+        <slot name="Proxy_personal"/>
+    </frame>
+    <frame name="Name_personal" topFrame="Actor"/>
+    <frame name="Naming" topFrame=""/>
+    <frame name="Needing" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Object"/>
+    </frame>
+    <frame name="Negation" topFrame="Negation">
+        <slot name="Name_personal"/>
+    </frame>
+    <frame name="Nothing" topFrame="Object"/>
+    <frame name="Object" topFrame="Object">
+        <slot name="Color"/>
+        <slot name="Position"/>
+        <slot name="Dimension"/>
+        <slot name="Owner"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Definite"/>
+        <slot name="Card_number"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Object_abstract" topFrame=""/>
+    <frame name="Object_anaphoric" topFrame="Object">
+        <slot name="Position"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Attribute"/>
+    </frame>
+    <frame name="Object_ground" topFrame="Object">
+        <slot name="Color"/>
+        <slot name="Position"/>
+        <slot name="Dimension"/>
+        <slot name="Owner"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Definite"/>
+        <slot name="Card_number"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Object_home" topFrame="Object">
+        <slot name="Color"/>
+        <slot name="Position"/>
+        <slot name="Dimension"/>
+        <slot name="Owner"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Definite"/>
+        <slot name="Card_number"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Object_kitchen" topFrame="Object">
+        <slot name="Color"/>
+        <slot name="Position"/>
+        <slot name="Dimension"/>
+        <slot name="Owner"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Definite"/>
+        <slot name="Card_number"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Object_kitchen1" topFrame="Object_kitchen">
+        <slot name="Color"/>
+        <slot name="Position"/>
+        <slot name="Dimension"/>
+        <slot name="Owner"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Definite"/>
+        <slot name="Card_number"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Object_office" topFrame="Object">
+        <slot name="Color"/>
+        <slot name="Position"/>
+        <slot name="Dimension"/>
+        <slot name="Owner"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Definite"/>
+        <slot name="Card_number"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Object_plant" topFrame="Object">
+        <slot name="Color"/>
+        <slot name="Position"/>
+        <slot name="Dimension"/>
+        <slot name="Owner"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Definite"/>
+        <slot name="Card_number"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="Object_soil" topFrame="Object">
+        <slot name="Color"/>
+        <slot name="Position"/>
+        <slot name="Dimension"/>
+        <slot name="Owner"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Definite"/>
+        <slot name="Card_number"/>
+        <slot name="Direction"/>
+    </frame>
+    <frame name="On_top" topFrame="Position">
+        <slot name="Object"/>
+    </frame>
+    <frame name="Ord_number" topFrame=""/>
+    <frame name="Owner" topFrame="Actor"/>
+    <frame name="Part_orientational" topFrame="Position"/>
+    <frame name="Parting" topFrame="Socialisation">
+        <slot name="Name_personal"/>
+    </frame>
+    <frame name="Path_shape" topFrame=""/>
+    <frame name="Perception_active" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Performers_and_roles" topFrame="Description">
+        <slot name="Object"/>
+        <slot name="Attribute"/>
+    </frame>
+    <frame name="Person" topFrame="Object">
+        <slot name="Attribute"/>
+        <slot name="Position"/>
+        <slot name="Dimension"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Definite"/>
+    </frame>
+    <frame name="Position" topFrame="Attribute">
+        <slot name="Object"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Proxy"/>
+    </frame>
+    <frame name="Possession" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Object"/>
+        <slot name="Ability"/>
+        <slot name="From_relation"/>
+        <slot name="For_relation"/>
+    </frame>
+    <frame name="Posture" topFrame="Task">
+        <slot name="Proxy_personal"/>
+    </frame>
+    <frame name="Process_end" topFrame="">
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Process_stop" topFrame="Task">
+        <slot name="Actor"/>
+        <slot name="Object"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Proxy" topFrame="Actor"/>
+    <frame name="Proxy_personal" topFrame="Actor"/>
+    <frame name="Proxy_personal_you" topFrame="Actor"/>
+    <frame name="Quality_definition" topFrame="Description">
+        <slot name="Quality_evaluation"/>
+    </frame>
+    <frame name="Quality_evaluation" topFrame=""/>
+    <frame name="Quantity" topFrame=""/>
+    <frame name="Quantity_relative" topFrame=""/>
+    <frame name="Question" topFrame="">
+        <slot name="Name_personal"/>
+    </frame>
+    <frame name="Question_action" topFrame="Question">
+        <slot name="Action"/>
+        <slot name="Ability"/>
+        <slot name="Existence"/>
+    </frame>
+    <frame name="Question_attribute" topFrame="Question">
+        <slot name="Attribute"/>
+        <slot name="Existence"/>
+        <slot name="Object"/>
+        <slot name="Name_personal"/>
+    </frame>
+    <frame name="Question_identity" topFrame="Question">
+        <slot name="Existence"/>
+        <slot name="Object"/>
+    </frame>
+    <frame name="Question_location" topFrame="Question">
+        <slot name="Existence"/>
+        <slot name="Location"/>
+        <slot name="Object"/>
+    </frame>
+    <frame name="Question_name" topFrame="Question">
+        <slot name="Name_bearing"/>
+    </frame>
+    <frame name="Question_object" topFrame="Question">
+        <slot name="Object"/>
+        <slot name="Position"/>
+        <slot name="Existence"/>
+        <slot name="Awareness"/>
+    </frame>
+    <frame name="Question_person" topFrame="Question">
+        <slot name="Existence"/>
+        <slot name="Position"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Person"/>
+    </frame>
+    <frame name="Question_position" topFrame="Question">
+        <slot name="Existence"/>
+        <slot name="Name_personal"/>
+    </frame>
+    <frame name="Question_temporal" topFrame="Question">
+        <slot name="Task"/>
+    </frame>
+    <frame name="Question_topic" topFrame="Question">
+        <slot name="Existence"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Talk_topic"/>
+        <slot name="Theme"/>
+        <slot name="Change_topic"/>
+    </frame>
+    <frame name="Receiving" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Object"/>
+        <slot name="From_relation"/>
+        <slot name="For_relation"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Release" topFrame="Task"/>
+    <frame name="Request" topFrame="Task">
+        <slot name="Object"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Location"/>
+        <slot name="Proxy"/>
+    </frame>
+    <frame name="Reset" topFrame="Task">
+        <slot name="Actor"/>
+        <slot name="Object"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Self_motion" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Position"/>
+        <slot name="Social_interaction"/>
+    </frame>
+    <frame name="Showing" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Object"/>
+        <slot name="Proxy"/>
+        <slot name="Name_personal"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+        <slot name="Grant_permission"/>
+    </frame>
+    <frame name="Similarity" topFrame="Attribute"/>
+    <frame name="Simplicity" topFrame="Attribute">
+        <slot name="Task"/>
+    </frame>
+    <frame name="Social_interaction" topFrame="Socialisation"/>
+    <frame name="Socialisation" topFrame=""/>
+    <frame name="Sound" topFrame="Description">
+        <slot name="Object"/>
+        <slot name="Maybe_gesture"/>
+        <slot name="Proxy"/>
+        <slot name="Proxy_personal"/>
+    </frame>
+    <frame name="Specialize" topFrame="Attribute">
+        <slot name="Object"/>
+    </frame>
+    <frame name="State" topFrame=""/>
+    <frame name="Statement" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="State"/>
+        <slot name="Ability"/>
+        <slot name="Greeting"/>
+    </frame>
+    <frame name="Take" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Object"/>
+        <slot name="From_relation"/>
+        <slot name="Away"/>
+        <slot name="Social_interaction"/>
+    </frame>
+    <frame name="Talk" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Name_personal"/>
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+        <slot name="Grant_permission"/>
+        <slot name="Time_vector"/>
+    </frame>
+    <frame name="Talk_topic" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Topic"/>
+        <slot name="Social_interaction"/>
+        <slot name="Grant_permission"/>
+        <slot name="Time_vector"/>
+        <slot name="Object"/>
+        <slot name="Action"/>
+    </frame>
+    <frame name="Task" topFrame="Task">
+        <slot name="Ability"/>
+    </frame>
+    <frame name="Telling" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Object"/>
+        <slot name="Proxy_personal"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+        <slot name="Negation"/>
+    </frame>
+    <frame name="de.unibi.citec.clf.bonsai.dsl.Test" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Social_interaction"/>
+    </frame>
+    <frame name="Theme" topFrame="Object_abstract">
+        <slot name="Definite"/>
+    </frame>
+    <frame name="Time_vector" topFrame=""/>
+    <frame name="Topic" topFrame="">
+        <slot name="Object"/>
+        <slot name="Action"/>
+    </frame>
+    <frame name="Touching" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Object"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+    </frame>
+    <frame name="UNKNOWN_FRAME" topFrame="UNKNOWN_FRAME"/>
+    <frame name="Under" topFrame="Position">
+        <slot name="Object"/>
+    </frame>
+    <frame name="Understand" topFrame="Task">
+        <slot name="Proxy"/>
+        <slot name="Object"/>
+        <slot name="Ability"/>
+        <slot name="Negation"/>
+    </frame>
+    <frame name="Visit" topFrame="Task">
+        <slot name="Proxy_personal"/>
+        <slot name="Name_personal"/>
+        <slot name="Proxy"/>
+        <slot name="Social_interaction"/>
+        <slot name="Ability"/>
+    </frame>
+</frames>

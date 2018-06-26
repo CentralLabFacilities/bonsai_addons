@@ -1,0 +1,10 @@
+<KINECTDATA>
+    <GENERATOR>generator123</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="253543797"/>
+        <UPDATED value="253543712"/>
+    </TIMESTAMP>
+    <TILT value="3.141592654"/>
+    <ACCELERATION x="0.0" y="1.0" z="2.0"/>
+</KINECTDATA>
+			

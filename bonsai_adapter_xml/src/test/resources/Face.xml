@@ -1,0 +1,11 @@
+<FACE>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <IMAGEPOSITION x="123" y="92" width="200" height="42"/>
+    <POSITION angle="0.45" angleVariance="0.34" height="-12.34"
+              heightVariance="12.12" distance="77.23" distanceVariance="-3.45"/>
+    <DATA lineOfSight="30" faceWidthAngle="13.56" reliability="0.67"/>
+</FACE>

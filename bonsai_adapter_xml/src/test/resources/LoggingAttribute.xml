@@ -1,0 +1,9 @@
+<LoggingAttribute>
+    <GENERATOR>test</GENERATOR>
+    <FRAME_ID></FRAME_ID>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <Attribute type="1" value="test"/>
+</LoggingAttribute>

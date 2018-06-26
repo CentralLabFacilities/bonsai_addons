@@ -1,0 +1,11 @@
+<GPSRACTION>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <ACTION name="putObject">
+        <PARAMETER name="cup" type="object"/>
+        <PARAMETER name="table" type="location"/>
+    </ACTION>
+</GPSRACTION> 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<ANNOTATION label="kitchen">
+    <ELEMENT_TYPE>de.unibi.citec.clf.btl.data.map.Annotation</ELEMENT_TYPE>
+    <TIMESTAMP>
+        <INSERTED value="1334754163505"/>
+        <UPDATED value="1334754163505"/>
+    </TIMESTAMP>
+    <GENERATOR>unknown</GENERATOR>
+    <VIEWPOINT label="table1" category="VIEW">
+        <ROBOTPOSITION>
+            <TIMESTAMP>
+                <INSERTED value="1334589211533"/>
+                <UPDATED value="1334589211533"/>
+            </TIMESTAMP>
+            <GENERATOR>unknown</GENERATOR>
+            <POSITION x="0.0" y="1.0" theta="2.0" ref="world" kind="absolute"/>
+        </ROBOTPOSITION>
+    </VIEWPOINT>
+    <VIEWPOINT label="table2" category="VIEW">
+        <ROBOTPOSITION>
+            <TIMESTAMP>
+                <INSERTED value="1334589211533"/>
+                <UPDATED value="1334589211533"/>
+            </TIMESTAMP>
+            <GENERATOR>unknown</GENERATOR>
+            <POSITION x="0.0" y="1.0" theta="2.0" ref="world" kind="absolute"/>
+        </ROBOTPOSITION>
+    </VIEWPOINT>
+    <PRECISEPOLYGON>
+        <POINT2D x="0.0" y="0.0" scope="GLOBAL"/>
+        <POINT2D x="0.0" y="2000.0" scope="GLOBAL"/>
+        <POINT2D x="2000.0" y="2000.0" scope="GLOBAL"/>
+        <POINT2D x="2000.0" y="0.0" scope="GLOBAL"/>
+    </PRECISEPOLYGON>
+</ANNOTATION>

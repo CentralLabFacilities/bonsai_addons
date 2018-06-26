@@ -1,0 +1,15 @@
+<VERBPHRASEDATA>
+    <GENERATOR>test</GENERATOR>
+    <FRAME_ID></FRAME_ID>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <VERBPHRASE phrasetype="verbPhraseType" verbtype="verbType" verb="verb"/>
+
+    <NOMINALPHRASES>
+        <NOMINALPHRASE phrasetype="nominalPhrasesType1" nominal="nominal1" preposition="prepositions1"/>
+        <NOMINALPHRASE phrasetype="nominalPhrasesType2" nominal="nominal2" preposition="prepositions2"/>
+    </NOMINALPHRASES>
+
+</VERBPHRASEDATA>

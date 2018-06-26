@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<SENSORS>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <FINGER position="right">
+        <FORCE name="inside_near" value="1"/>
+        <FORCE name="inside_far" value="2"/>
+        <INFRARED name="outside" value="3"/>
+        <INFRARED name="front" value="4"/>
+        <INFRARED name="inside_near" value="5"/>
+        <INFRARED name="inside_far" value="6"/>
+    </FINGER>
+    <FINGER position="left">
+        <FORCE name="inside_near" value="7"/>
+        <FORCE name="inside_far" value="8"/>
+        <INFRARED name="outside" value="9"/>
+        <INFRARED name="front" value="10"/>
+        <INFRARED name="inside_near" value="11"/>
+        <INFRARED name="inside_far" value="12"/>
+    </FINGER>
+    <MIDDLE>
+        <INFRARED name="middle" value="13"/>
+    </MIDDLE>
+</SENSORS>

@@ -1,0 +1,16 @@
+<SLAMUPDATE type="init">
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <ADDITIONS>
+        <GRID metric_x="1" metric_y="2"/>
+        <GRID metric_x="3" metric_y="4"/>
+    </ADDITIONS>
+    <REMOVALS>
+        <GRID metric_x="5" metric_y="6"/>
+        <GRID metric_x="7" metric_y="8"/>
+        <GRID metric_x="9" metric_y="10"/>
+    </REMOVALS>
+</SLAMUPDATE>

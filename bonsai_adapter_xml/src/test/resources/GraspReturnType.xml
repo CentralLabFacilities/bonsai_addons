@@ -1,0 +1,7 @@
+<GRASPRETURNTYPE x="1.0" y="2.0" z="3.0" rating="0.0" graspResult="SUCCESS">
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+</GRASPRETURNTYPE>

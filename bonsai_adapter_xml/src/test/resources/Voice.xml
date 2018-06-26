@@ -1,0 +1,9 @@
+<VOICE>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <POSITION angle="0.45" angleVariance="0.345" runtimeDifferenceMicro="77230"
+              runtimeDifferenceVarianceMicro="1340"/>
+</VOICE>

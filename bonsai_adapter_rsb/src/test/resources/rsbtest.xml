@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<BonsaiConfiguration xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="../../main/resources/xml/bonsai_config/BonsaiConfiguration.xsd">
+
+	<FactoryOptions factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory">
+	</FactoryOptions>
+
+	<WorkingMemory key="WorkingMemory"
+		factoryClass="de.unibi.citec.clf.bonsai.rsb.RsbFactory"
+		workingMemoryClass="de.unibi.citec.clf.bonsai.rsb.RsbWorkingMemory">
+		<Options>
+			<Option key="memoryName">Scene</Option>
+		</Options>
+		<Slots>
+			<Slot slotClass="de.unibi.citec.clf.bonsai.rsb.slots.RsbBtlMemorySlot"
+				dataTypeClass="de.unibi.citec.clf.btl.Type" />
+		</Slots>
+	</WorkingMemory>
+
+</BonsaiConfiguration>

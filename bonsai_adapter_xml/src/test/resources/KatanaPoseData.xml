@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<POSITION>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <P x="232" y="343" z="454"/>
+    <ANGLE psi="1.23" phi="1.34" theta="0.23"/>
+</POSITION>

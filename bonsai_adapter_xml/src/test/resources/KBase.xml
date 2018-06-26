@@ -1,0 +1,259 @@
+<?xml version="1.0" encoding="utf-8" standalone="no" ?>
+<KBASE>
+    <ELEMENT_TYPE>de.unibi.citec.clf.btl.data.knowledgebase.KBase</ELEMENT_TYPE>
+    <ARENA>
+        <GENERATOR>unknown</GENERATOR>
+        <ROOM name="rooma" numberOfDoors="5">
+            <ANNOTATION label="annotation">
+                <TIMESTAMP>
+                    <INSERTED value="1334754163505"/>
+                    <UPDATED value="1334754163505"/>
+                </TIMESTAMP>
+                <GENERATOR>unknown</GENERATOR>
+                <VIEWPOINT label="vp" category="VIEW">
+                    <GENERATOR>unknown</GENERATOR>
+                    <ROBOTPOSITION>
+                        <TIMESTAMP>
+                            <INSERTED value="1334589211533"/>
+                            <UPDATED value="1334589211533"/>
+                        </TIMESTAMP>
+                        <GENERATOR>unknown</GENERATOR>
+                        <POSITION x="1.2" y="3.4" theta="5.6" ref="world" kind="absolute"/>
+                    </ROBOTPOSITION>
+                </VIEWPOINT>
+                <PRECISEPOLYGON>
+                    <GENERATOR>unknown</GENERATOR>
+                    <POINT2D x="0.0" y="0.0" scope="GLOBAL"/>
+                </PRECISEPOLYGON>
+            </ANNOTATION>
+            <GENERATOR>unknown</GENERATOR>
+        </ROOM>
+        <LOCATION isBeacon="True" isPlacement="False" name="loca" room="bath">
+            <GENERATOR>unknown</GENERATOR>
+            <ANNOTATION label="annotation">
+                <TIMESTAMP>
+                    <INSERTED value="1334754163505"/>
+                    <UPDATED value="1334754163505"/>
+                </TIMESTAMP>
+                <GENERATOR>unknown</GENERATOR>
+                <VIEWPOINT label="vp" category="VIEW">
+                    <GENERATOR>unknown</GENERATOR>
+                    <ROBOTPOSITION>
+                        <TIMESTAMP>
+                            <INSERTED value="1334589211533"/>
+                            <UPDATED value="1334589211533"/>
+                        </TIMESTAMP>
+                        <GENERATOR>unknown</GENERATOR>
+                        <POSITION x="1.2" y="3.4" theta="5.6" ref="world" kind="absolute"/>
+                    </ROBOTPOSITION>
+                </VIEWPOINT>
+                <PRECISEPOLYGON>
+                    <GENERATOR>unknown</GENERATOR>
+                    <POINT2D x="0.0" y="0.0" scope="GLOBAL"/>
+                </PRECISEPOLYGON>
+            </ANNOTATION>
+        </LOCATION>
+        <LOCATION isBeacon="False" isPlacement="True" name="locb" room="bedroom">
+            <GENERATOR>unknown</GENERATOR>
+            <ANNOTATION label="annotation2">
+                <TIMESTAMP>
+                    <INSERTED value="1334754163505"/>
+                    <UPDATED value="1334754163505"/>
+                </TIMESTAMP>
+                <GENERATOR>unknown</GENERATOR>
+                <VIEWPOINT label="vp2" category="VIEW">
+                    <GENERATOR>unknown</GENERATOR>
+                    <ROBOTPOSITION>
+                        <TIMESTAMP>
+                            <INSERTED value="1334589211533"/>
+                            <UPDATED value="1334589211533"/>
+                        </TIMESTAMP>
+                        <GENERATOR>unknown</GENERATOR>
+                        <POSITION x="9.0" y="1.2" theta="3.4" ref="world" kind="absolute"/>
+                    </ROBOTPOSITION>
+                </VIEWPOINT>
+                <PRECISEPOLYGON>
+                    <GENERATOR>unknown</GENERATOR>
+                    <POINT2D x="7000.0" y="8000.0" scope="GLOBAL"/>
+                </PRECISEPOLYGON>
+            </ANNOTATION>
+        </LOCATION>
+        <ROOM name="roomb" numberOfDoors="3">
+            <GENERATOR>unknown</GENERATOR>
+            <ANNOTATION label="annotation2">
+                <TIMESTAMP>
+                    <INSERTED value="1334754163505"/>
+                    <UPDATED value="1334754163505"/>
+                </TIMESTAMP>
+                <GENERATOR>unknown</GENERATOR>
+                <VIEWPOINT label="vp2" category="VIEW">
+                    <GENERATOR>unknown</GENERATOR>
+                    <ROBOTPOSITION>
+                        <TIMESTAMP>
+                            <INSERTED value="1334589211533"/>
+                            <UPDATED value="1334589211533"/>
+                        </TIMESTAMP>
+                        <GENERATOR>unknown</GENERATOR>
+                        <POSITION x="9.0" y="1.2" theta="3.4" ref="world" kind="absolute"/>
+                    </ROBOTPOSITION>
+                </VIEWPOINT>
+                <PRECISEPOLYGON>
+                    <GENERATOR>unknown</GENERATOR>
+                    <POINT2D x="7000.0" y="8000.0" scope="GLOBAL"/>
+                </PRECISEPOLYGON>
+            </ANNOTATION>
+        </ROOM>
+        <DOOR roomOne="room1a" roomTwo="room2a">
+            <GENERATOR>unknown</GENERATOR>
+            <ANNOTATION label="annotation">
+                <TIMESTAMP>
+                    <INSERTED value="1334754163505"/>
+                    <UPDATED value="1334754163505"/>
+                </TIMESTAMP>
+                <GENERATOR>unknown</GENERATOR>
+                <VIEWPOINT label="vp" category="VIEW">
+                    <GENERATOR>unknown</GENERATOR>
+                    <ROBOTPOSITION>
+                        <TIMESTAMP>
+                            <INSERTED value="1334589211533"/>
+                            <UPDATED value="1334589211533"/>
+                        </TIMESTAMP>
+                        <GENERATOR>unknown</GENERATOR>
+                        <POSITION x="1.2" y="3.4" theta="5.6" ref="world" kind="absolute"/>
+                    </ROBOTPOSITION>
+                </VIEWPOINT>
+                <PRECISEPOLYGON>
+                    <GENERATOR>unknown</GENERATOR>
+                    <POINT2D x="0.0" y="0.0" scope="GLOBAL"/>
+                </PRECISEPOLYGON>
+            </ANNOTATION>
+        </DOOR>
+        <DOOR roomOne="room1b" roomTwo="room2b">
+            <GENERATOR>unknown</GENERATOR>
+            <ANNOTATION label="annotation2">
+                <TIMESTAMP>
+                    <INSERTED value="1334754163505"/>
+                    <UPDATED value="1334754163505"/>
+                </TIMESTAMP>
+                <GENERATOR>unknown</GENERATOR>
+                <VIEWPOINT label="vp2" category="VIEW">
+                    <GENERATOR>unknown</GENERATOR>
+                    <ROBOTPOSITION>
+                        <TIMESTAMP>
+                            <INSERTED value="1334589211533"/>
+                            <UPDATED value="1334589211533"/>
+                        </TIMESTAMP>
+                        <GENERATOR>unknown</GENERATOR>
+                        <POSITION x="9.0" y="1.2" theta="3.4" ref="world" kind="absolute"/>
+                    </ROBOTPOSITION>
+                </VIEWPOINT>
+                <PRECISEPOLYGON>
+                    <GENERATOR>unknown</GENERATOR>
+                    <POINT2D x="7000.0" y="8000.0" scope="GLOBAL"/>
+                </PRECISEPOLYGON>
+            </ANNOTATION>
+        </DOOR>
+    </ARENA>
+    <RCOBJECTS>
+        <GENERATOR>unknown</GENERATOR>
+        <RCOBJECT category="Food" color="blue" graspdifficulty="5" location="here" name="john" room="bath"
+                  shape="pointy" size="3" type="not my" weight="4">
+            <GENERATOR>unknown</GENERATOR>
+        </RCOBJECT>
+        <RCOBJECT category="Candy" color="red" graspdifficulty="2" location="there" name="boris" room="bedroom"
+                  shape="sharp" size="1" type="my" weight="0">
+            <GENERATOR>unknown</GENERATOR>
+        </RCOBJECT>
+    </RCOBJECTS>
+    <CROWD>
+        <GENERATOR>unknown</GENERATOR>
+        <PERSON age="3" gender="male" gesture="pointing" pose="sitting" shirtcolor="blue">
+            <GENERATOR>unknown</GENERATOR>
+            <POINT2D x="1000.0" y="2000.0" scope="GLOBAL">
+                <GENERATOR>test</GENERATOR>
+                <TIMESTAMP>
+                    <INSERTED value="12345"/>
+                    <UPDATED value="67890"/>
+                </TIMESTAMP>
+            </POINT2D>
+        </PERSON>
+        <PERSON age="1" gender="female" gesture="waving" pose="standing" shirtcolor="green">
+            <GENERATOR>unknown</GENERATOR>
+            <POINT2D x="3000.0" y="4000.0" scope="GLOBAL">
+                <GENERATOR>test</GENERATOR>
+                <TIMESTAMP>
+                    <INSERTED value="12345"/>
+                    <UPDATED value="67890"/>
+                </TIMESTAMP>
+            </POINT2D>
+        </PERSON>
+    </CROWD>
+    <GENERATOR>unknown</GENERATOR>
+    <CONTEXT lastquestion="but you just asked me the first question">
+        <GENERATOR>unknown</GENERATOR>
+        <PERSON age="3" gender="male" gesture="pointing" pose="sitting" shirtcolor="blue">
+            <GENERATOR>unknown</GENERATOR>
+            <POINT2D x="1000.0" y="2000.0" scope="GLOBAL">
+                <GENERATOR>test</GENERATOR>
+                <TIMESTAMP>
+                    <INSERTED value="12345"/>
+                    <UPDATED value="67890"/>
+                </TIMESTAMP>
+            </POINT2D>
+        </PERSON>
+        <ROOM name="rooma" numberOfDoors="5">
+            <GENERATOR>unknown</GENERATOR>
+            <ANNOTATION label="annotation">
+                <TIMESTAMP>
+                    <INSERTED value="1334754163505"/>
+                    <UPDATED value="1334754163505"/>
+                </TIMESTAMP>
+                <GENERATOR>unknown</GENERATOR>
+                <VIEWPOINT label="vp" category="VIEW">
+                    <GENERATOR>unknown</GENERATOR>
+                    <ROBOTPOSITION>
+                        <TIMESTAMP>
+                            <INSERTED value="1334589211533"/>
+                            <UPDATED value="1334589211533"/>
+                        </TIMESTAMP>
+                        <GENERATOR>unknown</GENERATOR>
+                        <POSITION x="1.2" y="3.4" theta="5.6" ref="world" kind="absolute"/>
+                    </ROBOTPOSITION>
+                </VIEWPOINT>
+                <PRECISEPOLYGON>
+                    <GENERATOR>unknown</GENERATOR>
+                    <POINT2D x="0.0" y="0.0" scope="GLOBAL"/>
+                </PRECISEPOLYGON>
+            </ANNOTATION>
+        </ROOM>
+        <LOCATION isBeacon="True" isPlacement="False" name="loca" room="bath">
+            <GENERATOR>unknown</GENERATOR>
+            <ANNOTATION label="annotation">
+                <TIMESTAMP>
+                    <INSERTED value="1334754163505"/>
+                    <UPDATED value="1334754163505"/>
+                </TIMESTAMP>
+                <GENERATOR>unknown</GENERATOR>
+                <VIEWPOINT label="vp" category="VIEW">
+                    <GENERATOR>unknown</GENERATOR>
+                    <ROBOTPOSITION>
+                        <TIMESTAMP>
+                            <INSERTED value="1334589211533"/>
+                            <UPDATED value="1334589211533"/>
+                        </TIMESTAMP>
+                        <GENERATOR>unknown</GENERATOR>
+                        <POSITION x="1.2" y="3.4" theta="5.6" ref="world" kind="absolute"/>
+                    </ROBOTPOSITION>
+                </VIEWPOINT>
+                <PRECISEPOLYGON>
+                    <GENERATOR>unknown</GENERATOR>
+                    <POINT2D x="0.0" y="0.0" scope="GLOBAL"/>
+                </PRECISEPOLYGON>
+            </ANNOTATION>
+        </LOCATION>
+        <RCOBJECT category="Food" color="blue" graspdifficulty="5" location="here" name="john" room="bath"
+                  shape="pointy" size="3" type="not my" weight="4">
+            <GENERATOR>unknown</GENERATOR>
+        </RCOBJECT>
+    </CONTEXT>
+</KBASE>

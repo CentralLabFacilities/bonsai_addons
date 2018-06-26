@@ -1,0 +1,21 @@
+<SPLOCANGLES>
+
+    <GENERATOR>test</GENERATOR>
+
+    <TIMESTAMP>
+        <INSERTED value="1234"/>
+        <UPDATED value="4567"/>
+    </TIMESTAMP>
+
+    <READTIME>
+        <SECONDS value="123213412"/>
+        <MICROSECONDS value="335435"/>
+    </READTIME>
+
+    <ANGLES>
+        <ANGLE value="0.1000000014901161"/>
+        <ANGLE value="0.2000000029802322"/>
+        <ANGLE value="0.300000011920929"/>
+    </ANGLES>
+
+</SPLOCANGLES>

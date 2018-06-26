@@ -1,0 +1,12 @@
+<STALL>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <READTIME>
+        <SECONDS value="123213412"/>
+        <MICROSECONDS value="335435"/>
+    </READTIME>
+    <stalled>true</stalled>
+</STALL>

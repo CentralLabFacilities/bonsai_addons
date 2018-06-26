@@ -1,0 +1,13 @@
+<CAMERATARGET>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <!-- distance = distance from robot in laser coordinates (mm)
+         height = height over floor (mm) -->
+    <CYLINDRIC dist="123" height="2342"/>
+    <AZIMUTH rad="0.345"/>
+    <ROTVEL qual="MEDIUM"/>
+    <ZOOM qual="0.75"/>
+</CAMERATARGET>

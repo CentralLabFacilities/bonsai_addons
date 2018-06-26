@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<currentarmcoord>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <currentxyz x="18" y="25" z="34"/>
+</currentarmcoord> 

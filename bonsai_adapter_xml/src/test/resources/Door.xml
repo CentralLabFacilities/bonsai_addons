@@ -1,0 +1,52 @@
+<DOOR>
+
+    <GENERATOR>test</GENERATOR>
+
+    <TIMESTAMP>
+        <INSERTED value="123"/>
+        <UPDATED value="456"/>
+    </TIMESTAMP>
+
+    <LEFT>
+        <POINT2D scope="GLOBAL" x="1000" y="2000">
+            <GENERATOR>unknown</GENERATOR>
+            <TIMESTAMP>
+                <INSERTED value="123"/>
+                <UPDATED value="456"/>
+            </TIMESTAMP>
+        </POINT2D>
+    </LEFT>
+
+    <RIGHT>
+        <POINT2D scope="GLOBAL" x="3000" y="4000">
+            <GENERATOR>unknown</GENERATOR>
+            <TIMESTAMP>
+                <INSERTED value="123"/>
+                <UPDATED value="456"/>
+            </TIMESTAMP>
+        </POINT2D>
+    </RIGHT>
+
+    <HANDLELEFT>
+        <POINT3D scope="GLOBAL" x="5000" y="6000" z="7000">
+            <GENERATOR>unknown</GENERATOR>
+            <TIMESTAMP>
+                <INSERTED value="123"/>
+                <UPDATED value="456"/>
+            </TIMESTAMP>
+        </POINT3D>
+    </HANDLELEFT>
+
+    <HANDLERIGHT>
+        <POINT3D scope="GLOBAL" x="8000" y="9000" z="0">
+            <GENERATOR>unknown</GENERATOR>
+            <TIMESTAMP>
+                <INSERTED value="123"/>
+                <UPDATED value="456"/>
+            </TIMESTAMP>
+        </POINT3D>
+    </HANDLERIGHT>
+
+    <COORDINATE_SYSTEM>ROBOT_CS</COORDINATE_SYSTEM>
+    <CONFIDENCE>0.123</CONFIDENCE>
+</DOOR>

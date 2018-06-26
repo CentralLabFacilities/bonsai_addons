@@ -1,0 +1,34 @@
+<MAPREGION>
+    <TIMESTAMP>
+        <INSERTED value="1332952614802"/>
+        <UPDATED value="1332952614802"/>
+    </TIMESTAMP>
+    <GENERATOR>unknown</GENERATOR>
+    <REGIONTYPE>abc</REGIONTYPE>
+    <REGIONLABEL>def</REGIONLABEL>
+    <REGIONGROUP>ghi</REGIONGROUP>
+    <CONFIDENCE>6.7</CONFIDENCE>
+    <HEIGHT>6.8</HEIGHT>
+    <MAPPOINT>
+        <TIMESTAMP>
+            <INSERTED value="1332952614806"/>
+            <UPDATED value="1332952614806"/>
+        </TIMESTAMP>
+        <GENERATOR>unknown</GENERATOR>
+        <Point x="1.0" y="2.0"/>
+        <Kind>WORLD</Kind>
+    </MAPPOINT>
+    <NAVIGATIONGOAL>
+        <TIMESTAMP>
+            <INSERTED value="1332952614809"/>
+            <UPDATED value="1332952614809"/>
+        </TIMESTAMP>
+        <GENERATOR>sdf</GENERATOR>
+        <POSITION x="3.0" y="4.0" theta="5.0" ref="world" kind="absolute"/>
+        <TOLERANCES>
+            <DR quant="0.25"/>
+            <DTHETA quant="6.283185307179586"/>
+        </TOLERANCES>
+        <TYPE>GLOBAL</TYPE>
+    </NAVIGATIONGOAL>
+</MAPREGION>

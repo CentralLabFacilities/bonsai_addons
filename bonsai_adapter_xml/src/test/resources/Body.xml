@@ -1,0 +1,8 @@
+<BODY id="-1">
+    <GENERATOR>BodyTester</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <COM x="12" y="12" z="81" scope="GLOBAL"/>
+</BODY>

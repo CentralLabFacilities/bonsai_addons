@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
+<UTTERANCEPART>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <UtterancePartData word='auto' id='2' begin='1' end='3'
+                       acousticScore='4.567' lmScore='5.678' combinedScore='6.789'/>
+</UTTERANCEPART>

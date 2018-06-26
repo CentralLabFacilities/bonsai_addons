@@ -1,0 +1,5 @@
+<SRCALIBRATEDDATA scope="GLOBAL">
+    <POINT3D x="1" y="2" z="3" scope="GLOBAL"/>
+    <POINT3D x="1" y="2" z="3" scope="GLOBAL"/>
+    <POINT3D x="0.1" y="0.2" z="0.3" scope="LOCAL"/>
+</SRCALIBRATEDDATA>

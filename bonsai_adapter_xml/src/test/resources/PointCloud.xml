@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<POINTCLOUD>
+    <GENERATOR>PointCloudTester</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="127194"/>
+        <UPDATED value="127199"/>
+    </TIMESTAMP>
+    <SENSOR_ORIGIN x="41.3" y="12.1" z="21.84" scope="GLOBAL"/>
+    <ROTATION3D>
+        <GENERATOR>PointCloudSensorRotationTester</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="253543797"/>
+            <UPDATED value="253543712"/>
+        </TIMESTAMP>
+        <MATRIX a00="1.0" a01="0.0" a02="0.0" a10="0.0" a11="1.0" a12="0.0" a20="0.0" a21="0.0" a22="1.0"/>
+    </ROTATION3D>
+    <POINT3D x="12" y="12" z="81" scope="GLOBAL"/>
+    <POINT3D x="1.6" y="51" z="511" scope="GLOBAL"/>
+    <POINT3D x="14" y="34" z="66" scope="GLOBAL"/>
+    <POINT3D x="82" y="16" z="44" scope="GLOBAL"/>
+</POINTCLOUD>

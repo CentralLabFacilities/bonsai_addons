@@ -1,0 +1,33 @@
+<GPSRACTIONLIST>
+    <GPSRACTION>
+        <GENERATOR>test</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="12345"/>
+            <UPDATED value="67890"/>
+        </TIMESTAMP>
+        <ACTION name="goTo">
+            <PARAMETER name="kitchen" type="location"/>
+        </ACTION>
+    </GPSRACTION>
+    <GPSRACTION>
+        <GENERATOR>test</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="12345"/>
+            <UPDATED value="67890"/>
+        </TIMESTAMP>
+        <ACTION name="getObject">
+            <PARAMETER name="cup" type="object"/>
+        </ACTION>
+    </GPSRACTION>
+    <GPSRACTION>
+        <GENERATOR>test</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="12345"/>
+            <UPDATED value="67890"/>
+        </TIMESTAMP>
+        <ACTION name="putObject">
+            <PARAMETER name="cup" type="object"/>
+            <PARAMETER name="table" type="location"/>
+        </ACTION>
+    </GPSRACTION>
+</GPSRACTIONLIST> 

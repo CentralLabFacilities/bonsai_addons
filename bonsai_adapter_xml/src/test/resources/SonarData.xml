@@ -1,0 +1,9 @@
+<SONARDATA>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <DISTLEFT value="1.1"/>
+    <DISTRIGHT value="4.2"/>
+</SONARDATA>

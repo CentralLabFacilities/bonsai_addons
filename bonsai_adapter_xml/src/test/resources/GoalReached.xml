@@ -1,0 +1,8 @@
+<GOALREACHED>
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <REACHED>1</REACHED>
+</GOALREACHED>

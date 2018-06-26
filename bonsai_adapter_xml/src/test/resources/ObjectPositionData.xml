@@ -1,0 +1,33 @@
+<OBJECTPOSITION>
+    <HYPOTHESIS>
+        <GENERATOR>BoostDetector</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="253543797"/>
+            <UPDATED value="253543712"/>
+        </TIMESTAMP>
+        <CLASS>smacks</CLASS>
+        <RATING>
+            <RELIABILITY value="0.6"/>
+        </RATING>
+
+    </HYPOTHESIS>
+
+    <SENSORTYPE>SONY_EVI</SENSORTYPE>
+    <PRECISEPOLYGON ref="world" kind="absolute">
+        <GENERATOR>BoostDetector</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="253543797"/>
+            <UPDATED value="253543712"/>
+        </TIMESTAMP>
+        <POINT2D x="0.0" y="0.0"/>
+        <POINT2D x="1.0" y="1.0"/>
+        <POINT2D x="2.0" y="2.0"/>
+    </PRECISEPOLYGON>
+    s
+
+    <TIMESTAMP>
+        <INSERTED value="0"></INSERTED>
+        <UPDATED value="0"></UPDATED>
+    </TIMESTAMP>
+    <GENERATOR>unknown</GENERATOR>
+</OBJECTPOSITION>

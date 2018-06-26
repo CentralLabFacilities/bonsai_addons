@@ -1,0 +1,9 @@
+<BINARYSLAMMAP uri="test/uri">
+    <GENERATOR>test</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="12345"/>
+        <UPDATED value="67890"/>
+    </TIMESTAMP>
+    <POSITION ref="world" kind="absolute" x="234.5" y="-6345.42" theta="0.34"/>
+    <MAPPROPERTIES width="745" height="123" xorigin="74" yorigin="34" resolution="0.45"/>
+</BINARYSLAMMAP>

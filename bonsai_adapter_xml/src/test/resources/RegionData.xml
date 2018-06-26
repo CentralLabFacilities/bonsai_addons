@@ -1,0 +1,19 @@
+<REGION>
+    <GENERATOR>RegionDetector</GENERATOR>
+    <TIMESTAMP>
+        <INSERTED value="253543797"/>
+        <UPDATED value="253543712"/>
+    </TIMESTAMP>
+    <SCOPE>LOCAL</SCOPE>
+    <PRECISEPOLYGON>
+        <GENERATOR>RegionDetector</GENERATOR>
+        <TIMESTAMP>
+            <INSERTED value="253543797"/>
+            <UPDATED value="253543712"/>
+        </TIMESTAMP>
+        <POINT2D scope="LOCAL" x="0.0" y="0.0"/>
+        <POINT2D scope="LOCAL" x="1.0" y="1.0"/>
+        <POINT2D scope="LOCAL" x="2.0" y="2.0"/>
+    </PRECISEPOLYGON>
+</REGION>
+			
