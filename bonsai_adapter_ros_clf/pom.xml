@@ -70,7 +70,7 @@
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>openpose_ros_msgs</artifactId>
-            <version>0.0.4</version>
+            <version>0.0.15</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
@@ -84,8 +84,8 @@
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
-            <artifactId>biron_posture_execution_msgs</artifactId>
-            <version>1.1.0</version>
+            <artifactId>posture_execution_msgs</artifactId>
+            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
@@ -95,12 +95,12 @@
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>object_tracking_msgs</artifactId>
-            <version>1.0.7</version>
+            <version>1.0.10</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>clf_perception_vision_msgs</artifactId>
-            <version>0.0.8</version>
+            <version>0.0.9</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
@@ -120,7 +120,7 @@
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>pepper_clf_msgs</artifactId>
-            <version>0.1.2</version>
+            <version>0.1.13</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
@@ -141,6 +141,11 @@
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>bayes_people_tracker_msgs</artifactId>
             <version>[0.0.4,1.0.0)</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ros.rosjava_messages</groupId>
+            <artifactId>pepper_mtc_msgs</artifactId>
+            <version>0.0.3</version>
         </dependency>
        
     </dependencies>

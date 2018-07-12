@@ -38,7 +38,7 @@ public class RosKBaseActuator extends RosNode implements KBaseActuator {
     private ServiceClient<QueryRequest, QueryResponse> sc;
     private ServiceClient<DataRequest, DataResponse> scd;
     private org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(getClass());
-    private long timeout = 1000;
+    private long timeout = 8000;
 
     public RosKBaseActuator(GraphName gn) {
         initialized = false;
@@ -71,7 +71,8 @@ public class RosKBaseActuator extends RosNode implements KBaseActuator {
 
     @Override
     public void destroyNode() {
-        if(sc!=null) sc.shutdown();
+        if (sc != null) sc.shutdown();
+        if (scd != null) scd.shutdown();
     }
 
     private QueryRequest generateQuery(String query) {
@@ -230,7 +231,7 @@ public class RosKBaseActuator extends RosNode implements KBaseActuator {
         }
     }
 
-    private boolean sendSavingQuery(String data) throws BDOHasInvalidAttributesException{
+    private boolean sendSavingQuery(String data) throws BDOHasInvalidAttributesException {
         DataResponse res = dataQueryKBase(data);
         if (res.getSuccess()) {
             return true;
@@ -371,14 +372,16 @@ public class RosKBaseActuator extends RosNode implements KBaseActuator {
 
     @Override
     public Room getRoomForPoint(Point2D point) throws BDONotFoundException, NoAreaFoundException {
-        String point_xml = parseToXML(point);
+        Point2D point_to_ignore_subclass = new Point2D(point);
+        String point_xml = parseToXML(point_to_ignore_subclass);
         String query = "in which room is the point " + point_xml;
         return sendAreaQuery(query, Room.class);
     }
 
     @Override
     public Location getLocationForPoint(Point2D point) throws BDONotFoundException, NoAreaFoundException {
-        String point_xml = parseToXML(point);
+        Point2D point_to_ignore_subclass = new Point2D(point);
+        String point_xml = parseToXML(point_to_ignore_subclass);
         String query = "in which location is the point " + point_xml;
         return sendAreaQuery(query, Location.class);
     }
@@ -430,7 +433,7 @@ public class RosKBaseActuator extends RosNode implements KBaseActuator {
 
 
     @Override
-    public <T extends BDO> boolean storeBDO(T object) throws BDOHasInvalidAttributesException{
+    public <T extends BDO> boolean storeBDO(T object) throws BDOHasInvalidAttributesException {
         String obj_xml = parseToXML(object);
 
         return sendSavingQuery("remember " + obj_xml);

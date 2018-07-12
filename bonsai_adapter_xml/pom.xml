@@ -28,8 +28,8 @@
 
         <dependency>
             <groupId>de.unibi.citec.clf</groupId>
-            <artifactId>bonsai2-interface</artifactId>
-            <version>0.4-SNAPSHOT</version>
+            <artifactId>bonsai_interfaces</artifactId>
+            <version>0.5.0</version>
         </dependency>
 
         <dependency>

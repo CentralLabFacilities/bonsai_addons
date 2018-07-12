@@ -41,15 +41,8 @@ public class RosNaoQiSpeechActuator extends RosNode implements SpeechActuator {
     }
 
     private ActionFuture sendToTTS(String data) throws IOException {
-
-        logger.debug(">>> waiting for TTS-Action server...");
-        if (!ac.waitForActionServerToStart(new Duration(10))) {
-            logger.error("action server not started on " + this.topic);
-        }
-        logger.debug(">>> TTS-Action server found! sending action goal");
         SpeechWithFeedbackActionGoal goalMessage = ac.newGoalMessage();
         goalMessage.getGoal().setSay(data);
-
         return ac.sendGoal(goalMessage);
 
     }
@@ -62,6 +55,11 @@ public class RosNaoQiSpeechActuator extends RosNode implements SpeechActuator {
     @Override
     public void onStart(final ConnectedNode connectedNode) {
         ac = new ActionClient(connectedNode, this.topic, SpeechWithFeedbackActionGoal._TYPE, SpeechWithFeedbackActionFeedback._TYPE, SpeechWithFeedbackActionResult._TYPE);
+        logger.debug(">>> waiting for TTS-Action server...");
+        if (!ac.waitForActionServerToStart(new Duration(10))) {
+            logger.error("action server not started on " + this.topic);
+        }
+        logger.debug(">>> TTS-Action server found! sending action goal");
         initialized = true;
         logger.debug("on start, RosNaoQiSpeechActuator done");
     }

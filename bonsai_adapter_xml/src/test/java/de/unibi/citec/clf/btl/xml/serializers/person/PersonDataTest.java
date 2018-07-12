@@ -18,6 +18,8 @@ import org.junit.Test;
 
 import de.unibi.citec.clf.btl.xml.TestUtils;
 
+import java.util.LinkedList;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -47,7 +49,9 @@ public class PersonDataTest {
         PersonAttribute pa = new PersonAttribute();
         pa.setShirtcolor(PersonAttribute.Shirtcolor.BLACK);
         pa.setGender(PersonAttribute.Gender.FEMALE);
-        //pa.setGesture(PersonAttribute.Gesture.NEUTRAL);
+        LinkedList<PersonAttribute.Gesture> gestures = new LinkedList<>();
+        gestures.add(PersonAttribute.Gesture.NEUTRAL);
+        pa.setGestures(gestures);
         pa.setAge("1-2");
         pa.setPosture(PersonAttribute.Posture.LYING);
         original.setPersonAttribute(pa);

@@ -99,6 +99,13 @@ public class UtteranceSerializer extends XomSerializer<Utterance> {
         }
 
 
+        nodes = element.getChildElements("VALID");
+        if (nodes.size() > 0) {
+            Element tElem = nodes.get(0);
+            Boolean b = "1".equals(tElem.getValue());
+            type.setValid(b);
+        }
+
         return type;
     }
 

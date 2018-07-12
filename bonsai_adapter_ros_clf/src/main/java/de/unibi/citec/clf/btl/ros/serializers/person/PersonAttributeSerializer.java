@@ -5,6 +5,10 @@ import de.unibi.citec.clf.btl.data.person.PersonAttribute;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
 import openpose_ros_msgs.PersonAttributes;
 import org.ros.message.MessageFactory;
+import sun.awt.image.ImageWatched;
+
+import java.util.Arrays;
+import java.util.LinkedList;
 
 
 public class PersonAttributeSerializer extends RosSerializer<PersonAttribute, openpose_ros_msgs.PersonAttributes> {
@@ -38,7 +42,7 @@ public class PersonAttributeSerializer extends RosSerializer<PersonAttribute, op
             case "blue": ret.setShirtcolor(PersonAttribute.Shirtcolor.BLUE); break;
             case "purple": ret.setShirtcolor(PersonAttribute.Shirtcolor.PURPLE); break;
             case "black": ret.setShirtcolor(PersonAttribute.Shirtcolor.BLACK); break;
-            case "gray": ret.setShirtcolor(PersonAttribute.Shirtcolor.GREY); break;
+            case "grey": ret.setShirtcolor(PersonAttribute.Shirtcolor.GREY); break;
         }
 
         switch(msg.getPosture()) {
@@ -47,16 +51,20 @@ public class PersonAttributeSerializer extends RosSerializer<PersonAttribute, op
             case 2: ret.setPosture(PersonAttribute.Posture.STANDING); break;
             case 3: ret.setPosture(PersonAttribute.Posture.LYING); break;
         }
-
-        switch(msg.getGesture()) {
-            case 1: ret.setGesture(PersonAttribute.Gesture.POINTING_LEFT); break;
-            case 2: ret.setGesture(PersonAttribute.Gesture.POINTING_RIGHT); break;
-            case 3: ret.setGesture(PersonAttribute.Gesture.RAISING_LEFT_ARM); break;
-            case 4: ret.setGesture(PersonAttribute.Gesture.RAISING_RIGHT_ARM); break;
-            case 5: ret.setGesture(PersonAttribute.Gesture.WAVING); break;
-            default:
-            case 6: ret.setGesture(PersonAttribute.Gesture.NEUTRAL); break;
+        LinkedList<PersonAttribute.Gesture> gestures = new LinkedList<>();
+        for(int gesture: msg.getGestures()){
+            switch(gesture) {
+                case 1: gestures.add(PersonAttribute.Gesture.POINTING_LEFT); break;
+                case 2: gestures.add(PersonAttribute.Gesture.POINTING_RIGHT); break;
+                case 3: gestures.add(PersonAttribute.Gesture.RAISING_LEFT_ARM); break;
+                case 4: gestures.add(PersonAttribute.Gesture.RAISING_RIGHT_ARM); break;
+                case 5: gestures.add(PersonAttribute.Gesture.WAVING); break;
+                default:
+                case 6: gestures.add(PersonAttribute.Gesture.NEUTRAL); break;
+            }
         }
+
+        ret.setGestures(gestures);
 
         return ret;
     }

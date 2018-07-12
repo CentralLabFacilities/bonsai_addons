@@ -69,7 +69,7 @@ public class RosRecognizeObjectsActuator extends RosNode implements RecognizeObj
     }
 
     @Override
-    public List<ObjectShapeData> recognize(boolean doSegmentation) throws InterruptedException, ExecutionException {
+    public List<ObjectShapeData> recognize() throws InterruptedException, ExecutionException {
         RecognizeObjectsRequest req = clientTrigger.newMessage();
         //set data
         final ResponseFuture<RecognizeObjectsResponse> res = new ResponseFuture<>();

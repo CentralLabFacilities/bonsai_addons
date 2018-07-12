@@ -56,6 +56,11 @@ public class RsbGazeActuator extends RsbNode implements GazeActuator {
     }
 
     @Override
+    public void setGazeTarget(float azimuth, float elevation, float speed) {
+        throw new NotImplementedException();
+    }
+
+    @Override
     public void setGazeTargetPitch(float pitch){
         throw new NotImplementedException();
     }

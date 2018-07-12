@@ -12,6 +12,7 @@ import de.unibi.citec.clf.btl.ros.RosSerializer;
 import de.unibi.citec.clf.btl.units.LengthUnit;
 import org.ros.message.MessageFactory;
 
+import javax.vecmath.Quat4d;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -31,11 +32,6 @@ public class ObjectShapeSerializer extends RosSerializer<ObjectShapeData, object
             hypos.add(h);
         }
         sensor_msgs.RegionOfInterest roi = fact.newFromType(sensor_msgs.RegionOfInterest._TYPE);
-        /*Rectangle box= data.getPolygon().getAwtPolygon().getBounds();
-        roi.setHeight(box.height);
-        roi.setWidth(box.width);
-        roi.setXOffset(box.x);
-        roi.setYOffset(box.y);*/
         geometry_msgs.Point p = fact.newFromType(geometry_msgs.Point._TYPE);
         p.setX(data.getCenter().getX(LengthUnit.METER));
         p.setY(data.getCenter().getY(LengthUnit.METER));
@@ -62,6 +58,7 @@ public class ObjectShapeSerializer extends RosSerializer<ObjectShapeData, object
         BoundingBox3D box = new BoundingBox3D();
         Pose3D center = new Pose3D();
         center.setTranslation(new Point3D(msg.getCenter().getX(), msg.getCenter().getY(), msg.getCenter().getZ(), LengthUnit.METER));
+        center.setRotation(new Rotation3D(new Quat4d(msg.getQuadx(), msg.getQuady(), msg.getQuadz(), msg.getQuadw())));
         box.setPose(center);
         box.setSize(new Point3D(msg.getWidth(),msg.getHeight(),msg.getDepth()));
         ret.setBoundingBox(box);
@@ -69,12 +66,6 @@ public class ObjectShapeSerializer extends RosSerializer<ObjectShapeData, object
         for (object_tracking_msgs.Hypothesis hyp : msg.getHypotheses()) {
             ret.addHypothesis(MsgTypeFactory.getInstance().createType(hyp, ObjectShapeData.Hypothesis.class));
         }
-
-        /*ret.setCenter(MsgTypeFactory.getInstance().createType(msg.getCenter(), Point3D.class));
-        ret.setHeight(msg.getHeight(), LengthUnit.METER);
-        ret.setWidth(msg.getWidth(), LengthUnit.METER);
-        ret.setDepth(msg.getDepth(), LengthUnit.METER);
-        ret.setId(msg.getName());*/
         return ret;
     }
 

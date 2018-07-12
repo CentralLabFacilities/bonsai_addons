@@ -94,12 +94,17 @@ public class RosGazeActuator extends RosNode implements GazeActuator {
      */
     @Override
     public void setGazeTarget(float pitch, float yaw) {
+        this.setGazeTarget(pitch, yaw, 0.125f);
+    }
+
+    @Override
+    public void setGazeTarget(float pitch, float yaw, float speed) {
         pitch = pitch < 0 ? Math.max(pitch, minPitch) : Math.min(pitch, maxPitch);
         yaw = yaw < 0 ? Math.max(yaw, minYaw) : Math.min(yaw, maxYaw);
         Map<String, Float> joints = new HashMap<>();
         joints.put("HeadPitch", pitch);
         joints.put("HeadYaw", yaw);
-        setGazeTarget(joints, false);
+        setGazeTarget(joints, false, speed);
     }
 
     @Override
@@ -110,7 +115,6 @@ public class RosGazeActuator extends RosNode implements GazeActuator {
         setGazeTarget(joints, false);
     }
 
-
     @Override
     public void setGazeTargetYaw(float yaw){
         yaw = yaw < 0 ? Math.max(yaw, minYaw) : Math.min(yaw, maxYaw);
@@ -119,7 +123,7 @@ public class RosGazeActuator extends RosNode implements GazeActuator {
         setGazeTarget(joints, false);
     }
 
-    public void setGazeTarget(Map<String, Float> joints, boolean relative){
+    public void setGazeTarget(Map<String, Float> joints, boolean relative, float speed){
         JointAnglesWithSpeed msg = publisher.newMessage();
 
         List<String> names = new ArrayList<>();
@@ -134,9 +138,13 @@ public class RosGazeActuator extends RosNode implements GazeActuator {
         msg.setJointNames(names);
         msg.setJointAngles(angles);
         msg.setRelative((byte) (relative? 1 : 0));
-        msg.setSpeed((float) 0.125);
+        msg.setSpeed(speed);
 
         publisher.publish(msg);
+    }
+
+    public void setGazeTarget(Map<String, Float> joints, boolean relative){
+        this.setGazeTarget(joints, relative,0.125f);
     }
 
     @Override
@@ -244,7 +252,7 @@ public class RosGazeActuator extends RosNode implements GazeActuator {
 
             @Override
             public Boolean get(long l, TimeUnit tu) throws InterruptedException, ExecutionException, TimeoutException {
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                return fut.get(l, tu).getStatus().getStatus() == GoalStatus.SUCCEEDED;
             }
         };
     }
