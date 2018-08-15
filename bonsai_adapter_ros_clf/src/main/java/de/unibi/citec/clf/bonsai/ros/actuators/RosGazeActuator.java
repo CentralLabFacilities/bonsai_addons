@@ -153,7 +153,7 @@ public class RosGazeActuator extends RosNode implements GazeActuator {
     }
 
     @Override
-    public Future<Void> lookAt(Pose3D pose, float duration) {
+    public Future<Void> lookAt(Pose3D pose, long duration) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
