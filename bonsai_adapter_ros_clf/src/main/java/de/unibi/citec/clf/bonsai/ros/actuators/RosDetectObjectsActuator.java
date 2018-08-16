@@ -33,6 +33,8 @@ import java.util.logging.Logger;
 public class RosDetectObjectsActuator extends RosNode implements RecognizeObjectsActuator {
 
     String topic;
+    long timeout = 10000;
+    long actuator_timeout;
     private GraphName nodeName;
     private org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(getClass());
 
@@ -69,11 +71,19 @@ public class RosDetectObjectsActuator extends RosNode implements RecognizeObject
 
     @Override
     public List<ObjectShapeData> recognize() throws InterruptedException, ExecutionException {
+        if (timeout > 0) {
+            logger.debug("using timeout of " + timeout + "ms");
+            actuator_timeout = System.currentTimeMillis() + timeout;
+        }
         DetectObjectsRequest req = clientTrigger.newMessage();
         //set data
         final ResponseFuture<DetectObjectsResponse> res = new ResponseFuture<>();
         clientTrigger.call(req, res);
         while (!res.isDone()) {
+            if(actuator_timeout < System.currentTimeMillis()){
+                logger.error("service call timed out!");
+                return null;
+            }
             try {
                 Thread.sleep(250);
             } catch (InterruptedException ex) {

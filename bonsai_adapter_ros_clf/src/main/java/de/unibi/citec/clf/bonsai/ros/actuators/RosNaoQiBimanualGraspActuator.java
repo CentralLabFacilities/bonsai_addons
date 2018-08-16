@@ -1,7 +1,6 @@
 
 package de.unibi.citec.clf.bonsai.ros.actuators;
 
-import com.github.rosjava_actionlib.ActionClient;
 import de.unibi.citec.clf.bonsai.actuators.BimanualGraspActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
@@ -43,17 +42,15 @@ public class RosNaoQiBimanualGraspActuator extends RosNode implements BimanualGr
 
     private static final Logger logger = Logger.getLogger(RosNaoQiBimanualGraspActuator.class);
 
-    String visualizeActionTopic;
-    String executeActionTopic;
+    String visualizeServiceTopic;
+    String executeServiceTopic;
     String planningServiceTopic;
     GraphName nodeName;
     ConnectedNode node;
 
-   // private ActionClient<PepperExecuteSolutionActionGoal, PepperExecuteSolutionActionFeedback, PepperExecuteSolutionActionResult> ac;
-   // private ActionClient<PepperVisualizeSolutionActionGoal, PepperVisualizeSolutionActionFeedback, PepperVisualizeSolutionActionResult> vis_ac;
+    private ServiceClient<PepperVisualizeSolutionRequest, PepperVisualizeSolutionResponse> viz_sc;
     private ServiceClient<PepperExecuteSolutionRequest, PepperExecuteSolutionResponse> exec_sc;
-    //private ServiceClient<Pepper, PepperFindGraspPlanResponse> vis_sc;
-    private ServiceClient<PepperFindGraspPlanRequest, PepperFindGraspPlanResponse> sc;
+    private ServiceClient<PepperFindGraspPlanRequest, PepperFindGraspPlanResponse> plan_sc;
     private Publisher<CollisionObject> objectSpawner;
 
     public RosNaoQiBimanualGraspActuator(GraphName gn) {
@@ -63,26 +60,18 @@ public class RosNaoQiBimanualGraspActuator extends RosNode implements BimanualGr
 
     @Override
     public void configure(IObjectConfigurator conf) throws ConfigurationException {
-        this.executeActionTopic = conf.requestValue("executeActionTopic");
-        this.visualizeActionTopic = conf.requestValue("visualizeActionTopic");
+        this.executeServiceTopic = conf.requestValue("executeServiceTopic");
+        this.visualizeServiceTopic = conf.requestValue("visualizeServiceTopic");
         this.planningServiceTopic = conf.requestValue("planningServiceTopic");
     }
 
     @Override
     public void onStart(ConnectedNode connectedNode) {
-/*
-        ac = new ActionClient(connectedNode, this.executeActionTopic,
-                PepperExecuteSolutionActionGoal._TYPE,
-                PepperExecuteSolutionActionFeedback._TYPE,
-                PepperExecuteSolutionActionResult._TYPE);
-        vis_ac = new ActionClient(connectedNode, this.visualizeActionTopic,
-                PepperVisualizeSolutionActionGoal._TYPE,
-                PepperVisualizeSolutionActionFeedback._TYPE,
-                PepperVisualizeSolutionActionResult._TYPE);
-*/
+
         try {
-            sc = connectedNode.newServiceClient(this.planningServiceTopic, PepperFindGraspPlan._TYPE);
-            exec_sc = connectedNode.newServiceClient(this.executeActionTopic, PepperExecuteSolution._TYPE);
+            plan_sc = connectedNode.newServiceClient(this.planningServiceTopic, PepperFindGraspPlan._TYPE);
+            viz_sc = connectedNode.newServiceClient(this.visualizeServiceTopic, PepperVisualizeSolution._TYPE);
+            exec_sc = connectedNode.newServiceClient(this.executeServiceTopic, PepperExecuteSolution._TYPE);
         } catch (ServiceNotFoundException e) {
             e.printStackTrace();
         }
@@ -94,9 +83,9 @@ public class RosNaoQiBimanualGraspActuator extends RosNode implements BimanualGr
 
     @Override
     public void destroyNode() {
-      //  if(ac!=null){ac.finish();}
-      //  if(vis_ac!=null){vis_ac.finish();}
-        if(sc!=null){sc.shutdown();}
+       if(plan_sc!=null){plan_sc.shutdown();}
+       if(viz_sc!=null){viz_sc.shutdown();}
+       if(exec_sc!=null){exec_sc.shutdown();}
     }
 
     @Override
@@ -107,10 +96,10 @@ public class RosNaoQiBimanualGraspActuator extends RosNode implements BimanualGr
 
     @Override
     public Future<List<String>> planBimanualGrasp(String object_uuid) {
-        PepperFindGraspPlanRequest req = sc.newMessage();
+        PepperFindGraspPlanRequest req = plan_sc.newMessage();
         req.setObjectUuid(object_uuid);
         ResponseFuture<PepperFindGraspPlanResponse> res = new ResponseFuture<>();
-        sc.call(req, res);
+        plan_sc.call(req, res);
         Future<List<String> > fut = new Future<List<String>>() {
             @Override
             public boolean cancel(boolean b) {
@@ -142,15 +131,16 @@ public class RosNaoQiBimanualGraspActuator extends RosNode implements BimanualGr
 
     @Override
     public Future<Boolean> visualizeBimanualGrasp(String solution_uuid) {
-       // PepperVisualizeSolutionActionGoal goal = vis_ac.newGoalMessage();
-        //return vis_ac.sendGoal(goal).toBooleanFuture();
-        return null;
+        PepperVisualizeSolutionRequest req = viz_sc.newMessage();
+        req.setSolutionId(solution_uuid);
+        ResponseFuture<PepperVisualizeSolutionResponse> res = new ResponseFuture<>();
+        viz_sc.call(req,res);
+
+        return res.toBooleanFuture();
     }
 
     @Override
     public Future<Boolean> executeBimanualGrasp(String solution_uuid) {
-       // PepperExecuteSolutionActionGoal goal = ac.newGoalMessage();
-       // return ac.sendGoal(goal).toBooleanFuture();
 
         PepperExecuteSolutionRequest req = exec_sc.newMessage();
         req.setSolutionId(solution_uuid);
