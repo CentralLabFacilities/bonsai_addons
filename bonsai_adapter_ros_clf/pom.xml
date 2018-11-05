@@ -25,13 +25,13 @@
         <dependency>
             <groupId>de.unibi.citec.clf</groupId>
             <artifactId>bonsai_interfaces</artifactId>
-            <version>0.5.1-SNAPSHOT</version>
+            <version>0.5-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>de.unibi.citec.clf</groupId>
             <artifactId>bonsai_adapter_ros</artifactId>
-            <version>0.5.1-SNAPSHOT</version>
+            <version>0.5-SNAPSHOT</version>
         </dependency>
 
         <dependency>
@@ -147,7 +147,11 @@
             <artifactId>pepper_mtc_msgs</artifactId>
             <version>0.0.3</version>
         </dependency>
-       
+        <dependency>
+            <groupId>org.ros.rosjava_messages</groupId>
+            <artifactId>tiago_grasping_msgs</artifactId>
+            <version>0.0.0</version>
+        </dependency>
     </dependencies>
 
     <build>

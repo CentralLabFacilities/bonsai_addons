@@ -4,6 +4,7 @@ package de.unibi.citec.clf.bonsai.ros.actuators;
 import actionlib_msgs.GoalStatusArray;
 import com.github.rosjava_actionlib.ActionClient;
 import com.github.rosjava_actionlib.ActionClientListener;
+import de.unibi.citec.clf.btl.data.object.ObjectShapeList;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 
@@ -17,6 +18,7 @@ import org.ros.message.Duration;
 import planning_scene_manager_msgs.PlanningSceneManagerRequestActionFeedback;
 import planning_scene_manager_msgs.PlanningSceneManagerRequestActionGoal;
 import planning_scene_manager_msgs.PlanningSceneManagerRequestActionResult;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 /**
  *
@@ -37,6 +39,16 @@ public class RosPlanningSceneActuator extends RosNode implements PlanningSceneAc
     @Override
     public void configure(IObjectConfigurator conf) throws ConfigurationException {
         this.topic = conf.requestValue("topic");
+    }
+
+    @Override
+    public Future<Boolean> clearScene() {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Future<Boolean> addObjects(ObjectShapeList objects) {
+        throw new NotImplementedException();
     }
 
     public Future<Boolean> manage() {

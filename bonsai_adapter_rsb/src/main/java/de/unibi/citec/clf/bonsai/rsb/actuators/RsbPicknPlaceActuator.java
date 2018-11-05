@@ -45,6 +45,9 @@ import rst.geometry.TranslationType.Translation;
 import rst.kinematics.JointAnglesType.JointAngles;
 import rst.math.Vec3DDoubleType.Vec3DDouble;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 public class RsbPicknPlaceActuator extends RsbNode implements PicknPlaceActuator {
 
     public static final String OPTION_TIMEOUT = "timeout";
@@ -572,8 +575,39 @@ public class RsbPicknPlaceActuator extends RsbNode implements PicknPlaceActuator
     }
 
     @Override
-    public Future<GraspReturnType> graspObject(String objectToGrasp, String group) throws IOException {
-        return callMethodStringString(METHOD_GRASP_OBJECT, objectToGrasp, "");
+    public Future<MoveitResult> graspObject(@Nonnull ObjectShapeData osd, @Nullable String group) throws IOException {
+        return graspObject(osd.getId(),group);
+    }
+
+    @Override
+    public Future<MoveitResult> graspObject(@Nonnull String objectToGrasp, @Nullable String group) throws IOException {
+        Future<GraspReturnType> grt = callMethodStringString(METHOD_GRASP_OBJECT, objectToGrasp, "");
+        return new Future<MoveitResult>() {
+            @Override
+            public boolean cancel(boolean b) {
+                return grt.cancel(b);
+            }
+
+            @Override
+            public boolean isCancelled() {
+                return grt.isCancelled();
+            }
+
+            @Override
+            public boolean isDone() {
+                return grt.isDone();
+            }
+
+            @Override
+            public MoveitResult get() throws InterruptedException, ExecutionException {
+                return grt.get().toMoveitResult();
+            }
+
+            @Override
+            public MoveitResult get(long l, java.util.concurrent.TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
+                return grt.get(l,timeUnit).toMoveitResult();
+            }
+        };
     }
 
     @Override

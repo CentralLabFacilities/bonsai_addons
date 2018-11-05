@@ -57,7 +57,7 @@ public class RsbGazeActuator extends RsbNode implements GazeActuator {
 
     @Override
     public void setGazeTarget(float pitch, float yaw, float speed) {
-        throw new NotImplementedException();
+
     }
 
     @Override
@@ -100,7 +100,6 @@ public class RsbGazeActuator extends RsbNode implements GazeActuator {
     public Future<Void> lookAt(Pose3D pose, long duration) {
         throw new NotImplementedException();
     }
-
 
     @Override
     public void startNode() throws InitializeException {

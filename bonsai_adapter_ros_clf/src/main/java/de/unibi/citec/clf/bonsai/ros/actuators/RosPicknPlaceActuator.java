@@ -36,6 +36,9 @@ import de.unibi.citec.clf.btl.data.object.ObjectShapeData;
 import org.apache.log4j.Logger;
 import org.ros.message.Time;
 
+import javax.annotation.Nonnull;
+import javax.annotation.Nullable;
+
 /**
  *
  * @author ffriese
@@ -102,10 +105,41 @@ public class RosPicknPlaceActuator extends RosNode implements PicknPlaceActuator
     public void destroyNode() {
         return;
     }
-    
+
     @Override
-    public Future<GraspReturnType> graspObject(String objectName, String group) throws IOException {
-        return graspObject(objectName, group, false);
+    public Future<MoveitResult> graspObject(@Nonnull ObjectShapeData osd, @Nullable String group) throws IOException {
+        return graspObject(osd.getId(),group);
+    }
+
+    @Override
+    public Future<MoveitResult> graspObject(String objectName, String group) throws IOException {
+        Future<GraspReturnType> grt = graspObject(objectName, group, false);
+        return new Future<MoveitResult>() {
+            @Override
+            public boolean cancel(boolean b) {
+                return grt.cancel(b);
+            }
+
+            @Override
+            public boolean isCancelled() {
+                return grt.isCancelled();
+            }
+
+            @Override
+            public boolean isDone() {
+                return grt.isDone();
+            }
+
+            @Override
+            public MoveitResult get() throws InterruptedException, ExecutionException {
+                return grt.get().toMoveitResult();
+            }
+
+            @Override
+            public MoveitResult get(long l, java.util.concurrent.TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
+                return grt.get(l,timeUnit).toMoveitResult();
+            }
+        };
     }
 
     @Override
