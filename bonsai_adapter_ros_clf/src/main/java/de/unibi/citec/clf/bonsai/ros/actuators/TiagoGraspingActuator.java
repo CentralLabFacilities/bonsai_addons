@@ -13,9 +13,9 @@ import org.apache.log4j.Logger;
 import org.ros.message.Duration;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
-import tiago_grasping_msgs.GraspItemActionFeedback;
-import tiago_grasping_msgs.GraspItemActionGoal;
-import tiago_grasping_msgs.GraspItemActionResult;
+import clf_grasping_msgs.GraspItemActionFeedback;
+import clf_grasping_msgs.GraspItemActionGoal;
+import clf_grasping_msgs.GraspItemActionResult;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
