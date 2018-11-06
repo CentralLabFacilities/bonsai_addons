@@ -4,6 +4,7 @@ import com.github.rosjava_actionlib.ActionClient;
 import com.github.rosjava_actionlib.ActionFuture;
 import actionlib_msgs.GoalID;
 
+import de.unibi.citec.clf.bonsai.ros.helper.NavigationFuture;
 import org.ros.exception.RemoteException;
 import org.ros.exception.ServiceNotFoundException;
 import org.ros.node.service.ServiceClient;
@@ -307,7 +308,7 @@ public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator
 
         last_direct_ac_goal_id = msg.getGoalId();
         ActionFuture<MoveBaseActionGoal, MoveBaseActionFeedback, MoveBaseActionResult> fut = this.direct_ac.sendGoal(msg);
-        Future<CommandResult> fcr = new CommandResultFuture(fut);
+        Future<CommandResult> fcr = new NavigationFuture(fut);
 
         return fcr;
     }
@@ -333,7 +334,7 @@ public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator
 
         last_ac_goal_id = msg.getGoalId();
         ActionFuture<MoveBaseActionGoal, MoveBaseActionFeedback, MoveBaseActionResult> fut = this.ac.sendGoal(msg);
-        Future<CommandResult> fcr = new CommandResultFuture(fut);
+        Future<CommandResult> fcr = new NavigationFuture(fut);
 
         return fcr;
     }
