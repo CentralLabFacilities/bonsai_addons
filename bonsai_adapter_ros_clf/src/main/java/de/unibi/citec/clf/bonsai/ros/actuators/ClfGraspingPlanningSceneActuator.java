@@ -2,9 +2,9 @@
 package de.unibi.citec.clf.bonsai.ros.actuators;
 
 import actionlib_msgs.GoalStatusArray;
-import clf_grasping_msgs.ClearPlanningScene;
-import clf_grasping_msgs.ClearPlanningSceneRequest;
-import clf_grasping_msgs.ClearPlanningSceneResponse;
+import std_srvs.Empty;
+import std_srvs.EmptyRequest;
+import std_srvs.EmptyResponse;
 import com.github.rosjava_actionlib.ActionClient;
 import de.unibi.citec.clf.bonsai.actuators.PlanningSceneActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
@@ -33,7 +33,7 @@ public class ClfGraspingPlanningSceneActuator extends RosNode implements Plannin
 
     String topicClear;
     private GraphName nodeName;
-    private ServiceClient<ClearPlanningSceneRequest, ClearPlanningSceneResponse> serviceClear;
+    private ServiceClient<EmptyRequest, EmptyResponse> serviceClear;
     private org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(getClass());
 
     public ClfGraspingPlanningSceneActuator(GraphName gn) {
@@ -48,8 +48,8 @@ public class ClfGraspingPlanningSceneActuator extends RosNode implements Plannin
 
     @Override
     public Future<Boolean> clearScene() {
-        ClearPlanningSceneRequest a = serviceClear.newMessage();
-        ResponseFuture<ClearPlanningSceneResponse> res = new ResponseFuture<>();
+        EmptyRequest a = serviceClear.newMessage();
+        ResponseFuture<EmptyResponse> res = new ResponseFuture<>();
         serviceClear.call(a,res);
         return res.toBooleanFuture();
     }
@@ -71,7 +71,7 @@ public class ClfGraspingPlanningSceneActuator extends RosNode implements Plannin
     @Override
     public void onStart(final ConnectedNode connectedNode) {
         try {
-            serviceClear = connectedNode.newServiceClient(topicClear, ClearPlanningScene._TYPE);
+            serviceClear = connectedNode.newServiceClient(topicClear, Empty._TYPE);
         } catch (ServiceNotFoundException e) {
             return;
         }
