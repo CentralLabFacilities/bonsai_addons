@@ -20,11 +20,9 @@ import java.util.concurrent.Future;
 import org.ros.message.Duration;
 
 /**
- * Created by semeyerz on 29.03.17.
+ * Created by lruegeme
  */
-
-//TODO add msgs package, use new actionlib stuff
-public class RosHandOverActuator extends RosNode implements HandOverActuator, ActionClientListener<HandOverActionFeedback, HandOverActionResult> {
+public class RosHandOverActuator extends RosNode implements HandOverActuator {
 
     String serverTopic;
     private GraphName nodeName;
@@ -50,9 +48,13 @@ public class RosHandOverActuator extends RosNode implements HandOverActuator, Ac
     @Override
     public void onStart(final ConnectedNode connectedNode) {
         ac = new ActionClient(connectedNode, this.serverTopic, HandOverActionGoal._TYPE, HandOverActionFeedback._TYPE, HandOverActionResult._TYPE);
-        ac.attachListener(this);
-        initialized = true;
-        logger.fatal("on start, RosHandShakeActuator done");
+        if (ac.waitForActionServerToStart(new Duration(2.0))) {
+            initialized = true;
+            logger.debug("RosHandOverActuator started");
+        } else {
+            logger.debug("RosHandOverActuatortimeout after 2sec " + this.serverTopic);
+        }
+
     }
 
     @Override
@@ -60,15 +62,7 @@ public class RosHandOverActuator extends RosNode implements HandOverActuator, Ac
         if(ac!=null) ac.finish();
     }
 
-    @Override
-    public void statusReceived(GoalStatusArray status) {
-        logger.trace("status recieved ");
-        List<GoalStatus> statusList = status.getStatusList();
-        for (GoalStatus gs : statusList) {
-            logger.fatal("GoalID: " + gs.getGoalId().getId() + " -- GoalStatus: " + gs.getStatus() + " -- " + gs.getText());
-        }
-        //logger.fatal("Current state of our goal: " + ClientStateMachine.ClientStates.translateState(ac.getGoalState()));
-    }
+
 
     @Override
     public Future<Boolean> handOver(String group_name, byte type) throws IOException {
@@ -83,14 +77,6 @@ public class RosHandOverActuator extends RosNode implements HandOverActuator, Ac
         return ac.sendGoal(goalMessage).toBooleanFuture();
     }
 
-    @Override
-    public void resultReceived(HandOverActionResult t) {
-        logger.trace("!!!! result recieved  !!!!");
-    }
 
-    @Override
-    public void feedbackReceived(HandOverActionFeedback t) {
-        logger.trace("feedback recieved");
-    }
 
 }
