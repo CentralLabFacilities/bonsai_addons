@@ -46,7 +46,10 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator {
         if(ac?.waitForActionServerToStart(Duration(2.0)) ==  true) {
             logger.info("PalSpeech server connected $topic")
             initialized = true
+        } else {
+            logger.error("PalSpeech server timeout after 2sec $topic")
         }
+
     }
 
     override fun destroyNode() {
