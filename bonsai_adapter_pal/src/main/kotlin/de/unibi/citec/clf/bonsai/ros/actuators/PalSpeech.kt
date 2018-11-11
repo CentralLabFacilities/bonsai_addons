@@ -41,7 +41,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator {
     }
 
     override fun onStart(connectedNode: ConnectedNode) {
-        ac = ActionClient(connectedNode!!, this.topic, TtsActionGoal._TYPE, TtsActionFeedback._TYPE, TtsActionResult._TYPE)
+        ac = ActionClient(connectedNode, this.topic, TtsActionGoal._TYPE, TtsActionFeedback._TYPE, TtsActionResult._TYPE)
 
         if(ac?.waitForActionServerToStart(Duration(2.0)) ==  true) {
             logger.info("PalSpeech server connected $topic")

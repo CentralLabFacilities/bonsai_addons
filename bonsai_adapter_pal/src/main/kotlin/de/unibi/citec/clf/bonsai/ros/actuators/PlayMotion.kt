@@ -33,11 +33,11 @@ class PlayMotion(private val nodeName: GraphName) : RosNode(), PostureActuator {
     }
 
     override fun configure(conf: IObjectConfigurator) {
-        topic = conf!!.requestValue("topic")
+        topic = conf.requestValue("topic")
     }
 
     override fun onStart(connectedNode: ConnectedNode) {
-        ac = ActionClient(connectedNode!!, this.topic, PlayMotionActionGoal._TYPE, PlayMotionActionFeedback._TYPE, PlayMotionActionResult._TYPE)
+        ac = ActionClient(connectedNode, this.topic, PlayMotionActionGoal._TYPE, PlayMotionActionFeedback._TYPE, PlayMotionActionResult._TYPE)
 
         if(ac?.waitForActionServerToStart(Duration(2.0)) ==  true) {
             logger.info("PlayMotion server connected $topic")
