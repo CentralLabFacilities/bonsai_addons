@@ -31,7 +31,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator {
     private var ac: ActionClient<TtsActionGoal, TtsActionFeedback, TtsActionResult>? = null
     private var clientDisableSpeech: ServiceClient<SetBoolRequest, SetBoolResponse>? = null
     private lateinit var topic: String
-    private var disableSpeechTopic: String? = null
+    private var disableSpeechTopic: String = ""
 
     init {
         initialized = false
@@ -49,8 +49,8 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator {
 
     override fun onStart(connectedNode: ConnectedNode) {
         ac = ActionClient(connectedNode, this.topic, TtsActionGoal._TYPE, TtsActionFeedback._TYPE, TtsActionResult._TYPE)
-        disableSpeechTopic?.let {
-            clientDisableSpeech = connectedNode.newServiceClient(it,SetBool._TYPE)
+        if(disableSpeechTopic.isNotEmpty()) {
+            clientDisableSpeech = connectedNode.newServiceClient(disableSpeechTopic,SetBool._TYPE)
         }
         if(ac?.waitForActionServerToStart(Duration(2.0)) ==  true) {
             logger.info("PalSpeech server connected $topic")
@@ -86,10 +86,13 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator {
 
     private fun enableSpeech(enabled: Boolean) {
         clientDisableSpeech?.let {
+            logger.debug("enabling speech $enabled")
             val a = it.newMessage()
             a.data = enabled
             val res = ResponseFuture<SetBoolResponse>()
             it.call(a, res)
+            val get = res.get()
+
         } ?: logger.warn("SpeechRec not connected")
 
     }
