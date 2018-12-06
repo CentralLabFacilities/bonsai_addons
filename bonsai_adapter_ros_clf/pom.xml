@@ -100,6 +100,16 @@
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
+            <artifactId>clf_object_recognition_msgs</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ros.rosjava_messages</groupId>
+            <artifactId>vision_msgs</artifactId>
+            <version>0.0.1</version>
+        </dependency>
+        <dependency>
+            <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>clf_perception_vision_msgs</artifactId>
             <version>0.0.9</version>
         </dependency>
