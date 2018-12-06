@@ -1,6 +1,5 @@
 package de.unibi.citec.clf.bonsai.ros.actuators;
 
-import com.sun.xml.internal.ws.api.model.Parameter;
 import de.unibi.citec.clf.bonsai.actuators.RecognizeObjectsActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
