@@ -6,6 +6,7 @@ import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
 import de.unibi.citec.clf.bonsai.ros.helper.ResponseFuture;
 import de.unibi.citec.clf.btl.List;
+import de.unibi.citec.clf.btl.data.object.ObjectData;
 import de.unibi.citec.clf.btl.data.object.ObjectLocationData;
 import de.unibi.citec.clf.btl.data.object.ObjectShapeData;
 import de.unibi.citec.clf.btl.data.vision3d.PlanePatchList;
@@ -20,9 +21,12 @@ import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 import org.ros.node.service.ServiceClient;
 
+
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.HashMap;
+import java.util.Iterator;
 
 public class RosDetectObjects2DActuator extends RosNode implements RecognizeObjectsActuator {
     String topic;
@@ -31,6 +35,7 @@ public class RosDetectObjects2DActuator extends RosNode implements RecognizeObje
     long actuator_timeout;
     private GraphName nodeName;
     private org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(getClass());
+    private HashMap<String,String> idLabelMap;
 
     ServiceClient<Detect2DRequest, Detect2DResponse> clientTrigger;
     public RosDetectObjects2DActuator(GraphName gn) {
@@ -58,6 +63,7 @@ public class RosDetectObjects2DActuator extends RosNode implements RecognizeObje
             throw new RosRuntimeException(e.getMessage());
         }
         initialized = true;
+        idLabelMap = (HashMap<String, String>) connectedNode.getParameterTree().getMap(rosparam);
     }
 
     @Override
@@ -93,8 +99,12 @@ public class RosDetectObjects2DActuator extends RosNode implements RecognizeObje
         List<ObjectShapeData> ret = new List(ObjectShapeData.class);
         for (int i = 0; i < res.get().getDetections().getDetections().size(); ++i) {
             try {
-                ret.add(new ObjectShapeData(MsgTypeFactory.getInstance().createType(res.get().getDetections().getDetections().get(i), ObjectLocationData.class)));
-
+                ObjectShapeData osd = new ObjectShapeData(MsgTypeFactory.getInstance().createType(res.get().getDetections().getDetections().get(i), ObjectLocationData.class));
+                for (Iterator<ObjectData.Hypothesis> it = osd.getHypotheses().iterator(); it.hasNext(); ) {
+                    ObjectData.Hypothesis hyp = it.next();
+                    hyp.setClassLabel(idLabelMap.get(hyp.getClassLabel()));
+                }
+                ret.add(osd);
             } catch (RosSerializer.DeserializationException ex) {
                 Logger.getLogger(RosDetectObjectsActuator.class.getName()).log(Level.SEVERE, null, ex);
             }
