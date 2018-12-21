@@ -264,8 +264,8 @@ public class RsbNavigationActuator extends RsbNode implements NavigationActuator
     public void manualStop() throws IOException {
         try {
             Future<Event> e = remoteServer.callAsync("stop");
-            long end = (long) (System.currentTimeMillis() + timeout);
-            while (!e.isDone() && end < System.currentTimeMillis()) {
+            long end = (long) (Time.currentTimeMillis() + timeout);
+            while (!e.isDone() && end < Time.currentTimeMillis()) {
                 Thread.sleep(100);
             }
         } catch (RSBException | InterruptedException e) {
@@ -283,8 +283,8 @@ public class RsbNavigationActuator extends RsbNode implements NavigationActuator
     public void clearCostmap() throws IOException {
         try {
             Future<Event> e = remoteServer.callAsync("clearCostmap");
-            long end = (long) (System.currentTimeMillis() + timeout);
-            while (!e.isDone() && end < System.currentTimeMillis()) {
+            long end = (long) (Time.currentTimeMillis() + timeout);
+            while (!e.isDone() && end < Time.currentTimeMillis()) {
                 Thread.sleep(100);
             }
         } catch (RSBException | InterruptedException e) {

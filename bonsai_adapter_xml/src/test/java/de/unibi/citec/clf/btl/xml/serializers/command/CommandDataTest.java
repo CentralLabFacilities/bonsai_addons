@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.command;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.data.command.CommandData;
 import de.unibi.citec.clf.btl.data.speechrec.GrammarNonTerminal;
 import de.unibi.citec.clf.btl.units.TimeUnit;
@@ -35,7 +36,7 @@ public class CommandDataTest {
             de.unibi.citec.clf.btl.xml.XomSerializer.DeserializationException {
 
         CommandData command = new CommandData();
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         command.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         command.setAction("bring");
         command.setActionset(true);
@@ -85,7 +86,7 @@ public class CommandDataTest {
     public void fileCompatibility() throws Exception {
 
         CommandData command = new CommandData();
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         command.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         command.setAction("bring");
         command.setActionset(true);

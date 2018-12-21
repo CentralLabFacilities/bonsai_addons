@@ -6,8 +6,8 @@ import com.github.rosjava_actionlib.ActionFuture;
 import de.unibi.citec.clf.bonsai.actuators.PostureActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
-import org.ros.message.Time;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 import pepper_clf_msgs.*;
@@ -69,7 +69,7 @@ public class RosNaoQiPostureActuator extends RosNode implements PostureActuator 
 
         return new Future<Boolean>() {
 
-            Time lastFeedback = Time.fromMillis(System.currentTimeMillis());
+            org.ros.message.Time lastFeedback = org.ros.message.Time.fromMillis(Time.currentTimeMillis());
 
             @Override
             public boolean cancel(boolean b) {
@@ -85,7 +85,7 @@ public class RosNaoQiPostureActuator extends RosNode implements PostureActuator 
             public boolean isDone() {
                 AnimationActionFeedback fb = fut.getLatestFeedback();
                 if(fb != null) lastFeedback = fb.getHeader().getStamp();
-                return Time.fromMillis(System.currentTimeMillis()).subtract(lastFeedback).secs>timeoutInSeconds
+                return org.ros.message.Time.fromMillis(Time.currentTimeMillis()).subtract(lastFeedback).secs>timeoutInSeconds
                         || fut.isDone();
             }
 

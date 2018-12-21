@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.navigation;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.common.Timestamp;
 import de.unibi.citec.clf.btl.data.navigation.TurnData;
@@ -30,7 +31,7 @@ public class TurnDataTest {
     public void selfCompatibility() throws Exception {
 
         TurnData original = new TurnData();
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         original.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         original.setGenerator("test");
         original.setAngle(-0.45, AngleUnit.RADIAN);

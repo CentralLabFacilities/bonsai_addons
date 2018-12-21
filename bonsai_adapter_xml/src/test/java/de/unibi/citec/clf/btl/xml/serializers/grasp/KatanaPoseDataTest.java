@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.grasp;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.common.Timestamp;
 import de.unibi.citec.clf.btl.data.grasp.KatanaPoseData;
@@ -28,7 +29,7 @@ public class KatanaPoseDataTest {
     @Test
     public void selfCompatibility() throws Exception {
         KatanaPoseData original = new KatanaPoseData();
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         original.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         original.setGenerator("test");
         original.setX(111, LengthUnit.MILLIMETER);

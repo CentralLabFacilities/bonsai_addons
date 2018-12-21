@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.status;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.data.status.RobotState;
 import de.unibi.citec.clf.btl.units.TimeUnit;
 import de.unibi.citec.clf.btl.xml.XomTypeFactory;
@@ -21,7 +22,7 @@ public class RobotStateTest {
     public void selfCompatibility() throws Exception {
 
         RobotState original = new RobotState();
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         original.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         original.setGenerator("test");
         original.setCurrenState(RobotState.RobotStates.DRIVE_TO);

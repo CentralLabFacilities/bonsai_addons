@@ -40,7 +40,7 @@ public class PersonDataTest {
     public void selfCompatibility() throws SerializationException, DeserializationException {
 
         PersonData original = new PersonData();
-        //final long timestamp = System.currentTimeMillis();
+        //final long timestamp = Time.currentTimeMillis();
         //original.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         //original.setGenerator("test");
         original.setName("peter");

@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.navigation;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.navigation.PositionData;
 import de.unibi.citec.clf.btl.units.AngleUnit;
@@ -26,7 +27,7 @@ public class PositionDataTest {
     public void selfCompatibility() throws Exception {
 
         PositionData original = new PositionData();
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         //original.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         //original.setGenerator("test");
         original.setX(-12.34, LengthUnit.MILLIMETER);

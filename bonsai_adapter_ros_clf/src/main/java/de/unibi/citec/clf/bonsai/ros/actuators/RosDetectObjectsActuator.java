@@ -5,6 +5,7 @@ package de.unibi.citec.clf.bonsai.ros.actuators;
 import de.unibi.citec.clf.bonsai.actuators.RecognizeObjectsActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
 import de.unibi.citec.clf.bonsai.ros.helper.ResponseFuture;
 import de.unibi.citec.clf.btl.List;
@@ -73,14 +74,14 @@ public class RosDetectObjectsActuator extends RosNode implements RecognizeObject
     public List<ObjectShapeData> recognize() throws InterruptedException, ExecutionException {
         if (timeout > 0) {
             logger.debug("using timeout of " + timeout + "ms");
-            actuator_timeout = System.currentTimeMillis() + timeout;
+            actuator_timeout = Time.currentTimeMillis() + timeout;
         }
         DetectObjectsRequest req = clientTrigger.newMessage();
         //set data
         final ResponseFuture<DetectObjectsResponse> res = new ResponseFuture<>();
         clientTrigger.call(req, res);
         while (!res.isDone()) {
-            if(actuator_timeout < System.currentTimeMillis()){
+            if(actuator_timeout < Time.currentTimeMillis()){
                 logger.error("service call timed out!");
                 return null;
             }

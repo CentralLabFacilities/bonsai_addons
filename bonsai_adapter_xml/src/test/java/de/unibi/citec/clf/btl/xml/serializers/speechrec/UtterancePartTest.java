@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.speechrec;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.common.Timestamp;
 import de.unibi.citec.clf.btl.data.speechrec.UtterancePart;
@@ -30,7 +31,7 @@ public class UtterancePartTest {
     public void selfCompatibility() throws SerializationException, DeserializationException {
 
         UtterancePart actual = new UtterancePart();
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         actual.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         actual.setGenerator("test");
         actual.setWord("auto");

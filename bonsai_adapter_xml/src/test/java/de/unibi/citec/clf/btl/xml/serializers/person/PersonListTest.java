@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.person;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.common.Timestamp;
 import de.unibi.citec.clf.btl.data.person.PersonData;
@@ -40,7 +41,7 @@ public class PersonListTest {
 
         PersonData data1 = new PersonData();
 
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         data1.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         data1.setGenerator("test");
 //        data1.setFacing(true);
@@ -55,7 +56,7 @@ public class PersonListTest {
 
         PersonData data2 = new PersonData();
 
-        final long timestamp2 = System.currentTimeMillis();
+        final long timestamp2 = Time.currentTimeMillis();
         data2.setTimestamp(timestamp2, TimeUnit.MILLISECONDS);
         data2.setGenerator("test2");
 //        data2.setFacing(false);

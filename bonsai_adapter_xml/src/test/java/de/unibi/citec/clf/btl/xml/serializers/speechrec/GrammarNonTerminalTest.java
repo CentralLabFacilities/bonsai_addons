@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.speechrec;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.speechrec.GrammarNonTerminal;
 import de.unibi.citec.clf.btl.data.speechrec.UtterancePart;
@@ -37,13 +38,13 @@ public class GrammarNonTerminalTest {
     public void selfCompatibility() throws SerializationException, DeserializationException {
 
         GrammarNonTerminal actual = new GrammarNonTerminal();
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         actual.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         actual.setGenerator("test");
         actual.setName("Phrase");
 
         UtterancePart utt = new UtterancePart();
-        final long uttTimestamp = System.currentTimeMillis();
+        final long uttTimestamp = Time.currentTimeMillis();
         utt.setTimestamp(uttTimestamp, TimeUnit.MILLISECONDS);
         utt.setGenerator("test");
         utt.setWord("das");
@@ -55,7 +56,7 @@ public class GrammarNonTerminalTest {
         utt.setCombinedScore(6.789);
 
         GrammarNonTerminal nt = new GrammarNonTerminal();
-        final long ntTimestamp = System.currentTimeMillis();
+        final long ntTimestamp = Time.currentTimeMillis();
         nt.setTimestamp(ntTimestamp, TimeUnit.MILLISECONDS);
         nt.setGenerator("test");
         nt.setName("Nomen");

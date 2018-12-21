@@ -329,7 +329,7 @@ public class RsbPicknPlaceActuator extends RsbNode implements PicknPlaceActuator
         try {
             synchronized (serverLock) {
                 logger.debug("------servercall--------: call server: "
-                        + System.currentTimeMillis());
+                        + Time.currentTimeMillis());
 
                 Future<Boolean> success = server.callAsync(
                         METHOD_SET_MOVEMENTS, name);
@@ -337,7 +337,7 @@ public class RsbPicknPlaceActuator extends RsbNode implements PicknPlaceActuator
                 // boolean success = server.call(METHOD_SET_MOVEMENTS, name,
                 // TIMEOUT);
                 logger.debug("-----servercall--------: returned: "
-                        + System.currentTimeMillis() + " setMovment: "
+                        + Time.currentTimeMillis() + " setMovment: "
                         + success);
                 return success;
             }

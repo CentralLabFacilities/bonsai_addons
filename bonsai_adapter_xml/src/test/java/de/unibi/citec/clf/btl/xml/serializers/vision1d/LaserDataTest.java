@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.vision1d;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.common.Timestamp;
 import de.unibi.citec.clf.btl.data.vision1d.LaserData;
@@ -29,7 +30,7 @@ public class LaserDataTest {
     public void selfCompatibility() throws Exception {
 
         LaserData original = new LaserData();
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         original.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         original.setGenerator("test");
 //        original.setReadTime(new MicroTimestamp(123, 456));

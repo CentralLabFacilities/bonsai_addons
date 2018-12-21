@@ -64,8 +64,8 @@ public class RsbFaceIdentificationHumavipsActuator extends RsbNode implements Fa
 
             listener.addHandler(handler, true);
 
-            long timeStart = System.currentTimeMillis();
-            while (eventIn == null && System.currentTimeMillis() - timeStart < timeout) {
+            long timeStart = Time.currentTimeMillis();
+            while (eventIn == null && Time.currentTimeMillis() - timeStart < timeout) {
                 try {
                     Thread.sleep(50);
                 } catch (InterruptedException e) {

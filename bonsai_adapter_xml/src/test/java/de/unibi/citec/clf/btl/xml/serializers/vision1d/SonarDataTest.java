@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.vision1d;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.common.Timestamp;
 import de.unibi.citec.clf.btl.data.vision1d.SonarData;
@@ -27,7 +28,7 @@ public class SonarDataTest {
     @Test
     public void selfCompatibility() throws Exception {
         SonarData original = new SonarData(4.2, 1.1, LengthUnit.METER);
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         original.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         original.setGenerator("test");
 

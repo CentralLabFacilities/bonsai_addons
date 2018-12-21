@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.map;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.common.Timestamp;
 import de.unibi.citec.clf.btl.data.map.BinarySlamMap;
@@ -37,7 +38,7 @@ public class BinarySlamMapTest {
     public void selfCompatibility() throws Exception {
 
         BinarySlamMap original = new BinarySlamMap();
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         original.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         original.setGenerator("test");
         original.setHeight(23445);

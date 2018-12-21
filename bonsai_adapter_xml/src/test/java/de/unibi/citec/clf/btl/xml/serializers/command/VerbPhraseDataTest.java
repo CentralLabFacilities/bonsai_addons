@@ -45,6 +45,7 @@ package de.unibi.citec.clf.btl.xml.serializers.command;
  * %LICENSE#
  */
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.data.command.VerbPhraseData;
 import de.unibi.citec.clf.btl.units.TimeUnit;
 import de.unibi.citec.clf.btl.xml.XomTypeFactory;
@@ -81,7 +82,7 @@ public class VerbPhraseDataTest {
 
         VerbPhraseData data = new VerbPhraseData();
 
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         data.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         data.setVerb("verb");
         data.setVerbPhraseType("verbPhraseType");
@@ -116,7 +117,7 @@ public class VerbPhraseDataTest {
     public void fileCompatibility() throws Exception {
         VerbPhraseData data = new VerbPhraseData();
 
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
         data.setTimestamp(timestamp, TimeUnit.MILLISECONDS);
         data.setVerb("verb");
         data.setVerbPhraseType("verbPhraseType");

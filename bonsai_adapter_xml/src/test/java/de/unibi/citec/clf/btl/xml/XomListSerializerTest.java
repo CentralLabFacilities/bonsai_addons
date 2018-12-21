@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.List;
 import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.geometry.Point2D;
@@ -30,7 +31,7 @@ public class XomListSerializerTest {
     @Test
     public void selfCompatibility() throws Exception {
 
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
 
         List<Point2D> original = new List<Point2D>(Point2D.class);
         original.setGenerator("test");
@@ -66,7 +67,7 @@ public class XomListSerializerTest {
     @Test
     public void testDynamicInstantiation() throws Exception {
 
-        final long timestamp = System.currentTimeMillis();
+        final long timestamp = Time.currentTimeMillis();
 
         List<Point2D> original = new List<Point2D>(Point2D.class);
         original.setGenerator("test");

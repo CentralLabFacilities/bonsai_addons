@@ -1,6 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.common;
 
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.btl.data.common.MicroTimestamp;
 import org.junit.Test;
 
@@ -64,7 +65,7 @@ public class MicroTimestampTest {
      */
     @Test
     public void timeConversion() {
-        long currentTime = System.currentTimeMillis();
+        long currentTime = Time.currentTimeMillis();
 
         MicroTimestamp mts = new MicroTimestamp(currentTime, TimeUnit.MILLISECONDS);
 
