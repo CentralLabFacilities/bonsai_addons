@@ -97,9 +97,9 @@ public class RosDetectObjects2DActuator extends RosNode implements RecognizeObje
             return null;
         }
         List<ObjectShapeData> ret = new List(ObjectShapeData.class);
-        for (int i = 0; i < res.get().getDetections().getDetections().size(); ++i) {
+        for (int i = 0; i < res.get().getDetections().size(); ++i) {
             try {
-                ObjectShapeData osd = new ObjectShapeData(MsgTypeFactory.getInstance().createType(res.get().getDetections().getDetections().get(i), ObjectLocationData.class));
+                ObjectShapeData osd = new ObjectShapeData(MsgTypeFactory.getInstance().createType(res.get().getDetections().get(i), ObjectLocationData.class));
                 for (Iterator<ObjectData.Hypothesis> it = osd.getHypotheses().iterator(); it.hasNext(); ) {
                     ObjectData.Hypothesis hyp = it.next();
                     hyp.setClassLabel(idLabelMap.get(hyp.getClassLabel()));
