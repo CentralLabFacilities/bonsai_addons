@@ -45,15 +45,16 @@ public class PersonAttributeSerializer extends RosSerializer<PersonAttribute, op
             case "grey": ret.setShirtcolor(PersonAttribute.Shirtcolor.GREY); break;
         }
 
-        switch(msg.getPosture()) {
+        switch(msg.getPosture().getPosture()) {
             case 1: ret.setPosture(PersonAttribute.Posture.SITTING); break;
             default:
             case 2: ret.setPosture(PersonAttribute.Posture.STANDING); break;
             case 3: ret.setPosture(PersonAttribute.Posture.LYING); break;
         }
         LinkedList<PersonAttribute.Gesture> gestures = new LinkedList<>();
-        for(int gesture: msg.getGestures()){
-            switch(gesture) {
+        for(openpose_ros_msgs.Gesture gesture: msg.getGestures()){
+            int g = gesture.getGesture();
+            switch(g) {
                 case 1: gestures.add(PersonAttribute.Gesture.POINTING_LEFT); break;
                 case 2: gestures.add(PersonAttribute.Gesture.POINTING_RIGHT); break;
                 case 3: gestures.add(PersonAttribute.Gesture.RAISING_LEFT_ARM); break;
