@@ -10,6 +10,7 @@ import java.util.concurrent.TimeoutException;
 import javax.vecmath.Quat4d;
 import javax.vecmath.Vector3d;
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import org.apache.log4j.Logger;
 
 import rsb.RSBException;

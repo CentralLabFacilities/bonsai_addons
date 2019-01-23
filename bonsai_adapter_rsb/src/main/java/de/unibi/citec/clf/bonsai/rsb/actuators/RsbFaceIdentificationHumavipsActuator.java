@@ -3,6 +3,7 @@ package de.unibi.citec.clf.bonsai.rsb.actuators;
 import java.io.IOException;
 import java.util.concurrent.TimeoutException;
 
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import org.apache.log4j.Logger;
 
 import rsb.Event;
