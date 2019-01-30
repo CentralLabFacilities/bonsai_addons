@@ -8,7 +8,7 @@ import de.unibi.citec.clf.bonsai.actuators.GazeActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 
-import de.unibi.citec.clf.btl.data.geometry.Pose3D;
+import de.unibi.citec.clf.btl.data.geometry.Point3D;
 import org.ros.message.Duration;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
@@ -148,12 +148,12 @@ public class RosGazeActuator extends RosNode implements GazeActuator {
     }
 
     @Override
-    public Future<Void> lookAt(Pose3D pose) {
+    public Future<Void> lookAt(Point3D pose) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
     @Override
-    public Future<Void> lookAt(Pose3D pose, long duration) {
+    public Future<Void> lookAt(Point3D pose, long duration) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
 
