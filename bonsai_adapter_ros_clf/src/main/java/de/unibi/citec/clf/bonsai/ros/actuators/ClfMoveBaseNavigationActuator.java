@@ -4,9 +4,12 @@ import com.github.rosjava_actionlib.ActionClient;
 import com.github.rosjava_actionlib.ActionFuture;
 import actionlib_msgs.GoalID;
 
+import de.unibi.citec.clf.bonsai.core.exception.InitializationException;
 import de.unibi.citec.clf.bonsai.ros.helper.NavigationFuture;
+import geometry_msgs.Twist;
 import org.ros.exception.RemoteException;
 import org.ros.exception.ServiceNotFoundException;
+import org.ros.message.Duration;
 import org.ros.node.service.ServiceClient;
 import de.unibi.citec.clf.bonsai.actuators.NavigationActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
@@ -59,14 +62,9 @@ import org.ros.node.topic.Publisher;
  */
 public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator implements NavigationActuator {
 
-    String drive_direct_topic;
     String costmap_topic;
     String make_plan_topic;
-    private GraphName nodeName;
-    private ActionClient<MoveBaseActionGoal, MoveBaseActionFeedback, MoveBaseActionResult> ac;
-    private ActionClient<MoveBaseActionGoal, MoveBaseActionFeedback, MoveBaseActionResult> direct_ac;
     ServiceClient<GetPlanRequest, GetPlanResponse> getPlanClient;
-    private GoalID last_ac_goal_id;
     private GoalID last_direct_ac_goal_id;
     private ServiceClient<EmptyRequest, EmptyResponse> sc;
     private org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(getClass());
@@ -81,7 +79,7 @@ public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator
     @Override
     public void configure(IObjectConfigurator conf) throws ConfigurationException {
         this.topic = conf.requestValue("topic");
-        this.drive_direct_topic = conf.requestValue("driveDirectTopic");
+        this.moveRelativeTopic = conf.requestValue("moveRelativeTopic");
         this.costmap_topic = conf.requestValue("costmapTopic");
         this.make_plan_topic = conf.requestValue("makePlanTopic");
     }
@@ -93,10 +91,21 @@ public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator
 
     @Override
     public void onStart(final ConnectedNode connectedNode) {
+
+        logger.trace("Start " + RosMoveBaseNavigationActuator.class);
         ac = new ActionClient(connectedNode, this.topic, MoveBaseActionGoal._TYPE, MoveBaseActionFeedback._TYPE, MoveBaseActionResult._TYPE);
-        direct_ac = new ActionClient(connectedNode, this.drive_direct_topic, MoveBaseActionGoal._TYPE, MoveBaseActionFeedback._TYPE, MoveBaseActionResult._TYPE);
-        last_ac_goal_id = null;
-        last_direct_ac_goal_id = null;
+        this.moveRelativePublisher = connectedNode.newPublisher(this.moveRelativeTopic, Twist._TYPE);
+        subscriber = connectedNode.newSubscriber(poseTopic, geometry_msgs.Pose._TYPE);
+        lastAcGoalId = null;
+
+        try {
+            driveDirect = new DriveDirectThread();
+            subscriber.addMessageListener(driveDirect);
+        } catch (RosSerializer.SerializationException e) {
+            logger.error(e);
+            throw new InitializationException(e);
+        }
+
         testPub = connectedNode.newPublisher("/debug", PoseStamped._TYPE);
         try {
             sc = connectedNode.newServiceClient(this.costmap_topic, Empty._TYPE);
@@ -110,23 +119,13 @@ public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator
             logger.error(e.getMessage());
             return;
         }
-        initialized = true;
-        logger.debug("on start, RosMoveBaseNav done");
-    }
 
-    @Override
-    public void destroyNode() {
-        if(ac!=null) ac.finish();
-        if(direct_ac!=null) direct_ac.finish();
-        if(sc!=null) sc.shutdown();
-    }
-
-    @Override
-    public void setGoal(NavigationGoalData data) throws IOException {
-        if (data.getFrameId().isEmpty()) {
-            data.setFrameId("map");//TODO: may result in errors!
+        if (ac.waitForActionServerToStart(new Duration(2.0))) {
+            initialized = true;
+            logger.debug("RosMoveBase NavAct started");
+        } else {
+            logger.debug("RosMoveBase NavAct timeout after 2sec " + this.topic);
         }
-        this.navigateToCoordinate(data);
     }
 
     @Override
@@ -240,103 +239,8 @@ public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator
     }
 
     @Override
-    public void manualStop() throws IOException {
-        if (last_direct_ac_goal_id != null) {
-            direct_ac.sendCancel(last_direct_ac_goal_id);
-        }
-        if (last_ac_goal_id != null) {
-            ac.sendCancel(last_ac_goal_id);
-        }
-    }
-
-    @Override
     public NavigationGoalData getCurrentGoal() throws IOException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
-    @Override
-    public Future<CommandResult> moveRelative(DriveData drive, TurnData turn) {
-        MoveBaseActionGoal msg = direct_ac.newGoalMessage();
-        MoveBaseGoal goal = msg.getGoal();
-        Point position = goal.getTargetPose().getPose().getPosition();
-        Quaternion orientation = goal.getTargetPose().getPose().getOrientation();
-
-        double x, y, angle;
-        float move_vel, rot_vel;
-
-        try {
-            angle = turn.getAngle(AngleUnit.RADIAN);
-        } catch (NullPointerException e) {
-            angle = 0.0;
-        }
-
-        Rotation3D rot = new Rotation3D(0.0, 0.0, 1.0, angle, AngleUnit.RADIAN);
-        Quat4d q = rot.getQuaternion();
-
-        try {
-            x = drive.getDirection().getX(LengthUnit.METER) * drive.getDistance(LengthUnit.METER);
-        } catch (NullPointerException e) {
-            x = 0.0;
-        }
-
-        try {
-            y = drive.getDirection().getY(LengthUnit.METER) * drive.getDistance(LengthUnit.METER);
-        } catch (NullPointerException e) {
-            y = 0.0;
-        }
-
-        try{
-            move_vel = (float)drive.getSpeed(SpeedUnit.METER_PER_SEC);
-            goal.setPlanarVelocity(move_vel);
-        } catch (NullPointerException e){
-            // planar velocity not set. node will use standard velocity
-        }
-
-        try{
-            rot_vel = (float)turn.getSpeed(RotationalSpeedUnit.RADIANS_PER_SEC);
-            goal.setAngularVelocity(rot_vel);
-        } catch (NullPointerException e){
-            // angular velocity not set. node will use standard velocity
-        }
-        position.setX(x);
-        position.setY(y);
-        position.setZ(0.0);
-        orientation.setX(q.x);
-        orientation.setY(q.y);
-        orientation.setZ(q.z);
-        orientation.setW(q.w);
-
-        last_direct_ac_goal_id = msg.getGoalId();
-        ActionFuture<MoveBaseActionGoal, MoveBaseActionFeedback, MoveBaseActionResult> fut = this.direct_ac.sendGoal(msg);
-        Future<CommandResult> fcr = new NavigationFuture(fut);
-
-        return fcr;
-    }
-
-    @Override
-    public Future<CommandResult> navigateToCoordinate(NavigationGoalData data) {
-        MoveBaseActionGoal msg = ac.newGoalMessage();
-        MoveBaseGoal goal = msg.getGoal();
-        Point position = goal.getTargetPose().getPose().getPosition();
-        Quaternion orientation = goal.getTargetPose().getPose().getOrientation();
-        Rotation3D rot = new Rotation3D(0.0, 0.0, 1.0, data.getYaw(AngleUnit.RADIAN), AngleUnit.RADIAN);
-        Quat4d q = rot.getQuaternion();
-        position.setX(data.getX(LengthUnit.METER));
-        position.setY(data.getY(LengthUnit.METER));
-        position.setZ(0.0);
-        orientation.setX(q.x);
-        orientation.setY(q.y);
-        orientation.setZ(q.z);
-        orientation.setW(q.w);
-
-        Header h = goal.getTargetPose().getHeader();
-        h.setFrameId(data.getFrameId());
-
-        last_ac_goal_id = msg.getGoalId();
-        ActionFuture<MoveBaseActionGoal, MoveBaseActionFeedback, MoveBaseActionResult> fut = this.ac.sendGoal(msg);
-        Future<CommandResult> fcr = new NavigationFuture(fut);
-
-        return fcr;
     }
 
     @Override
