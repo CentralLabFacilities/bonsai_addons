@@ -120,7 +120,7 @@ public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator
             return;
         }
 
-        if (ac.waitForActionServerToStart(new Duration(2.0))) {
+        if (ac.waitForActionServerToStart(new Duration(4.0))) {
             initialized = true;
             logger.debug("RosMoveBase NavAct started");
         } else {

@@ -52,7 +52,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator {
         if(disableSpeechTopic.isNotEmpty()) {
             clientDisableSpeech = connectedNode.newServiceClient(disableSpeechTopic,SetBool._TYPE)
         }
-        if(ac?.waitForActionServerToStart(Duration(2.0)) ==  true) {
+        if(ac?.waitForActionServerToStart(Duration(4.0)) ==  true) {
             logger.info("PalSpeech server connected $topic")
             initialized = true
         } else {
