@@ -99,9 +99,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator {
 
     @Throws(IOException::class)
     override fun say(text: String) {
-        enableSpeech(false)
-        sendToTTS(text).get()
-        enableSpeech(true)
+        sayAsync(text).get()
     }
 
     @Throws(IOException::class)

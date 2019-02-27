@@ -5,7 +5,6 @@ import de.unibi.citec.clf.btl.data.person.PersonAttribute;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
 import openpose_ros_msgs.PersonAttributes;
 import org.ros.message.MessageFactory;
-import sun.awt.image.ImageWatched;
 
 import java.util.Arrays;
 import java.util.LinkedList;

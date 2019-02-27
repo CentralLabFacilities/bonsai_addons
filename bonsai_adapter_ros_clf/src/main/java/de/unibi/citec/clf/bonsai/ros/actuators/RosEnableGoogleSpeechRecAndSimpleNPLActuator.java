@@ -12,7 +12,6 @@ import org.ros.node.service.ServiceClient;
 import std_srvs.SetBool;
 import std_srvs.SetBoolRequest;
 import std_srvs.SetBoolResponse;
-import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.io.IOException;
 import java.util.concurrent.ExecutionException;

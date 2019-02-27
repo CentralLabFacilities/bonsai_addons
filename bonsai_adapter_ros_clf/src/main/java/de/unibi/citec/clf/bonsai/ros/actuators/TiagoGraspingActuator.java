@@ -13,9 +13,9 @@ import org.apache.log4j.Logger;
 import org.ros.message.Duration;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
-import clf_grasping_msgs.GraspItemActionFeedback;
-import clf_grasping_msgs.GraspItemActionGoal;
-import clf_grasping_msgs.GraspItemActionResult;
+import clf_grasping_msgs.PickActionFeedback;
+import clf_grasping_msgs.PickActionGoal;
+import clf_grasping_msgs.PickActionResult;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -34,9 +34,9 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
 
     class MoveitResultFuture implements Future<MoveitResult> {
 
-        private ActionFuture<GraspItemActionGoal, GraspItemActionFeedback, GraspItemActionResult> af;
+        private ActionFuture<PickActionGoal, PickActionFeedback, PickActionResult> af;
 
-        MoveitResultFuture(ActionFuture<GraspItemActionGoal, GraspItemActionFeedback, GraspItemActionResult> future) {
+        MoveitResultFuture(ActionFuture<PickActionGoal, PickActionFeedback, PickActionResult> future) {
             this.af = future;
         }
 
@@ -71,7 +71,7 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
     private String serverTopic; //tiago_mtc
     private GraphName nodeName;
     private String METHOD_GRASP = "grasp_object";
-    private ActionClient<GraspItemActionGoal, GraspItemActionFeedback, GraspItemActionResult> ac;
+    private ActionClient<PickActionGoal, PickActionFeedback, PickActionResult> ac;
     private @Nullable
     GoalID lastAcGoalId;
 
@@ -82,7 +82,7 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
 
     @Override
     public void onStart(ConnectedNode connectedNode) {
-        ac = new ActionClient(connectedNode, this.serverTopic + "/" + METHOD_GRASP, GraspItemActionGoal._TYPE, GraspItemActionFeedback._TYPE, GraspItemActionResult._TYPE);
+        ac = new ActionClient(connectedNode, this.serverTopic + "/" + METHOD_GRASP, PickActionGoal._TYPE, PickActionFeedback._TYPE, PickActionResult._TYPE);
         lastAcGoalId = null;
 
         if (ac.waitForActionServerToStart(new Duration(2.0))) {
@@ -108,10 +108,10 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
 
     @Override
     public Future<MoveitResult> graspObject(@Nonnull String objectId, @Nullable String group) throws IOException {
-        GraspItemActionGoal msg = ac.newGoalMessage();
+        PickActionGoal msg = ac.newGoalMessage();
         msg.getGoal().setId(objectId);
         lastAcGoalId = msg.getGoalId();
-        ActionFuture<GraspItemActionGoal, GraspItemActionFeedback, GraspItemActionResult> fut = this.ac.sendGoal(msg);
+        ActionFuture<PickActionGoal, PickActionFeedback, PickActionResult> fut = this.ac.sendGoal(msg);
 
         return new MoveitResultFuture(fut);
     }
@@ -119,6 +119,6 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
     @Override
     public void configure(IObjectConfigurator conf) throws ConfigurationException {
         this.serverTopic = conf.requestValue("topic");
-        this.METHOD_GRASP = conf.requestOptionalValue("method_GraspItem", METHOD_GRASP);
+        this.METHOD_GRASP = conf.requestOptionalValue("method_Pick", METHOD_GRASP);
     }
 }

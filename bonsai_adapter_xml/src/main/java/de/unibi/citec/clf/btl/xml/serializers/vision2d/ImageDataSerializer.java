@@ -1,7 +1,7 @@
 package de.unibi.citec.clf.btl.xml.serializers.vision2d;
 
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+import java.util.Base64;
 import de.unibi.citec.clf.btl.data.vision2d.ImageData;
 import de.unibi.citec.clf.btl.data.vision2d.ImageData.ColorMode;
 import nu.xom.Element;
@@ -84,7 +84,7 @@ public class ImageDataSerializer extends XomSerializer<ImageData> {
         //data.appendChild(test);
         
 
-        String encodedData = Base64.encode(img.getData());
+        String encodedData = Base64.getEncoder().encodeToString(img.getData());
         data.appendChild(encodedData);
 
 
@@ -97,7 +97,7 @@ public class ImageDataSerializer extends XomSerializer<ImageData> {
      * Constructs a {@link RegionDataSerializer} object from a given XOM
      * {@link Element}.
      *
-     * @param objectElement The XOM {@link Element} to construct an object from.
+     * @param element The XOM {@link Element} to construct an object from.
      * @return The {@link RegionDataSerializer} object containing all the
      * information given by the {@link Element} object.
      * @throws ParsingException
@@ -119,7 +119,7 @@ public class ImageDataSerializer extends XomSerializer<ImageData> {
                     result.setColorMode(ColorMode.valueOf(ElementParser.getAttributeValue(e, "color"))); 
                     break;
                 case "Data":
-                    byte[] decodedData = Base64.decode(e.getValue());
+                    byte[] decodedData = Base64.getDecoder().decode(e.getValue());
                     result.setData(decodedData);
                     break;
             }
