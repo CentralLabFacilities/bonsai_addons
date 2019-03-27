@@ -85,7 +85,8 @@
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>control_msgs</artifactId>
-            <version>LATEST</version>
+            <!-- LATEST AS VERSION DID NOT WORK! -->
+            <version>[1.5.0,1.6.0)</version>
         </dependency>
 
     </dependencies>
