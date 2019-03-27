@@ -163,7 +163,7 @@
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>bayes_people_tracker_msgs</artifactId>
-            <version>[0.0.4,1.0.0)</version>
+            <version>[0.0.4,2.0.0)</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
