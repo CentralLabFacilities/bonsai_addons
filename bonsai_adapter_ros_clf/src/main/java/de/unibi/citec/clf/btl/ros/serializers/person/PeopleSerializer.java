@@ -9,7 +9,6 @@ import de.unibi.citec.clf.btl.ros.MsgTypeFactory;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
 import org.ros.message.MessageFactory;
 
-@Deprecated //Use PeoplewithHeadSerializer instead
 public class PeopleSerializer extends RosSerializer<PersonDataList, People> {
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PeopleSerializer.class);
