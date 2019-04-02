@@ -1,6 +1,8 @@
 package de.unibi.citec.clf.bonsai.ros.actuators
 
+import actionlib_msgs.GoalStatusArray
 import com.github.rosjava_actionlib.ActionClient
+import com.github.rosjava_actionlib.ActionClientListener
 import com.github.rosjava_actionlib.ActionFuture
 import de.unibi.citec.clf.bonsai.actuators.SpeechActuator
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
@@ -25,7 +27,21 @@ import java.util.concurrent.TimeUnit
  *
  * @author lruegeme
  */
-class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator {
+class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, ActionClientListener<TtsActionFeedback, TtsActionResult> {
+    override fun statusReceived(status: GoalStatusArray) {
+        for(state in status.statusList) {
+            if(state.status < 7) return
+        }
+        enableSpeech(true)
+    }
+
+    override fun feedbackReceived(feedback: TtsActionFeedback) {
+        //NOP
+    }
+
+    override fun resultReceived(result: TtsActionResult) {
+        //NOP
+    }
 
     private val logger = org.apache.log4j.Logger.getLogger(javaClass)
     private var ac: ActionClient<TtsActionGoal, TtsActionFeedback, TtsActionResult>? = null
@@ -54,6 +70,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator {
         }
         if(ac?.waitForActionServerToStart(Duration(4.0)) ==  true) {
             logger.info("PalSpeech server connected $topic")
+            ac?.attachListener(this)
             initialized = true
         } else {
             logger.error("PalSpeech server timeout after 2sec $topic")
@@ -73,7 +90,6 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator {
             goal.goal.rawtext.langId = langId
 
             val sendGoal = client.sendGoal(goal)
-
             logger.info("PAL TTS: $data")
 
             return sendGoal
