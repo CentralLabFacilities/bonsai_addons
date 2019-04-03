@@ -30,7 +30,7 @@ import java.util.concurrent.TimeUnit
 class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, ActionClientListener<TtsActionFeedback, TtsActionResult> {
     override fun statusReceived(status: GoalStatusArray) {
         for(state in status.statusList) {
-            if(state.status < 7) return
+            if(state.status !in 2..5 && state.status < 8) return
         }
         enableSpeech(true)
     }
