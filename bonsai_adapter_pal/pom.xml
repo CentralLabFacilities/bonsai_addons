@@ -90,6 +90,12 @@
 
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
+            <artifactId>storing_groceries_msgs</artifactId>
+            <version>0.0.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>control_msgs</artifactId>
             <version>LATEST</version>
         </dependency>
