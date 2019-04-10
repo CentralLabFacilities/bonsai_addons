@@ -20,7 +20,7 @@ public class PeopleSerializer extends RosSerializer<PersonDataList, People> {
             PersonData person = MsgTypeFactory.getInstance().createType(p, PersonData.class);
 
             String frame_id = msg.getHeader().getFrameId().startsWith("/") ? msg.getHeader().getFrameId().substring(1) : msg.getHeader().getFrameId();
-            logger.warn("Persn frame id: "+frame_id);
+            logger.debug("Frame id of deserialized person: "+frame_id);
             person.getPosition().setFrameId(frame_id);
             persons.add(person);
         }
