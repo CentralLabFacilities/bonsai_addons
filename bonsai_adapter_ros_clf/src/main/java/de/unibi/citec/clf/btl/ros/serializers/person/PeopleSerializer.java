@@ -2,6 +2,7 @@ package de.unibi.citec.clf.btl.ros.serializers.person;
 
 
 import de.unibi.citec.clf.btl.data.person.PersonDataList;
+import de.unibi.citec.clf.btl.units.TimeUnit;
 import people_msgs.People;
 import people_msgs.Person;
 import de.unibi.citec.clf.btl.data.person.PersonData;
@@ -18,10 +19,10 @@ public class PeopleSerializer extends RosSerializer<PersonDataList, People> {
 
         for(Person p: msg.getPeople()){
             PersonData person = MsgTypeFactory.getInstance().createType(p, PersonData.class);
-
             String frame_id = msg.getHeader().getFrameId().startsWith("/") ? msg.getHeader().getFrameId().substring(1) : msg.getHeader().getFrameId();
-            logger.debug("Frame id of deserialized person: "+frame_id);
+//            logger.trace("Frame id of deserialized person: "+frame_id);
             person.getPosition().setFrameId(frame_id);
+            person.getTimestamp().setCreated(msg.getHeader().getStamp().secs, TimeUnit.SECONDS);
             persons.add(person);
         }
 

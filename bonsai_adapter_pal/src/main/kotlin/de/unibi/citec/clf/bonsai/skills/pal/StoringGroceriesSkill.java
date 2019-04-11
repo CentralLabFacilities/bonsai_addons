@@ -25,9 +25,11 @@ public class StoringGroceriesSkill extends AbstractSkill {
 
     private ExitToken tokenSuccess;
     private ExitToken tokenError;
-    private ExitToken tokenNavFailed;
-    private ExitToken tokenPlanFailed;
-    private ExitToken tokenGraspFailed;
+    private ExitToken tokenPickFailed;
+    private ExitToken tokenPlaceFailed;
+    private ExitToken tokenNoObjectFound;
+    private ExitToken tokenNoPlaceLocFound;
+    private ExitToken tokenMoveFailed;
 
     private StoringGroceriesActuator actuator;
     private Future<StoringGroceriesResult> future;
@@ -41,9 +43,11 @@ public class StoringGroceriesSkill extends AbstractSkill {
         }
         tokenSuccess = configurator.requestExitToken(ExitStatus.SUCCESS());
         tokenError = configurator.requestExitToken(ExitStatus.ERROR());
-        tokenNavFailed = configurator.requestExitToken(ExitStatus.ERROR().ps("navFailed"));
-        tokenPlanFailed = configurator.requestExitToken(ExitStatus.ERROR().ps("planFailed"));
-        tokenGraspFailed = configurator.requestExitToken(ExitStatus.ERROR().ps("graspFailed"));
+        tokenPickFailed = configurator.requestExitToken(ExitStatus.ERROR().ps("pickFailed"));
+        tokenPlaceFailed = configurator.requestExitToken(ExitStatus.ERROR().ps("placeFailed"));
+        tokenNoObjectFound = configurator.requestExitToken(ExitStatus.ERROR().ps("noObjectFound"));
+        tokenNoPlaceLocFound = configurator.requestExitToken(ExitStatus.ERROR().ps("noPlaceLocFound"));
+        tokenMoveFailed = configurator.requestExitToken(ExitStatus.ERROR().ps("moveFailed"));
 
         actuator = configurator.getActuator("StoringGroceriesActuator", StoringGroceriesActuator.class);
 
@@ -71,12 +75,16 @@ public class StoringGroceriesSkill extends AbstractSkill {
                 switch (result) {
                     case SUCCESS:
                         return tokenSuccess;
-                    case NAV_FAILED:
-                        return tokenNavFailed;
-                    case PLAN_FAILED:
-                        return tokenPlanFailed;
-                    case GRASP_FAILED:
-                        return tokenGraspFailed;
+                    case PICK_FAILED:
+                        return tokenPickFailed;
+                    case PLACE_FAILED:
+                        return tokenPlaceFailed;
+                    case NO_OBJECT_FOUND:
+                        return tokenNoObjectFound;
+                    case NO_PLACE_LOC_FOUND:
+                        return tokenNoPlaceLocFound;
+                    case MOVE_FAILED:
+                        return tokenMoveFailed;
                     default:
                         return tokenError;
                 }

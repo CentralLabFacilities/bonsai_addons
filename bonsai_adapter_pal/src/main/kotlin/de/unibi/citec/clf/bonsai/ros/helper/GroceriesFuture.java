@@ -47,15 +47,19 @@ public class GroceriesFuture implements Future<StoringGroceriesResult> {
 
         if (res.getResult().getReturnCode().getCode() == returnCode.SUCCESS) {
             return new StoringGroceriesResult(StoringGroceriesResult.Result.SUCCESS, 0);
-        } else if (res.getResult().getReturnCode().getCode() == returnCode.NAV_FAILED) {
-            return new StoringGroceriesResult(StoringGroceriesResult.Result.NAV_FAILED, 3);
-        } else if (res.getResult().getReturnCode().getCode() == returnCode.PLAN_FAILED) {
-            return new StoringGroceriesResult(StoringGroceriesResult.Result.PLAN_FAILED, 1);
-        } else if (res.getResult().getReturnCode().getCode() == returnCode.GRASP_FAILED) {
-            return new StoringGroceriesResult(StoringGroceriesResult.Result.NAV_FAILED, 2);
+        } else if (res.getResult().getReturnCode().getCode() == returnCode.PICK_FAILED) {
+            return new StoringGroceriesResult(StoringGroceriesResult.Result.PICK_FAILED, 1);
+        } else if (res.getResult().getReturnCode().getCode() == returnCode.PLACE_FAILED) {
+            return new StoringGroceriesResult(StoringGroceriesResult.Result.PLACE_FAILED, 2);
+        } else if (res.getResult().getReturnCode().getCode() == returnCode.NO_OBJECT_FOUND) {
+            return new StoringGroceriesResult(StoringGroceriesResult.Result.NO_OBJECT_FOUND, 3);
+        } else if (res.getResult().getReturnCode().getCode() == returnCode.NO_PLACE_LOC_FOUND) {
+            return new StoringGroceriesResult(StoringGroceriesResult.Result.NO_PLACE_LOC_FOUND, 4);
+        } else if (res.getResult().getReturnCode().getCode() == returnCode.MOVE_FAILED) {
+            return new StoringGroceriesResult(StoringGroceriesResult.Result.MOVE_FAILED, 5);
         } else {
             //TODO add unknown state
-            return new StoringGroceriesResult(StoringGroceriesResult.Result.PLAN_FAILED, 1);
+            return new StoringGroceriesResult(StoringGroceriesResult.Result.MOVE_FAILED, 5);
         }
     }
 }
