@@ -48,6 +48,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
     private var clientDisableSpeech: ServiceClient<SetBoolRequest, SetBoolResponse>? = null
     private lateinit var topic: String
     private var disableSpeechTopic: String = ""
+    private var speechEnabled: Boolean? = null;
 
     init {
         initialized = false
@@ -101,6 +102,9 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
     }
 
     private fun enableSpeech(enabled: Boolean) {
+        if (speechEnabled == enabled) return
+
+        speechEnabled = enabled;
         clientDisableSpeech?.let {
             logger.debug("enabling speech $enabled")
             val a = it.newMessage()
