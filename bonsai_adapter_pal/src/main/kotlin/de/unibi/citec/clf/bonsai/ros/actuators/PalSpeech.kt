@@ -111,7 +111,11 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
             a.data = enabled
             val res = ResponseFuture<SetBoolResponse>()
             it.call(a, res)
-            val get = res.get()
+            try {
+                res.get(500,TimeUnit.MILLISECONDS)
+            } catch (e: Exception) {
+                logger.warn("enableSpeech Timeout")
+            }
 
         } ?: logger.warn("SpeechRec not connected")
 
