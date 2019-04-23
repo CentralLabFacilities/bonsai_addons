@@ -57,13 +57,13 @@ class RosHandOverActuator(private val nodeName: GraphName) : RosNode(), HandOver
 
         var c = 0;
 
-        if (acHandover?.waitForActionServerToStart(Duration(4.0)) == true) {
+        if (acHandover?.waitForActionServerToStart(Duration(20.0)) == true) {
             c++
         } else {
             logger.error("could not connect to $handoverTopic")
         }
 
-        if (acMeasure?.waitForActionServerToStart(Duration(4.0)) == true) {
+        if (acMeasure?.waitForActionServerToStart(Duration(20.0)) == true) {
             c++
         } else {
             logger.error("could not connect to $measureTopic")

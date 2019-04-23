@@ -69,12 +69,12 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
         if(disableSpeechTopic.isNotEmpty()) {
             clientDisableSpeech = connectedNode.newServiceClient(disableSpeechTopic,SetBool._TYPE)
         }
-        if(ac?.waitForActionServerToStart(Duration(4.0)) ==  true) {
+        if(ac?.waitForActionServerToStart(Duration(20.0)) ==  true) {
             logger.info("PalSpeech server connected $topic")
             ac?.attachListener(this)
             initialized = true
         } else {
-            logger.error("PalSpeech server timeout after 4sec $topic")
+            logger.error("PalSpeech server timeout after 20sec $topic")
         }
 
     }

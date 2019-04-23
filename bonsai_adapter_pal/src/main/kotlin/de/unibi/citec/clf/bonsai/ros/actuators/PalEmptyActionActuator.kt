@@ -41,7 +41,7 @@ class PalEmptyActionActuator(private val nodeName: GraphName) : RosNode(), Execu
             EmptyActionResult._TYPE
         )
 
-        if (ac?.waitForActionServerToStart(Duration(4.0)) == true) {
+        if (ac?.waitForActionServerToStart(Duration(20.0)) == true) {
             logger.info("PalEmptyActionActuator connected to $topic")
             initialized = true
         }

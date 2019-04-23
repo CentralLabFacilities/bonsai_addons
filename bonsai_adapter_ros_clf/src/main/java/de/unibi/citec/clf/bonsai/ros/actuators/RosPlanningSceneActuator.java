@@ -53,7 +53,7 @@ public class RosPlanningSceneActuator extends RosNode implements PlanningSceneAc
 
     public Future<Boolean> manage() {
 
-        if (!ac.waitForActionServerToStart(new Duration(4))) {
+        if (!ac.waitForActionServerToStart(new Duration(2))) {
             logger.error("action server not started on " + this.topic);
         }
         PlanningSceneManagerRequestActionGoal goalMessage = ac.newGoalMessage();

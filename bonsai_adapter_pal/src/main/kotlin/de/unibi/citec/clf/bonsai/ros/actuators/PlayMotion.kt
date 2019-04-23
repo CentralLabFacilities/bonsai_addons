@@ -39,11 +39,11 @@ class PlayMotion(private val nodeName: GraphName) : RosNode(), PostureActuator {
     override fun onStart(connectedNode: ConnectedNode) {
         ac = ActionClient(connectedNode, this.topic, PlayMotionActionGoal._TYPE, PlayMotionActionFeedback._TYPE, PlayMotionActionResult._TYPE)
 
-        if(ac?.waitForActionServerToStart(Duration(4.0)) ==  true) {
+        if(ac?.waitForActionServerToStart(Duration(20.0)) ==  true) {
             logger.info("PlayMotion server connected $topic")
             initialized = true
         } else {
-            logger.info("PlayMotion server timeout after 4sec $topic")
+            logger.info("PlayMotion server timeout after 20sec $topic")
         }
 
     }

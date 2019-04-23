@@ -79,10 +79,7 @@ public class RosDetectPeopleActuator extends RosNode implements DetectPeopleActu
 
         actionClient = new ActionClient(connectedNode, this.topic, GetCrowdAttributesWithPoseActionGoal._TYPE,
                    GetCrowdAttributesWithPoseActionFeedback._TYPE, GetCrowdAttributesWithPoseActionResult._TYPE);
-        actionServerAvailable = actionClient.waitForActionServerToStart(Duration.fromMillis(4000));
-        logger.debug("ACTION SERVER AVAILABLE: "+actionServerAvailable);
-
-        initialized = true;
+        initialized = actionClient.waitForActionServerToStart(new Duration(20.0));
     }
 
     @Override
