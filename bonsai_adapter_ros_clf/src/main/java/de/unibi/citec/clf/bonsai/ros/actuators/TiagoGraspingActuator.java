@@ -85,7 +85,7 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
         ac = new ActionClient(connectedNode, this.serverTopic + "/" + METHOD_GRASP, PickActionGoal._TYPE, PickActionFeedback._TYPE, PickActionResult._TYPE);
         lastAcGoalId = null;
 
-        if (ac.waitForActionServerToStart(new Duration(2.0))) {
+        if (ac.waitForActionServerToStart(new Duration(4.0))) {
             initialized = true;
             logger.debug("RosMoveBase NavAct started");
         }

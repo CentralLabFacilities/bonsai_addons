@@ -74,7 +74,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
             ac?.attachListener(this)
             initialized = true
         } else {
-            logger.error("PalSpeech server timeout after 2sec $topic")
+            logger.error("PalSpeech server timeout after 4sec $topic")
         }
 
     }
