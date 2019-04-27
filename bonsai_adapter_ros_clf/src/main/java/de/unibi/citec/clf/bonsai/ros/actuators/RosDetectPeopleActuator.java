@@ -98,34 +98,7 @@ public class RosDetectPeopleActuator extends RosNode implements DetectPeopleActu
         final ResponseFuture<GetCrowdAttributesWithPoseResponse> res = new ResponseFuture<>();
         clientTrigger.call(req, res);
 
-        return new Future<PersonDataList>() {
-            @Override
-            public boolean cancel(boolean b) {
-                return res.cancel(b);
-            }
-
-            @Override
-            public boolean isCancelled() {
-                return res.isCancelled();
-            }
-
-            @Override
-            public boolean isDone() {
-                return res.isDone();
-            }
-
-            @Override
-            public PersonDataList get() throws InterruptedException, ExecutionException {
-
-                return getListFromResponse(res.get().getAttributes());
-            }
-
-            @Override
-            public PersonDataList get(long l,  TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
-
-                return getListFromResponse(res.get(l, timeUnit).getAttributes());
-            }
-        };
+        return new PersonDataListFuture(res);
     }
 
     @Override
@@ -242,5 +215,40 @@ public class RosDetectPeopleActuator extends RosNode implements DetectPeopleActu
         list.add(response.getRoi().getHeight());
         list.add(response.getRoi().getWidth());
         return list;
+    }
+
+    private class PersonDataListFuture implements Future<PersonDataList> {
+        private final ResponseFuture<GetCrowdAttributesWithPoseResponse> res;
+
+        public PersonDataListFuture(ResponseFuture<GetCrowdAttributesWithPoseResponse> res) {
+            this.res = res;
+        }
+
+        @Override
+        public boolean cancel(boolean b) {
+            return res.cancel(b);
+        }
+
+        @Override
+        public boolean isCancelled() {
+            return res.isCancelled();
+        }
+
+        @Override
+        public boolean isDone() {
+            return res.isDone();
+        }
+
+        @Override
+        public PersonDataList get() throws InterruptedException, ExecutionException {
+
+            return getListFromResponse(res.get().getAttributes());
+        }
+
+        @Override
+        public PersonDataList get(long l,  TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
+
+            return getListFromResponse(res.get(l, timeUnit).getAttributes());
+        }
     }
 }
