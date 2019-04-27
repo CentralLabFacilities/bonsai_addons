@@ -258,19 +258,17 @@ public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator
 
         EmptyRequest e = sc.newMessage();
 
-        ServiceResponseListener srl = new ServiceResponseListener() {
-            @Override
-            public void onSuccess(Object o) {
+        final ResponseFuture<EmptyResponse> res = new ResponseFuture<>();
 
-            }
+        sc.call(e,res);
 
-            @Override
-            public void onFailure(RemoteException e) {
-
-            }
-        };
-
-        sc.call(e, srl);
+        try {
+            res.get();
+        } catch (InterruptedException e1) {
+            e1.printStackTrace();
+        } catch (ExecutionException e1) {
+            e1.printStackTrace();
+        }
     }
 
 }
