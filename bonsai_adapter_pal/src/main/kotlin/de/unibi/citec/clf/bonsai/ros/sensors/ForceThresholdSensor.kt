@@ -4,6 +4,7 @@ import de.unibi.citec.clf.bonsai.core.SensorListener
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException
 import de.unibi.citec.clf.bonsai.ros.RosSensor
+import geometry_msgs.Wrench
 import geometry_msgs.WrenchStamped
 import org.apache.log4j.Logger
 import org.ros.message.MessageListener
@@ -76,7 +77,7 @@ class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wre
 
     override fun onStart(connectedNode: ConnectedNode) {
         logger.debug("connecting ForceThresholdSensor ...")
-        subscriber = connectedNode.newSubscriber(topic, std_msgs.Float64._TYPE)
+        subscriber = connectedNode.newSubscriber(topic, WrenchStamped._TYPE)
         subscriber!!.addMessageListener(this)
         initialized = true
     }
