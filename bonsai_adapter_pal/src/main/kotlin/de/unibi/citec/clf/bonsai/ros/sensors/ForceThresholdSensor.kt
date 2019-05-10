@@ -85,7 +85,6 @@ class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wre
     //Message Handler
     override fun onNewMessage(t: WrenchStamped) {
         val value = t.wrench.force.z
-        logger.debug("Foce read: "+value)
         last = if (higher) value > threshold else value < threshold
         listeners.forEach { l: SensorListener<Boolean> -> l.newDataAvailable(last) }
     }
