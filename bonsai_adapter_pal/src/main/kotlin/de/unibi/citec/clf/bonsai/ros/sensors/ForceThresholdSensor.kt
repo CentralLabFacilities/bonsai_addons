@@ -4,7 +4,7 @@ import de.unibi.citec.clf.bonsai.core.SensorListener
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException
 import de.unibi.citec.clf.bonsai.ros.RosSensor
-import geometry_msgs.Wrench
+import geometry_msgs.WrenchStamped
 import org.apache.log4j.Logger
 import org.ros.message.MessageListener
 import org.ros.namespace.GraphName
@@ -13,10 +13,10 @@ import org.ros.node.topic.Subscriber
 import java.io.IOException
 import java.util.*
 
-class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wrench>, val nodeName: GraphName) : RosSensor<Boolean, Wrench>(typeClass, rosType), MessageListener<Wrench> {
+class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<WrenchStamped>, val nodeName: GraphName) : RosSensor<Boolean, WrenchStamped>(typeClass, rosType), MessageListener<WrenchStamped> {
 
     private val logger = Logger.getLogger(ForceThresholdSensor::class.java)
-    private var subscriber: Subscriber<Wrench>? = null
+    private var subscriber: Subscriber<WrenchStamped>? = null
 
     private val listeners = HashSet<SensorListener<Boolean>>()
     private var topic: String? = null
@@ -82,8 +82,8 @@ class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wre
     }
 
     //Message Handler
-    override fun onNewMessage(t: Wrench) {
-        val value = t.force.z
+    override fun onNewMessage(t: WrenchStamped) {
+        val value = t.wrench.force.z
         logger.debug("Foce read: "+value)
         last = if (higher) value > threshold else value < threshold
         listeners.forEach { l: SensorListener<Boolean> -> l.newDataAvailable(last) }
