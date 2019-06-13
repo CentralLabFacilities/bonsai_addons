@@ -101,7 +101,7 @@ class RosHandOverActuator(private val nodeName: GraphName) : RosNode(), HandOver
             val goalMessage = client.newGoalMessage()
             //goalMessage.goal.groupName = group_name
             goalMessage.goal.threshold = threshold
-            logger.info("sending measure goal for group $group_name with threshold $threshold and id: ${goalMessage.goalId}")
+            logger.info("sending measure goal with threshold $threshold and id: ${goalMessage.goalId}")
             return client.sendGoal(goalMessage).toBooleanFuture()
         }
 
