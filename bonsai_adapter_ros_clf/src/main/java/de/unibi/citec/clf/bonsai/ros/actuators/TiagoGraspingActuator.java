@@ -72,8 +72,7 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
     private GraphName nodeName;
     private String METHOD_GRASP = "grasp_object";
     private ActionClient<PickActionGoal, PickActionFeedback, PickActionResult> ac;
-    private @Nullable
-    GoalID lastAcGoalId;
+    private @Nullable GoalID lastAcGoalId;
 
     public TiagoGraspingActuator(GraphName gn) {
         initialized = false;

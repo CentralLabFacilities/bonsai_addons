@@ -14,7 +14,7 @@ import pepper_clf_msgs.Choice;
 
 import java.util.*;
 
-public class RosDisplayActuator extends RosNode implements DisplayActuator  {
+public class PepperDisplayActuator extends RosNode implements DisplayActuator  {
 
 
     String choiceTopic;
@@ -22,7 +22,7 @@ public class RosDisplayActuator extends RosNode implements DisplayActuator  {
     private Publisher<DisplayChoice> choicePublisher;
     private MessageFactory msgFactory;
 
-    public RosDisplayActuator(GraphName gn) {
+    public PepperDisplayActuator(GraphName gn) {
         initialized = false;
         this.nodeName = gn;
     }
@@ -33,6 +33,11 @@ public class RosDisplayActuator extends RosNode implements DisplayActuator  {
         this.choiceTopic = conf.requestValue("choiceTopic");
     }
 
+
+    @Override
+    public void setWindowText(String txt) {
+
+    }
 
     @Override
     public void displayChoice(String layout,
