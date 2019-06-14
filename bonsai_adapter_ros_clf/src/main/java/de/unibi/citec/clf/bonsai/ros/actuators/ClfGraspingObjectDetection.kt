@@ -98,10 +98,15 @@ class ClfGraspingObjectDetection(private val nodeName: GraphName) : RosNode(), O
                     val data = ObjectShapeList()
                     for (i in 0 until msg.detections.size) {
                         val detection3d = msg.detections[i]
+                        for(hyp in detection3d.results) {
+                            logger.debug(hyp.id)
+                        }
                         val osd = MsgTypeFactory.getInstance().createType(detection3d, ObjectShapeData::class.java)
                         osd.id = msg.objectIds[i]
                         for(hyp in osd.hypotheses) {
-                            hyp.classLabel = objectIdMap[hyp.classLabel]
+                            hyp.classLabel = objectIdMap[hyp.classLabel.toString()]
+                            //hyp.classLabel = hyp.classLabel
+                            logger.debug("Class label: " + hyp.classLabel.toString())
                         }
                         data.add(osd)
                     }
