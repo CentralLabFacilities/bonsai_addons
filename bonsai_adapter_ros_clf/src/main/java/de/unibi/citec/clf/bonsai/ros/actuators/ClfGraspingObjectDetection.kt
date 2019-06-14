@@ -21,6 +21,7 @@ import org.ros.node.ConnectedNode
 import org.ros.node.service.ServiceClient
 import vision_msgs.Detection3D
 import java.io.IOException
+import java.util.HashMap
 
 import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit
@@ -33,6 +34,8 @@ class ClfGraspingObjectDetection(private val nodeName: GraphName) : RosNode(), O
 
     private lateinit var topicObject: String
     private lateinit var topicTable: String
+    private lateinit var objectIdParam : String
+    private lateinit var objectIdMap : Map<String, String>
 
     private var serviceObjects: ServiceClient<FindObjectsInROIRequest, FindObjectsInROIResponse>? = null
     private var serviceTable: ServiceClient<FindTableRequest, FindTableResponse>? = null
@@ -46,6 +49,7 @@ class ClfGraspingObjectDetection(private val nodeName: GraphName) : RosNode(), O
     override fun configure(conf: IObjectConfigurator) {
         this.topicObject = conf.requestValue("topic_detect_objects")
         this.topicTable = conf.requestValue("topic_detect_surface")
+        this.objectIdParam = conf.requestValue("object_id_param_tree")
     }
 
     override fun getDefaultNodeName(): GraphName {
@@ -57,6 +61,7 @@ class ClfGraspingObjectDetection(private val nodeName: GraphName) : RosNode(), O
         try {
             serviceObjects = connectedNode.newServiceClient(this.topicObject, FindObjectsInROI._TYPE)
             serviceTable = connectedNode.newServiceClient(this.topicTable, FindTable._TYPE)
+            objectIdMap = connectedNode.parameterTree.getMap(objectIdParam) as Map<String, String>
         } catch (ex: ServiceNotFoundException) {
             throw RosRuntimeException(ex.message)
         }
@@ -95,6 +100,9 @@ class ClfGraspingObjectDetection(private val nodeName: GraphName) : RosNode(), O
                         val detection3d = msg.detections[i]
                         val osd = MsgTypeFactory.getInstance().createType(detection3d, ObjectShapeData::class.java)
                         osd.id = msg.objectIds[i]
+                        for(hyp in osd.hypotheses) {
+                            hyp.classLabel = objectIdMap[hyp.classLabel]
+                        }
                         data.add(osd)
                     }
                     return data
