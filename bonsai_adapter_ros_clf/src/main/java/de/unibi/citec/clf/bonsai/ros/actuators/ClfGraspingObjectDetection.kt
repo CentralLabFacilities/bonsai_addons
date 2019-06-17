@@ -85,28 +85,26 @@ class ClfGraspingObjectDetection(private val nodeName: GraphName) : RosNode(), O
             }
 
             val res = ResponseFuture<FindObjectsInROIResponse>()
-            client.call(goal, res);
+            client.call(goal, res)
 
             return object : Future<List<ObjectShapeData>> {
                 override fun isDone(): Boolean = res.isDone
                 override fun cancel(b: Boolean): Boolean = res.cancel(b)
                 override fun isCancelled(): Boolean = res.isCancelled
-                override fun get(): List<ObjectShapeData> = get(0,TimeUnit.MINUTES);
+                override fun get(): List<ObjectShapeData> = get(0,TimeUnit.MINUTES)
 
                 override fun get(timeout: Long, unit: TimeUnit?): List<ObjectShapeData> {
                     var msg = res.get(timeout,unit)
+                    //logger.debug("Message: " + msg)
                     val data = ObjectShapeList()
                     for (i in 0 until msg.detections.size) {
                         val detection3d = msg.detections[i]
-                        for(hyp in detection3d.results) {
-                            logger.debug(hyp.id)
-                        }
+                        //logger.debug("Number of hypothesis: " + detection3d.results.size)
                         val osd = MsgTypeFactory.getInstance().createType(detection3d, ObjectShapeData::class.java)
                         osd.id = msg.objectIds[i]
                         for(hyp in osd.hypotheses) {
-                            hyp.classLabel = objectIdMap[hyp.classLabel.toString()]
-                            //hyp.classLabel = hyp.classLabel
-                            logger.debug("Class label: " + hyp.classLabel.toString())
+                            //logger.debug("Class label: " + hyp.classLabel + " is: " + objectIdMap[hyp.classLabel] + " with probability: " + hyp.reliability)
+                            hyp.classLabel = objectIdMap[hyp.classLabel] ?: "unknown"
                         }
                         data.add(osd)
                     }
