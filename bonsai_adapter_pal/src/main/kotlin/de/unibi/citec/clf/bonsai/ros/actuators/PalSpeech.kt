@@ -137,16 +137,16 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
                 return done
             }
 
-            override fun get(): Void {
+            override fun get(): Void? {
                 val a = ret.toVoidFuture().get()
                 enableSpeech(true)
-                return a
+                return null
             }
 
-            override fun get(p0: Long, p1: TimeUnit?): Void {
+            override fun get(p0: Long, p1: TimeUnit?): Void? {
                 val a = ret.toVoidFuture().get(p0,p1)
                 enableSpeech(true)
-                return a
+                return null
             }
 
             override fun cancel(p0: Boolean): Boolean {
