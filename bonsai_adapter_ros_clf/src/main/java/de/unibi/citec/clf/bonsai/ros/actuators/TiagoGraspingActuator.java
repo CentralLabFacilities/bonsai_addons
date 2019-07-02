@@ -70,7 +70,7 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
     private static final Logger logger = Logger.getLogger(TiagoGraspingActuator.class);
     private String serverTopic; //tiago_mtc
     private GraphName nodeName;
-    private String METHOD_GRASP = "grasp_object";
+    private String METHOD_GRASP = "pick_object";
     private ActionClient<PickActionGoal, PickActionFeedback, PickActionResult> ac;
     private @Nullable GoalID lastAcGoalId;
 
@@ -81,7 +81,9 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
 
     @Override
     public void onStart(ConnectedNode connectedNode) {
-        ac = new ActionClient(connectedNode, this.serverTopic + "/" + METHOD_GRASP, PickActionGoal._TYPE, PickActionFeedback._TYPE, PickActionResult._TYPE);
+        String topic = this.serverTopic + "/" + METHOD_GRASP;
+        ac = new ActionClient(connectedNode, topic, PickActionGoal._TYPE, PickActionFeedback._TYPE, PickActionResult._TYPE);
+        logger.debug("connecting to: " + topic);
         lastAcGoalId = null;
 
         if (ac.waitForActionServerToStart(new Duration(20.0))) {
