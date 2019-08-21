@@ -43,6 +43,7 @@ public class PersonSerializer extends RosSerializer<PersonData, people_msgs.Pers
 
         personData.setPosition(positionData);
         personData.setFrameId(positionData.getFrameId());
+        personData.setReliability(msg.getReliability());
 
         return personData;
     }
