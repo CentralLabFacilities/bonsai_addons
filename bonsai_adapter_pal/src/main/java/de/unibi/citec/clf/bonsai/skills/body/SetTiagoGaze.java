@@ -20,9 +20,9 @@ import java.util.concurrent.Future;
  *
  * Options:
  *  #_HORIZONTAL:   [String] Optional (Default: 0)
- *                      -> Horizontal direction to look to in rad (left - right)
+ *                      -> Horizontal direction to look to in rad (right - left) (Tiago: -1.24 to 1.24)
  *  #_VERTICAL:     [String] Optional (Default: 0)
- *                      -> Vertical direction to look to in rad (up - down)
+ *                      -> Vertical direction to look to in rad (down - up) (Tiago: -0.98 to 0.79)
  *  #_MOVE_DURATION:[String] Optional (Default: 2000)
  *                      -> Time the head takes to move to the position in milliseconds
  *  #_BLOCKING:     [boolean] Optional (default: true)
@@ -75,7 +75,7 @@ public class SetTiagoGaze extends AbstractSkill {
     public void configure(ISkillConfigurator configurator) throws SkillConfigurationException {
 
         blocking = configurator.requestOptionalBool(KEY_BLOCKING, blocking);
-        horizontal = configurator.requestOptionalDouble(KEY_HORIZONTAL, horizontal);
+        horizontal = configurator.requestOptionalDouble(KEY_HORIZONTAL, horizontal); // TODO check if angles are in range?
         vertical = configurator.requestOptionalDouble(KEY_VERTICAL, vertical);
         move_duration = configurator.requestOptionalInt(KEY_MOVE_DURATION, move_duration);
         timeout = configurator.requestOptionalInt(KEY_TIMEOUT, (int) timeout);
@@ -108,9 +108,9 @@ public class SetTiagoGaze extends AbstractSkill {
 
         int scaling_factor = 10;
 
-        float x_rel = (float)Math.cos(horizontal) * scaling_factor;
-        float y_rel = (float)Math.sin(horizontal) * scaling_factor;
-        float z_rel = (float)Math.sin(vertical) * scaling_factor;
+        float x_rel = (float) (Math.cos(horizontal) * Math.cos(vertical) * scaling_factor);
+        float y_rel = (float) (Math.sin(horizontal) * Math.cos(vertical) * scaling_factor);
+        float z_rel = (float) (Math.sin(vertical) * scaling_factor);
 
         Point3D target = new Point3D(x_rel, y_rel, z_rel, LengthUnit.METER, "torso_lift_link");
 
@@ -133,7 +133,7 @@ public class SetTiagoGaze extends AbstractSkill {
         }
 
         if (blocking && !gazeFuture.isDone()) {
-            logger.trace("Gaze done: " + gazeFuture.isDone() + " gaze cancelled: " + gazeFuture.isCancelled());
+            //logger.trace("Gaze done: " + gazeFuture.isDone() + " gaze cancelled: " + gazeFuture.isCancelled());
             return ExitToken.loop(50);
         }
 
