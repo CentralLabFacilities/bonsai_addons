@@ -63,6 +63,7 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
         @Override
         public MoveitResult get(long l, TimeUnit timeUnit) throws InterruptedException, ExecutionException, TimeoutException {
             int error = af.get(l,timeUnit).getResult().getErrorCode();
+            logger.debug("get(): error code is " + error);
             return MoveitResult.getById(error);
         }
     }
