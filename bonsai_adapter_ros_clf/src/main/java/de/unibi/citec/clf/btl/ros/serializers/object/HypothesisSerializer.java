@@ -5,7 +5,6 @@ package de.unibi.citec.clf.btl.ros.serializers.object;
 import de.unibi.citec.clf.btl.data.object.ObjectShapeData;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
 
-import object_tracking_msgs.Hypothesis;
 import org.ros.message.MessageFactory;
 
 /**

@@ -42,7 +42,6 @@ package de.unibi.citec.clf.btl.xml;
 
 import de.unibi.citec.clf.btl.data.geometry.BoundingBox3D;
 import de.unibi.citec.clf.btl.data.person.PersonData;
-import de.unibi.citec.clf.btl.data.person.PersonDataList;
 import de.unibi.citec.clf.btl.xml.XomSerializerRepository;
 import org.apache.log4j.BasicConfigurator;
 import org.junit.BeforeClass;

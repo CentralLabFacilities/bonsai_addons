@@ -3,7 +3,6 @@ package de.unibi.citec.clf.btl.xml.tools;
 
 
 import de.unibi.citec.clf.btl.xml.UnexpectedElementFormatException;
-import nu.xom.Attribute;
 import nu.xom.Element;
 import nu.xom.Node;
 import nu.xom.Nodes;

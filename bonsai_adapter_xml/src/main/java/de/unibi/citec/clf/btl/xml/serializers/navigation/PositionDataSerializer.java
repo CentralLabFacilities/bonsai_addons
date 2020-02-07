@@ -7,7 +7,6 @@ import de.unibi.citec.clf.btl.units.LengthUnit;
 import de.unibi.citec.clf.btl.xml.serializers.geometry.Point2DSerializer;
 import nu.xom.Attribute;
 import nu.xom.Element;
-import nu.xom.Elements;
 import nu.xom.ParsingException;
 import de.unibi.citec.clf.btl.xml.XomSerializer;
 import de.unibi.citec.clf.btl.xml.tools.ElementParser;

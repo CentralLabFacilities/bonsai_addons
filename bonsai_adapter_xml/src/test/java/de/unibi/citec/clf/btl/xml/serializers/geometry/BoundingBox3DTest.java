@@ -12,7 +12,6 @@ import de.unibi.citec.clf.btl.xml.XomTypeFactory;
 import nu.xom.Builder;
 import nu.xom.Document;
 import org.apache.log4j.Logger;
-import org.junit.Test;
 
 import de.unibi.citec.clf.btl.xml.TestUtils;
 

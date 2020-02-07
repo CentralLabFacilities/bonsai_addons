@@ -2,7 +2,6 @@ package de.unibi.citec.clf.btl.xml.serializers.speechrec;
 
 
 
-import de.unibi.citec.clf.btl.data.common.Timestamp;
 import de.unibi.citec.clf.btl.xml.UnexpectedElementFormatException;
 import org.apache.log4j.Logger;
 

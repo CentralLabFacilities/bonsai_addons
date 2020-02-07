@@ -4,8 +4,6 @@ package de.unibi.citec.clf.btl.xml.serializers.object;
 
 import de.unibi.citec.clf.btl.xml.serializers.geometry.PrecisePolygonSerializer;
 import nu.xom.Element;
-import nu.xom.Node;
-import nu.xom.Nodes;
 import nu.xom.ParsingException;
 import de.unibi.citec.clf.btl.data.object.ObjectData;
 import de.unibi.citec.clf.btl.data.object.ObjectLocationData;

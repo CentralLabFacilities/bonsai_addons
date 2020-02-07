@@ -1,13 +1,10 @@
 
 package de.unibi.citec.clf.bonsai.ros.actuators;
 
-import de.unibi.citec.clf.bonsai.ros.RosNode;
-import de.unibi.citec.clf.bonsai.ros.helper.ResponseFuture;
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
 import java.io.IOException;
 import java.time.Instant;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;

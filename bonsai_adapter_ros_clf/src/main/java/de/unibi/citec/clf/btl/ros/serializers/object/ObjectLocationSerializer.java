@@ -7,7 +7,6 @@ import de.unibi.citec.clf.btl.data.object.ObjectLocationData;
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
 
-import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.List;
 

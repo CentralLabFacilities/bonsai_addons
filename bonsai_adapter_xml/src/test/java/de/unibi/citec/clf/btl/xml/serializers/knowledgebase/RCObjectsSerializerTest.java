@@ -53,7 +53,6 @@ import nu.xom.Document;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import java.util.LinkedList;
 

@@ -7,7 +7,6 @@ import de.unibi.citec.clf.bonsai.actuators.GraspActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
-import de.unibi.citec.clf.btl.data.grasp.GraspReturnType;
 import de.unibi.citec.clf.btl.data.object.ObjectShapeData;
 import org.apache.log4j.Logger;
 import org.ros.message.Duration;

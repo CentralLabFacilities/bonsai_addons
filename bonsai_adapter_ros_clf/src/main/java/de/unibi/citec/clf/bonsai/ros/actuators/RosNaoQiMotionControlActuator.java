@@ -1,6 +1,5 @@
 package de.unibi.citec.clf.bonsai.ros.actuators;
 
-import com.github.rosjava_actionlib.ActionClient;
 import de.unibi.citec.clf.bonsai.actuators.MotionControlActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
@@ -9,11 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
-import pepper_clf_msgs.*;
 
 import java.util.Map;
 import java.util.concurrent.Future;
-import naoqi_bridge_msgs.JointAnglesWithSpeed;
+
 import org.ros.node.topic.Publisher;
 import sensor_msgs.JointState;
 

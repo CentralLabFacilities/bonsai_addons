@@ -1,7 +1,6 @@
 package de.unibi.citec.clf.btl.ros.serializers.person;
 
 
-import de.unibi.citec.clf.btl.List;
 import de.unibi.citec.clf.btl.data.person.PersonData;
 import de.unibi.citec.clf.btl.data.person.PersonDataList;
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory;

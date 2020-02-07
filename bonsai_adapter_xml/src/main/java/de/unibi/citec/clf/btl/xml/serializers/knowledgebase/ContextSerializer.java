@@ -1,16 +1,8 @@
 package de.unibi.citec.clf.btl.xml.serializers.knowledgebase;
 
 import de.unibi.citec.clf.btl.data.knowledgebase.Context;
-import de.unibi.citec.clf.btl.data.knowledgebase.BDO;
-import de.unibi.citec.clf.btl.data.knowledgebase.Location;
-import de.unibi.citec.clf.btl.data.knowledgebase.RCObject;
-import de.unibi.citec.clf.btl.data.knowledgebase.Room;
 import de.unibi.citec.clf.btl.xml.XomSerializer;
-import de.unibi.citec.clf.btl.xml.tools.ElementParser;
-import java.util.LinkedList;
-import nu.xom.Attribute;
 import nu.xom.Element;
-import nu.xom.Elements;
 import nu.xom.ParsingException;
 
 

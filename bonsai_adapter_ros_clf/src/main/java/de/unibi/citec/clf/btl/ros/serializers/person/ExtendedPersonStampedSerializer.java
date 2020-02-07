@@ -2,8 +2,6 @@ package de.unibi.citec.clf.btl.ros.serializers.person;
 
 
 import clf_perception_vision_msgs.ExtendedPersonStamped;
-import de.unibi.citec.clf.bonsai.core.exception.TransformException;
-import de.unibi.citec.clf.bonsai.ros.TFTransformer;
 import de.unibi.citec.clf.btl.data.geometry.Pose3D;
 import de.unibi.citec.clf.btl.data.navigation.PositionData;
 import de.unibi.citec.clf.btl.data.navigation.PositionData.ReferenceFrame;

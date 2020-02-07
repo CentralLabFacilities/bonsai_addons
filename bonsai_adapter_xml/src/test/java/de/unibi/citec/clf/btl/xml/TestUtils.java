@@ -1,8 +1,6 @@
 package de.unibi.citec.clf.btl.xml;
 
 
-import static org.junit.Assert.fail;
-
 /**
  * Utility functions for testing.
  *

@@ -6,7 +6,6 @@ import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.navigation.PositionData;
 import de.unibi.citec.clf.btl.units.AngleUnit;
 import de.unibi.citec.clf.btl.units.LengthUnit;
-import de.unibi.citec.clf.btl.units.TimeUnit;
 import de.unibi.citec.clf.btl.xml.XomTypeFactory;
 import nu.xom.Document;
 import org.apache.log4j.Logger;

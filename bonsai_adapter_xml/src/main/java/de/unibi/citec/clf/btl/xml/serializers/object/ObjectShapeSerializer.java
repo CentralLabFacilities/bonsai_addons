@@ -2,17 +2,12 @@ package de.unibi.citec.clf.btl.xml.serializers.object;
 
 
 
-import nu.xom.Attribute;
 import nu.xom.Element;
-import nu.xom.Node;
-import nu.xom.Nodes;
 import nu.xom.ParsingException;
 import de.unibi.citec.clf.btl.data.object.ObjectData;
 import de.unibi.citec.clf.btl.data.object.ObjectShapeData;
-import de.unibi.citec.clf.btl.data.object.ObjectData.Hypothesis;
 import de.unibi.citec.clf.btl.xml.XomSerializer;
 import de.unibi.citec.clf.btl.xml.serializers.geometry.Point3DSerializer;
-import de.unibi.citec.clf.btl.xml.tools.ElementParser;
 
 /**
  * Results of the object recognition. This class is meat so define the location

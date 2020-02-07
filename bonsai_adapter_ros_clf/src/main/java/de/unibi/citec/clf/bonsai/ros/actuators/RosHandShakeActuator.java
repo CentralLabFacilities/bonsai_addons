@@ -6,7 +6,6 @@ import com.github.rosjava_actionlib.ActionClient;
 import com.github.rosjava_actionlib.ActionClientListener;
 import de.unibi.citec.clf.bonsai.actuators.HandShakeActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
-import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
@@ -17,7 +16,6 @@ import hand_shaker_msgs.ShakeHandActionResult;
 import java.io.IOException;
 import java.util.List;
 import java.util.concurrent.Future;
-import org.ros.node.topic.Publisher;
 
 //import hand_shaker.ShakeHandGoal;
 import org.ros.message.Duration;

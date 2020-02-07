@@ -6,7 +6,6 @@ import de.unibi.citec.clf.btl.ros.RosSerializer;
 import openpose_ros_msgs.PersonAttributes;
 import org.ros.message.MessageFactory;
 
-import java.util.Arrays;
 import java.util.LinkedList;
 
 

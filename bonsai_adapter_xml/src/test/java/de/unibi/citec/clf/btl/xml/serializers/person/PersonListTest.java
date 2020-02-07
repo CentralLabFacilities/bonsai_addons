@@ -6,7 +6,6 @@ import de.unibi.citec.clf.btl.Type;
 import de.unibi.citec.clf.btl.data.common.Timestamp;
 import de.unibi.citec.clf.btl.data.person.PersonData;
 import de.unibi.citec.clf.btl.data.person.PersonDataList;
-import de.unibi.citec.clf.btl.units.LengthUnit;
 import de.unibi.citec.clf.btl.units.TimeUnit;
 import de.unibi.citec.clf.btl.xml.XomSerializer.DeserializationException;
 import de.unibi.citec.clf.btl.xml.XomSerializer.SerializationException;
@@ -16,7 +15,6 @@ import nu.xom.Document;
 import org.apache.log4j.BasicConfigurator;
 import org.apache.log4j.Logger;
 import org.junit.BeforeClass;
-import org.junit.Test;
 
 import de.unibi.citec.clf.btl.xml.TestUtils;
 

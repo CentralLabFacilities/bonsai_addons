@@ -12,11 +12,6 @@ import de.unibi.citec.clf.btl.units.AngleUnit;
 import de.unibi.citec.clf.btl.units.LengthUnit;
 import org.ros.message.MessageFactory;
 
-import people_msgs.Person;
-
-import java.io.UnsupportedEncodingException;
-import java.math.BigInteger;
-
 public class PersonSerializer extends RosSerializer<PersonData, people_msgs.Person> {
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PersonSerializer.class);

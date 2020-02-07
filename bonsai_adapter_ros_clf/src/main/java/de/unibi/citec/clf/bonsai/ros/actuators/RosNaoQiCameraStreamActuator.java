@@ -1,24 +1,15 @@
 package de.unibi.citec.clf.bonsai.ros.actuators;
 
 import de.unibi.citec.clf.bonsai.actuators.CameraStreamActuator;
-import de.unibi.citec.clf.bonsai.actuators.DetectPeopleActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 import de.unibi.citec.clf.bonsai.ros.helper.ResponseFuture;
-import de.unibi.citec.clf.btl.data.person.PersonData;
-import de.unibi.citec.clf.btl.data.person.PersonDataList;
-import de.unibi.citec.clf.btl.ros.MsgTypeFactory;
-import de.unibi.citec.clf.btl.ros.RosSerializer;
 
 import java.util.concurrent.ExecutionException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
-import de.unibi.citec.clf.btl.List;
-import de.unibi.citec.clf.btl.data.person.BodySkeleton;
 import org.ros.exception.RosRuntimeException;
 import org.ros.exception.ServiceNotFoundException;
 import org.ros.node.service.ServiceClient;

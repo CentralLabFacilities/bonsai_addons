@@ -2,14 +2,10 @@ package de.unibi.citec.clf.btl.xml.serializers.navigation;
 
 
 
-import de.unibi.citec.clf.btl.data.map.Viewpoint;
-import de.unibi.citec.clf.btl.data.navigation.PositionData;
 import nu.xom.Attribute;
 import nu.xom.Element;
 import nu.xom.ParsingException;
 import de.unibi.citec.clf.btl.data.navigation.NavigationGoalData;
-import de.unibi.citec.clf.btl.units.AngleUnit;
-import de.unibi.citec.clf.btl.units.LengthUnit;
 import de.unibi.citec.clf.btl.xml.XomSerializer;
 import de.unibi.citec.clf.btl.xml.tools.ElementParser;
 

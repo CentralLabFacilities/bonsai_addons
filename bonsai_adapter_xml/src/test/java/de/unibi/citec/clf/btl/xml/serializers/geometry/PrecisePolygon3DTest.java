@@ -5,7 +5,6 @@ import de.unibi.citec.clf.btl.data.geometry.PrecisePolygon3D;
 import de.unibi.citec.clf.btl.units.LengthUnit;
 import de.unibi.citec.clf.btl.xml.XomTypeFactory;
 import nu.xom.Document;
-import org.junit.Test;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;

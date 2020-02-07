@@ -1,13 +1,10 @@
 package de.unibi.citec.clf.bonsai.ros.actuators;
 
 import com.github.rosjava_actionlib.ActionClient;
-import com.github.rosjava_actionlib.ActionFuture;
 import actionlib_msgs.GoalID;
 
 import de.unibi.citec.clf.bonsai.core.exception.InitializationException;
-import de.unibi.citec.clf.bonsai.ros.helper.NavigationFuture;
 import geometry_msgs.Twist;
-import org.ros.exception.RemoteException;
 import org.ros.exception.ServiceNotFoundException;
 import org.ros.message.Duration;
 import org.ros.node.service.ServiceClient;
@@ -26,10 +23,8 @@ import org.ros.node.ConnectedNode;
 import de.unibi.citec.clf.bonsai.ros.helper.ResponseFuture;
 import de.unibi.citec.clf.btl.data.geometry.Pose3D;
 import de.unibi.citec.clf.btl.data.navigation.CommandResult;
-import de.unibi.citec.clf.btl.data.navigation.DriveData;
 import de.unibi.citec.clf.btl.data.navigation.GlobalPlan;
 import de.unibi.citec.clf.btl.data.navigation.NavigationGoalData;
-import de.unibi.citec.clf.btl.data.navigation.TurnData;
 import de.unibi.citec.clf.btl.units.AngleUnit;
 import de.unibi.citec.clf.btl.units.LengthUnit;
 import de.unibi.citec.clf.btl.units.RotationalSpeedUnit;
@@ -46,7 +41,6 @@ import move_base_msgs.*;
 import nav_msgs.GetPlan;
 import nav_msgs.GetPlanRequest;
 import nav_msgs.GetPlanResponse;
-import org.ros.node.service.ServiceResponseListener;
 import std_srvs.EmptyRequest;
 import std_srvs.EmptyResponse;
 import std_srvs.Empty;

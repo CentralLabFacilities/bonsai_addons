@@ -11,7 +11,6 @@ import de.unibi.citec.clf.btl.ros.RosSerializer;
 import de.unibi.citec.clf.btl.units.AngleUnit;
 import de.unibi.citec.clf.btl.units.LengthUnit;
 import org.ros.message.MessageFactory;
-import openpose_ros_msgs.PersonAttributesWithPose;
 
 public class PersonAttributesWithPoseSerializer extends RosSerializer<PersonData, openpose_ros_msgs.PersonAttributesWithPose> {
 
