@@ -12,9 +12,9 @@ import org.ros.exception.ServiceNotFoundException;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 import org.ros.node.service.ServiceClient;
-import std_srvs.Empty;
-import std_srvs.EmptyRequest;
-import std_srvs.EmptyResponse;
+import std_srvs.SetBool;
+import std_srvs.SetBoolRequest;
+import std_srvs.SetBoolResponse;
 
 import java.util.concurrent.Future;
 
@@ -26,7 +26,7 @@ public class ClfGraspingPlanningSceneActuator extends RosNode implements Plannin
 
     String topicClear;
     private GraphName nodeName;
-    private ServiceClient<EmptyRequest, EmptyResponse> serviceClear;
+    private ServiceClient<SetBoolRequest, SetBoolResponse> serviceClear;
     private org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(getClass());
 
     public ClfGraspingPlanningSceneActuator(GraphName gn) {
@@ -40,9 +40,10 @@ public class ClfGraspingPlanningSceneActuator extends RosNode implements Plannin
     }
 
     @Override
-    public Future<Boolean> clearScene() {
-        EmptyRequest a = serviceClear.newMessage();
-        ResponseFuture<EmptyResponse> res = new ResponseFuture<>();
+    public Future<Boolean> clearScene(boolean keep_attached_objects) {
+        SetBoolRequest a = serviceClear.newMessage();
+        a.setData(keep_attached_objects);
+        ResponseFuture<SetBoolResponse> res = new ResponseFuture<>();
         serviceClear.call(a,res);
         return res.toBooleanFuture();
     }
@@ -64,7 +65,7 @@ public class ClfGraspingPlanningSceneActuator extends RosNode implements Plannin
     @Override
     public void onStart(final ConnectedNode connectedNode) {
         try {
-            serviceClear = connectedNode.newServiceClient(topicClear, Empty._TYPE);
+            serviceClear = connectedNode.newServiceClient(topicClear, SetBool._TYPE);
         } catch (ServiceNotFoundException e) {
             return;
         }

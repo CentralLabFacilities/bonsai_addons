@@ -42,7 +42,7 @@ public class RosPlanningSceneActuator extends RosNode implements PlanningSceneAc
     }
 
     @Override
-    public Future<Boolean> clearScene() {
+    public Future<Boolean> clearScene(boolean keep_attached_objects) {
         throw new NotImplementedException();
     }
 
