@@ -72,12 +72,12 @@ public class ClfGraspingActuator extends RosNode implements ManipulationActuator
         }
     }
 
-    private static final Logger logger = Logger.getLogger(ClfGraspingActuator.class);
-    private String serverTopic; //tiago_mtc
+    protected static final Logger logger = Logger.getLogger(ClfGraspingActuator.class);
+    protected String serverTopic; //tiago_mtc
     private GraphName nodeName;
-    private String METHOD_GRASP = "pick_object";
-    private ActionClient<PickActionGoal, PickActionFeedback, PickActionResult> ac;
-    private @Nullable GoalID lastAcGoalId;
+    protected String METHOD_GRASP = "pick_object";
+    protected ActionClient<PickActionGoal, PickActionFeedback, PickActionResult> ac;
+    protected @Nullable GoalID lastAcGoalId;
 
     public ClfGraspingActuator(GraphName gn) {
         initialized = false;
@@ -93,7 +93,7 @@ public class ClfGraspingActuator extends RosNode implements ManipulationActuator
 
         if (ac.waitForActionServerToStart(new Duration(20.0))) {
             initialized = true;
-            logger.debug("Tiago Grasping started");
+            logger.debug("CLF Grasping started");
         }
     }
 
