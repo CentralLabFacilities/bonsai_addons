@@ -3,11 +3,14 @@ package de.unibi.citec.clf.bonsai.ros.actuators;
 import actionlib_msgs.GoalID;
 import com.github.rosjava_actionlib.ActionClient;
 import com.github.rosjava_actionlib.ActionFuture;
-import de.unibi.citec.clf.bonsai.actuators.GraspActuator;
+import de.unibi.citec.clf.bonsai.actuators.ManipulationActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
+import de.unibi.citec.clf.btl.data.geometry.BoundingBox3D;
+import de.unibi.citec.clf.btl.data.geometry.Pose3D;
 import de.unibi.citec.clf.btl.data.object.ObjectShapeData;
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.log4j.Logger;
 import org.ros.message.Duration;
 import org.ros.namespace.GraphName;
@@ -15,6 +18,8 @@ import org.ros.node.ConnectedNode;
 import clf_grasping_msgs.PickActionFeedback;
 import clf_grasping_msgs.PickActionGoal;
 import clf_grasping_msgs.PickActionResult;
+
+//import storing_groceries_msgs.
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
@@ -28,7 +33,7 @@ import java.util.concurrent.TimeoutException;
  * @author lruegeme
  */
 
-public class TiagoGraspingActuator extends RosNode implements GraspActuator {
+public class ClfGraspingActuator extends RosNode implements ManipulationActuator {
 
 
     class MoveitResultFuture implements Future<MoveitResult> {
@@ -67,14 +72,14 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
         }
     }
 
-    private static final Logger logger = Logger.getLogger(TiagoGraspingActuator.class);
+    private static final Logger logger = Logger.getLogger(ClfGraspingActuator.class);
     private String serverTopic; //tiago_mtc
     private GraphName nodeName;
     private String METHOD_GRASP = "pick_object";
     private ActionClient<PickActionGoal, PickActionFeedback, PickActionResult> ac;
     private @Nullable GoalID lastAcGoalId;
 
-    public TiagoGraspingActuator(GraphName gn) {
+    public ClfGraspingActuator(GraphName gn) {
         initialized = false;
         this.nodeName = gn;
     }
@@ -115,6 +120,26 @@ public class TiagoGraspingActuator extends RosNode implements GraspActuator {
         ActionFuture<PickActionGoal, PickActionFeedback, PickActionResult> fut = this.ac.sendGoal(msg);
 
         return new MoveitResultFuture(fut);
+    }
+
+    @Override
+    public Future<MoveitResult> placeObject(@Nonnull String supportSurface, @Nullable String group) throws IOException {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Future<MoveitResult> placeObject(@Nonnull Pose3D position, @Nullable String supportSurface, @Nullable String group) throws IOException {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Future<MoveitResult> placeObjectOnArea(@Nonnull BoundingBox3D area, @Nullable String supportSurface, @Nullable String group) throws IOException {
+        throw new NotImplementedException();
+    }
+
+    @Override
+    public Future<MoveitResult> placeObjectInArea(@Nonnull BoundingBox3D area, @Nullable String group) throws IOException {
+        throw new NotImplementedException();
     }
 
     @Override

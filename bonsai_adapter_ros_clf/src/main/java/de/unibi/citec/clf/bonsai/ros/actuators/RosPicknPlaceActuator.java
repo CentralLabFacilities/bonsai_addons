@@ -1,6 +1,7 @@
 
 package de.unibi.citec.clf.bonsai.ros.actuators;
 
+import de.unibi.citec.clf.btl.data.geometry.BoundingBox3D;
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
 import java.io.IOException;
@@ -22,6 +23,7 @@ import com.github.rosjava_actionlib.ActionClientListener;
 import de.unibi.citec.clf.bonsai.actuators.PicknPlaceActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
+import org.apache.commons.lang.NotImplementedException;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
@@ -137,6 +139,26 @@ public class RosPicknPlaceActuator extends RosNode implements PicknPlaceActuator
                 return grt.get(l,timeUnit).toMoveitResult();
             }
         };
+    }
+
+    @Override
+    public Future<MoveitResult> placeObject(@Nonnull String supportSurface, @Nullable String group) throws IOException {
+        throw new NotImplementedException("use placeObjectOnSurface/placeObjectOnSurface/placeObjectOn methods");
+    }
+
+    @Override
+    public Future<MoveitResult> placeObject(@Nonnull Pose3D position, @Nullable String supportSurface, @Nullable String group) throws IOException {
+        throw new NotImplementedException("use placeObjectOnSurface/placeObjectOnSurface/placeObjectOn methods");
+    }
+
+    @Override
+    public Future<MoveitResult> placeObjectOnArea(@Nonnull BoundingBox3D area, @Nullable String supportSurface, @Nullable String group) throws IOException {
+        throw new NotImplementedException("use placeObjectOnSurface/placeObjectOnSurface/placeObjectOn methods");
+    }
+
+    @Override
+    public Future<MoveitResult> placeObjectInArea(@Nonnull BoundingBox3D area, @Nullable String group) throws IOException {
+        throw new NotImplementedException("use placeObjectOnSurface/placeObjectOnSurface/placeObjectOn methods");
     }
 
     @Override
