@@ -93,11 +93,11 @@ class ClfGraspingObjectDetection(private val nodeName: GraphName) : RosNode(), O
                 override fun isCancelled(): Boolean = res.isCancelled
                 override fun get(): List<ObjectShapeData> = get(0,TimeUnit.MINUTES)
 
-                override fun get(timeout: Long, unit: TimeUnit?): List<ObjectShapeData> {
+                override fun get(timeout: Long, unit: TimeUnit): List<ObjectShapeData> {
                     var msg = res.get(timeout,unit)
                     //logger.debug("Message: " + msg)
                     val data = ObjectShapeList()
-                    for (i in 0 until msg.detections.size) {
+                    for (i in 0 until msg?.detections?.size!!) {
                         val detection3d = msg.detections[i]
                         //logger.debug("Number of hypothesis: " + detection3d.results.size)
                         val osd = MsgTypeFactory.getInstance().createType(detection3d, ObjectShapeData::class.java)
@@ -129,9 +129,9 @@ class ClfGraspingObjectDetection(private val nodeName: GraphName) : RosNode(), O
                 override fun isCancelled(): Boolean = res.isCancelled
                 override fun get(): BoundingBox3D = get(0,TimeUnit.MINUTES);
 
-                override fun get(timeout: Long, unit: TimeUnit?): BoundingBox3D {
+                override fun get(timeout: Long, unit: TimeUnit): BoundingBox3D {
                     var msg = res.get(timeout,unit)
-                    return MsgTypeFactory.getInstance().createType(msg.bbox, BoundingBox3D::class.java)
+                    return MsgTypeFactory.getInstance().createType(msg?.bbox, BoundingBox3D::class.java)
                 }
             }
         }
