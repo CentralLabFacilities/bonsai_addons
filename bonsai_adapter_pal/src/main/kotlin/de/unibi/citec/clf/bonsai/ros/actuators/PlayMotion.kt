@@ -1,5 +1,6 @@
 package de.unibi.citec.clf.bonsai.ros.actuators
 
+import actionlib_msgs.GoalStatus
 import com.github.rosjava_actionlib.ActionClient
 import de.unibi.citec.clf.bonsai.actuators.PostureActuator
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
@@ -13,6 +14,8 @@ import java.util.concurrent.Future
 import play_motion_msgs.PlayMotionActionGoal
 import play_motion_msgs.PlayMotionActionFeedback
 import play_motion_msgs.PlayMotionActionResult
+import play_motion_msgs.PlayMotionResult
+import java.util.concurrent.TimeUnit
 
 
 class PlayMotion(private val nodeName: GraphName) : RosNode(), PostureActuator {
@@ -66,7 +69,17 @@ class PlayMotion(private val nodeName: GraphName) : RosNode(), PostureActuator {
 
             logger.info("PAL Play Motion: $motion")
 
-            return sendGoal.toBooleanFuture()
+            return object : Future<Boolean> {
+                override fun cancel(p0: Boolean): Boolean = sendGoal.cancel(p0)
+                override fun isCancelled(): Boolean = sendGoal.isCancelled
+                override fun isDone(): Boolean = sendGoal.isDone
+                override fun get(): Boolean = get(1000, TimeUnit.DAYS)
+                override fun get(p0: Long, p1: TimeUnit): Boolean {
+                    val code = sendGoal.get(p0, p1).result
+                    logger.fatal("PlayMotion code:${code.errorCode} ${code.errorString}")
+                    return code.errorCode == PlayMotionResult.SUCCEEDED
+                }
+            }
 
         }
 
