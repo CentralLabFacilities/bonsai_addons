@@ -154,12 +154,12 @@
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>visualization_msgs</artifactId>
-            <version>[1.12.0,1.13.0)</version>
+            <version>[1.12.0,1.14.0)</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>trajectory_msgs</artifactId>
-            <version>[1.12.0,1.13.0)</version>
+            <version>[1.12.0,1.14.0)</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
