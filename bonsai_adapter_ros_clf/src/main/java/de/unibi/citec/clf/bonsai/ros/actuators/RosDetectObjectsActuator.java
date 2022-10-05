@@ -31,7 +31,7 @@ import java.util.logging.Logger;
  *
  * @author ffriese
  */
-public class RosDetectObjectsActuator extends RosNode implements RecognizeObjectsActuator {
+@Deprecated public class RosDetectObjectsActuator extends RosNode implements RecognizeObjectsActuator {
 
     String topic;
     long timeout = 10000;

@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 /**
  * @author jkummert
  */
-public class RosRecognizeObjectsActuator extends RosNode implements RecognizeObjectsActuator {
+@Deprecated public class RosRecognizeObjectsActuator extends RosNode implements RecognizeObjectsActuator {
 
     String topic;
     private GraphName nodeName;

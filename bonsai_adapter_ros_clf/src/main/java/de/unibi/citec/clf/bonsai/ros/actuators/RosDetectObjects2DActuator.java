@@ -28,7 +28,7 @@ import java.util.logging.Logger;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class RosDetectObjects2DActuator extends RosNode implements RecognizeObjectsActuator {
+@Deprecated public class RosDetectObjects2DActuator extends RosNode implements RecognizeObjectsActuator {
     String topic;
     String rosparam;
     long timeout = 10000;

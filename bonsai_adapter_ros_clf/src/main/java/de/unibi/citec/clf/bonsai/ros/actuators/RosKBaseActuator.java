@@ -63,7 +63,8 @@ public class RosKBaseActuator extends RosNode implements KBaseActuator {
             sc = connectedNode.newServiceClient(this.querytopic, Query._TYPE);
             scd = connectedNode.newServiceClient(this.datatopic, Data._TYPE);
         } catch (ServiceNotFoundException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage());
+            initialized = false;
         }
         initialized = true;
         logger.debug("on start, RosKBaseActuator done");
