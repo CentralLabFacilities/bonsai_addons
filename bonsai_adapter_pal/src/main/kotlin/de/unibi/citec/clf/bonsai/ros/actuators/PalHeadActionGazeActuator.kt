@@ -26,6 +26,7 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
 
     private var ac: ActionClient<PointHeadActionGoal, PointHeadActionFeedback, PointHeadActionResult>? = null
     private lateinit var topic: String
+    private lateinit var pointing_frame: String
     private val logger = org.apache.log4j.Logger.getLogger(javaClass)
     private var lastGoalId: GoalID? = null
 
@@ -54,6 +55,8 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
     @Throws(ConfigurationException::class)
     override fun configure(ioc: IObjectConfigurator) {
         this.topic = ioc.requestValue("topic")
+        this.pointing_frame = ioc.requestOptionalValue("pointing_frame", "xtion_optical_frame")
+
     }
 
     @Throws(IOException::class)
@@ -71,7 +74,7 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
             goal.goal.pointingAxis.x = 0.0
             goal.goal.pointingAxis.y = 0.0
             goal.goal.pointingAxis.z = 1.0
-            goal.goal.pointingFrame = "xtion_optical_frame"
+            goal.goal.pointingFrame = this.pointing_frame
 
             goal.goal.minDuration = Duration.fromMillis(duration)
 
