@@ -106,7 +106,6 @@ class FollowByHand : AbstractSkill() {
         speechManager?.removeHelper()
         speechManagerConfirm?.removeHelper()
         speechActuator?.say("please let go")
-        speechActuator?.say("3 2 1")
         action?.cancel(true)
         return curToken
     }
