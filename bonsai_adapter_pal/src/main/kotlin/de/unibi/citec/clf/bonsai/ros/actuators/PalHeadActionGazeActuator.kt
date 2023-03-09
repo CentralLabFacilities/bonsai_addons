@@ -40,6 +40,8 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
         if(ac?.waitForActionServerToStart(Duration(20.0)) ==  true) {
             logger.info("Gaze Actuator connected to $topic")
             initialized = true
+        } else {
+            logger.error("Gaze Actuator timeout after 20sec")
         }
 
     }

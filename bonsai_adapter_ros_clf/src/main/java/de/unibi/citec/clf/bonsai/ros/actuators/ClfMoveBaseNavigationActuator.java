@@ -118,7 +118,7 @@ public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator
             initialized = true;
             logger.debug("RosMoveBase NavAct started");
         } else {
-            logger.debug("RosMoveBase NavAct timeout after 20sec " + this.topic);
+            logger.error("RosMoveBase NavAct timeout after 20sec " + this.topic);
         }
     }
 
