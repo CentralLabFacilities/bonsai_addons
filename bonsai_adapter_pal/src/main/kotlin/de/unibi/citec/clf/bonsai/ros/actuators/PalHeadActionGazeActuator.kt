@@ -93,18 +93,22 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
         throw IOException("action server failure ${this.topic}")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setGazeTargetPitchAsync(pitch: Float, duration: Float): Future<Boolean> {
         TODO("not implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setGazeTargetYawAsync(yaw: Float, duration: Float): Future<Boolean> {
         TODO("not implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setGazeTargetPitch(pitch: Float) {
         TODO("not implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setGazeTargetYaw(yaw: Float) {
         TODO("not implemented")
     }
@@ -115,20 +119,24 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
         }
     }
 
+    @Deprecated("Deprecated in Java")
     override fun setGazeTarget(pitch: Float, yaw: Float, speed: Float) {
         TODO("not implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     @Throws(IOException::class)
     override fun setGazeTargetAsync(pitch: Float, yaw: Float): Future<Boolean> {
         TODO("not implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     @Throws(IOException::class)
     override fun setGazeTargetAsync(pitch: Float, yaw: Float, duration: Float): Future<Boolean> {
         TODO("not implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     @Throws(IOException::class)
     override fun setGazeTarget(azimuth: Float, elevation: Float) {
         TODO("not implemented")

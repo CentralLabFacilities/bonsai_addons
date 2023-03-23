@@ -10,17 +10,18 @@ import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException
 import de.unibi.citec.clf.bonsai.ros.RosNode
 import de.unibi.citec.clf.bonsai.ros.helper.ResponseFuture
 import org.ros.exception.RosException
+import org.ros.exception.RosRuntimeException
+import org.ros.exception.ServiceNotFoundException
 import org.ros.message.Duration
 import org.ros.namespace.GraphName
 import org.ros.node.ConnectedNode
 import org.ros.node.service.ServiceClient
-import java.util.concurrent.Future
-
 import pal_interaction_msgs.TtsActionFeedback
 import pal_interaction_msgs.TtsActionGoal
 import pal_interaction_msgs.TtsActionResult
 import std_srvs.*
 import java.io.IOException
+import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit
 
 /**
@@ -67,7 +68,11 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
     override fun onStart(connectedNode: ConnectedNode) {
         ac = ActionClient(connectedNode, this.topic, TtsActionGoal._TYPE, TtsActionFeedback._TYPE, TtsActionResult._TYPE)
         if(disableSpeechTopic.isNotEmpty()) {
-            clientDisableSpeech = connectedNode.newServiceClient(disableSpeechTopic,SetBool._TYPE)
+            try {
+                clientDisableSpeech = connectedNode.newServiceClient(disableSpeechTopic,SetBool._TYPE)
+            } catch (e: ServiceNotFoundException) {
+                throw RosRuntimeException(e)
+            }
         }
         if(ac?.waitForActionServerToStart(Duration(20.0)) ==  true) {
             logger.info("PalSpeech server connected $topic")
@@ -121,6 +126,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
 
     }
 
+    @Deprecated("Deprecated in Java")
     @Throws(IOException::class)
     override fun say(text: String) {
         sayAsync(text).get()

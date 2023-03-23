@@ -5,6 +5,7 @@ import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import java.util.concurrent.Future
 
 class SpeechActuatorStub : SpeechActuator {
+    @Deprecated("Deprecated in Java")
     override fun say(text: String) {
         return
     }
