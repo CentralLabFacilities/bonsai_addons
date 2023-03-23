@@ -40,6 +40,10 @@ class RosTrackingActuator(gn: GraphName) : RosNode(), TrackingActuator {
         return nodeName
     }
 
+    override fun connectionsAlive(): Boolean {
+        return clientTrigger?.isConnected ?: false;
+    }
+
     override fun onStart(connectedNode: ConnectedNode) {
         clientTrigger = try {
             connectedNode.newServiceClient(topic, ToggleCFtldTrackingWithBB._TYPE)
@@ -54,20 +58,19 @@ class RosTrackingActuator(gn: GraphName) : RosNode(), TrackingActuator {
     }
 
     override fun startTracking(boundingbox: List<Int>): Future<Boolean> {
-        if (!clientTrigger!!.isConnected) {
-            initialized = false
-            throw RosRuntimeException("node not connected")
+        clientTrigger?.let { client ->
+            val req = client.newMessage()
+            //set data
+            req.roi.xOffset = boundingbox[0]
+            req.roi.yOffset = boundingbox[1]
+            req.roi.height = boundingbox[2]
+            req.roi.width = boundingbox[3]
+            val res = ResponseFuture<ToggleCFtldTrackingWithBBResponse>()
+            client.call(req, res)
+            return res.toBooleanFuture()
         }
+        throw RosRuntimeException("client error")
 
-        val req = clientTrigger!!.newMessage()
-        //set data
-        req.roi.xOffset = boundingbox[0]
-        req.roi.yOffset = boundingbox[1]
-        req.roi.height = boundingbox[2]
-        req.roi.width = boundingbox[3]
-        val res = ResponseFuture<ToggleCFtldTrackingWithBBResponse>()
-        clientTrigger!!.call(req, res)
-        return res.toBooleanFuture()
     }
 
     override fun stopTracking() {
