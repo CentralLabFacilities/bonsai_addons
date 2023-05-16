@@ -24,9 +24,14 @@ import java.util.concurrent.Future
  */
 class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), GazeActuator {
 
+    enum class Axis {
+        X, Y, Z
+    }
+
     private var ac: ActionClient<PointHeadActionGoal, PointHeadActionFeedback, PointHeadActionResult>? = null
     private lateinit var topic: String
     private lateinit var pointing_frame: String
+    private lateinit var pointing_axis: Axis
     private val logger = org.apache.log4j.Logger.getLogger(javaClass)
     private var lastGoalId: GoalID? = null
 
@@ -58,7 +63,13 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
     override fun configure(ioc: IObjectConfigurator) {
         this.topic = ioc.requestValue("topic")
         this.pointing_frame = ioc.requestOptionalValue("pointing_frame", "xtion_optical_frame")
-
+        var axis = ioc.requestOptionalValue("pointing_axis", "Z")
+        this.pointing_axis = when (axis.lowercase()) {
+            "x" -> Axis.X
+            "y" -> Axis.Y
+            "z" -> Axis.Z
+            else -> throw ConfigurationException("bad pointing axis")
+        }
     }
 
     @Throws(IOException::class)
@@ -73,9 +84,12 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
 
             goal.goal.target.header.frameId = point.frameId
             goal.goal.target.point = MsgTypeFactory.getInstance().createMsg(point, geometry_msgs.Point::class.java)
-            goal.goal.pointingAxis.x = 0.0
-            goal.goal.pointingAxis.y = 0.0
-            goal.goal.pointingAxis.z = 1.0
+            when(pointing_axis) {
+                Axis.X -> goal.goal.pointingAxis.x = 1.0
+                Axis.Y -> goal.goal.pointingAxis.y = 1.0
+                Axis.Z -> goal.goal.pointingAxis.z = 1.0
+            }
+
             goal.goal.pointingFrame = this.pointing_frame
 
             goal.goal.minDuration = Duration.fromMillis(duration)
