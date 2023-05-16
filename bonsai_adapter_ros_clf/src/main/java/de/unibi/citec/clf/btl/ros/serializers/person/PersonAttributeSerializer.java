@@ -3,7 +3,9 @@ package de.unibi.citec.clf.btl.ros.serializers.person;
 
 import de.unibi.citec.clf.btl.data.person.PersonAttribute;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
+import openpose_ros_msgs.Gesture;
 import openpose_ros_msgs.PersonAttributes;
+import openpose_ros_msgs.Posture;
 import org.ros.message.MessageFactory;
 
 import java.util.LinkedList;
@@ -44,22 +46,22 @@ public class PersonAttributeSerializer extends RosSerializer<PersonAttribute, op
         }
 
         switch(msg.getPosture().getPosture()) {
-            case 1: ret.setPosture(PersonAttribute.Posture.SITTING); break;
-            default:
-            case 2: ret.setPosture(PersonAttribute.Posture.STANDING); break;
-            case 3: ret.setPosture(PersonAttribute.Posture.LYING); break;
+            case Posture.SITTING: ret.setPosture(PersonAttribute.Posture.SITTING); break;
+            case Posture.STANDING: ret.setPosture(PersonAttribute.Posture.STANDING); break;
+            case Posture.LYING: ret.setPosture(PersonAttribute.Posture.LYING); break;
+            default: throw new DeserializationException("unhandled Gesture: " + msg.getPosture().getPosture());
         }
         LinkedList<PersonAttribute.Gesture> gestures = new LinkedList<>();
         for(openpose_ros_msgs.Gesture gesture: msg.getGestures()){
             int g = gesture.getGesture();
             switch(g) {
-                case 1: gestures.add(PersonAttribute.Gesture.POINTING_LEFT); break;
-                case 2: gestures.add(PersonAttribute.Gesture.POINTING_RIGHT); break;
-                case 3: gestures.add(PersonAttribute.Gesture.RAISING_LEFT_ARM); break;
-                case 4: gestures.add(PersonAttribute.Gesture.RAISING_RIGHT_ARM); break;
-                case 5: gestures.add(PersonAttribute.Gesture.WAVING); break;
-                default:
-                case 6: gestures.add(PersonAttribute.Gesture.NEUTRAL); break;
+                case Gesture.POINTING_LEFT: gestures.add(PersonAttribute.Gesture.POINTING_LEFT); break;
+                case Gesture.POINTING_RIGHT: gestures.add(PersonAttribute.Gesture.POINTING_RIGHT); break;
+                case Gesture.RAISING_LEFT_ARM: gestures.add(PersonAttribute.Gesture.RAISING_LEFT_ARM); break;
+                case Gesture.RAISING_RIGHT_ARM: gestures.add(PersonAttribute.Gesture.RAISING_RIGHT_ARM); break;
+                case Gesture.WAVING: gestures.add(PersonAttribute.Gesture.WAVING); break;
+                case Gesture.NEUTRAL: gestures.add(PersonAttribute.Gesture.NEUTRAL); break;
+                default: throw new DeserializationException("unhandled Gesture: " + g);
             }
         }
 
