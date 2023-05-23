@@ -4,7 +4,6 @@ import clf_object_recognition_msgs.Detect3D
 import clf_object_recognition_msgs.Detect3DRequest
 import clf_object_recognition_msgs.Detect3DResponse
 import de.unibi.citec.clf.bonsai.actuators.ObjectDetectionActuator
-import de.unibi.citec.clf.bonsai.actuators.PlanningSceneActuator
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException
 import de.unibi.citec.clf.bonsai.ros.RosNode
@@ -14,16 +13,13 @@ import de.unibi.citec.clf.btl.data.geometry.BoundingBox3D
 import de.unibi.citec.clf.btl.data.`object`.ObjectShapeData
 import de.unibi.citec.clf.btl.data.`object`.ObjectShapeList
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory
-import knowledge_base_msgs.QueryResponse
 import org.apache.commons.lang.NotImplementedException
 import org.ros.exception.RosRuntimeException
 import org.ros.exception.ServiceNotFoundException
 import org.ros.namespace.GraphName
 import org.ros.node.ConnectedNode
 import org.ros.node.service.ServiceClient
-import vision_msgs.Detection3D
 import java.io.IOException
-import java.util.HashMap
 
 import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit
@@ -32,7 +28,7 @@ import java.util.concurrent.TimeUnit
  *
  * @author lruegeme
  */
-class ClfSimpleObjectDetection3D(private val nodeName: GraphName) : RosNode(), ObjectDetectionActuator {
+class ClfObjectDetection3D(private val nodeName: GraphName) : RosNode(), ObjectDetectionActuator {
 
     private lateinit var topicObject: String
     private lateinit var topicTable: String
@@ -77,11 +73,14 @@ class ClfSimpleObjectDetection3D(private val nodeName: GraphName) : RosNode(), O
     }
 
 
-    override fun detectObjects(roi: BoundingBox3D?): Future<List<ObjectShapeData>> {
+    override fun detectObjects(minConf: Double, roi: BoundingBox3D?): Future<List<ObjectShapeData>> {
         val let = serviceObjects?.let { client ->
             var goal = client.newMessage()
+            goal.minConf = minConf.toFloat()
+            goal.skipIcp = true
             roi?.let {
                 logger.warn("roi not supported")
+                throw IOException("${ClfObjectDetection3D::class.java} roi not supported")
             }
 
             val res = ResponseFuture<Detect3DResponse>()

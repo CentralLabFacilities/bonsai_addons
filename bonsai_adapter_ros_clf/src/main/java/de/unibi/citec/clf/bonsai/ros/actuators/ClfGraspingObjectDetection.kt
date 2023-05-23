@@ -75,7 +75,7 @@ class ClfGraspingObjectDetection(private val nodeName: GraphName) : RosNode(), O
     }
 
 
-    override fun detectObjects(roi: BoundingBox3D?): Future<List<ObjectShapeData>> {
+    override fun detectObjects(minConf: Double, roi: BoundingBox3D?): Future<List<ObjectShapeData>> {
         val let = serviceObjects?.let { client ->
             var goal = client.newMessage()
             goal.addToPlanningScene = true
