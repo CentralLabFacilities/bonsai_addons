@@ -1,4 +1,4 @@
-package de.unibi.citec.clf.bonsai.ros.actuators;
+package de.unibi.citec.clf.bonsai.ros.actuators.deprecated;
 
 import actionlib_msgs.GoalID;
 import com.github.rosjava_actionlib.ActionClient;
@@ -32,7 +32,7 @@ import java.util.concurrent.TimeoutException;
 /**
  * @author lruegeme
  */
-
+@Deprecated
 public class ClfGraspingActuator extends RosNode implements ManipulationActuator {
 
 

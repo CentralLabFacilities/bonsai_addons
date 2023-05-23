@@ -1,8 +1,7 @@
-package de.unibi.citec.clf.bonsai.ros.actuators
+package de.unibi.citec.clf.bonsai.ros.actuators.deprecated
 
 import clf_grasping_msgs.*
 import de.unibi.citec.clf.bonsai.actuators.ObjectDetectionActuator
-import de.unibi.citec.clf.bonsai.actuators.PlanningSceneActuator
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException
 import de.unibi.citec.clf.bonsai.ros.RosNode
@@ -12,16 +11,12 @@ import de.unibi.citec.clf.btl.data.geometry.BoundingBox3D
 import de.unibi.citec.clf.btl.data.`object`.ObjectShapeData
 import de.unibi.citec.clf.btl.data.`object`.ObjectShapeList
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory
-import knowledge_base_msgs.QueryResponse
-import org.apache.commons.lang.NotImplementedException
 import org.ros.exception.RosRuntimeException
 import org.ros.exception.ServiceNotFoundException
 import org.ros.namespace.GraphName
 import org.ros.node.ConnectedNode
 import org.ros.node.service.ServiceClient
-import vision_msgs.Detection3D
 import java.io.IOException
-import java.util.HashMap
 
 import java.util.concurrent.Future
 import java.util.concurrent.TimeUnit
@@ -30,6 +25,7 @@ import java.util.concurrent.TimeUnit
  *
  * @author lruegeme
  */
+@Deprecated("deprecated")
 class ClfGraspingObjectDetection(private val nodeName: GraphName) : RosNode(), ObjectDetectionActuator {
 
     private lateinit var topicObject: String

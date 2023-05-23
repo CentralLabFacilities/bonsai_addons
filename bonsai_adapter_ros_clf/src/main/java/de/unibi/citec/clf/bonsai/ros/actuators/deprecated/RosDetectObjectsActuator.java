@@ -1,53 +1,53 @@
-package de.unibi.citec.clf.bonsai.ros.actuators;
 
-import de.unibi.citec.clf.bonsai.actuators.RecognizeObjectsActuator;
+package de.unibi.citec.clf.bonsai.ros.actuators.deprecated;
+
+
+import de.unibi.citec.clf.bonsai.actuators.deprecated.RecognizeObjectsActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
+import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
 import de.unibi.citec.clf.bonsai.ros.helper.ResponseFuture;
 import de.unibi.citec.clf.btl.List;
-import de.unibi.citec.clf.btl.data.object.ObjectData;
 import de.unibi.citec.clf.btl.data.object.ObjectLocationData;
 import de.unibi.citec.clf.btl.data.object.ObjectShapeData;
 import de.unibi.citec.clf.btl.data.vision3d.PlanePatchList;
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
-import clf_object_recognition_msgs.Detect2D;
-import clf_object_recognition_msgs.Detect2DRequest;
-import clf_object_recognition_msgs.Detect2DResponse;
+import object_tracking_msgs.DetectObjects;
+import object_tracking_msgs.DetectObjectsRequest;
+import object_tracking_msgs.DetectObjectsResponse;
 import org.ros.exception.RosRuntimeException;
 import org.ros.exception.ServiceNotFoundException;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 import org.ros.node.service.ServiceClient;
 
-
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import java.util.HashMap;
-import java.util.Iterator;
 
-@Deprecated public class RosDetectObjects2DActuator extends RosNode implements RecognizeObjectsActuator {
+/**
+ *
+ * @author ffriese
+ */
+@Deprecated public class RosDetectObjectsActuator extends RosNode implements RecognizeObjectsActuator {
+
     String topic;
-    String rosparam;
     long timeout = 10000;
     long actuator_timeout;
     private GraphName nodeName;
     private org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(getClass());
-    private HashMap<String,String> idLabelMap;
 
-    ServiceClient<Detect2DRequest, Detect2DResponse> clientTrigger;
-    public RosDetectObjects2DActuator(GraphName gn) {
+    ServiceClient<DetectObjectsRequest, DetectObjectsResponse> clientTrigger;
+    public RosDetectObjectsActuator(GraphName gn) {
         initialized = false;
         this.nodeName = gn;
-
     }
-
+    
     @Override
     public void configure(IObjectConfigurator conf) throws ConfigurationException {
         this.topic = conf.requestValue("topic");
-        this.rosparam = conf.requestValue("param");
     }
 
     @Override
@@ -58,12 +58,11 @@ import java.util.Iterator;
     @Override
     public void onStart(final ConnectedNode connectedNode) {
         try {
-            clientTrigger = connectedNode.newServiceClient(topic, Detect2D._TYPE);
+            clientTrigger = connectedNode.newServiceClient(topic, DetectObjects._TYPE);
         } catch (ServiceNotFoundException e) {
             throw new RosRuntimeException(e.getMessage());
         }
         initialized = true;
-        idLabelMap = (HashMap<String, String>) connectedNode.getParameterTree().getMap(rosparam);
     }
 
     @Override
@@ -75,14 +74,14 @@ import java.util.Iterator;
     public List<ObjectShapeData> recognize() throws InterruptedException, ExecutionException {
         if (timeout > 0) {
             logger.debug("using timeout of " + timeout + "ms");
-            actuator_timeout = System.currentTimeMillis() + timeout;
+            actuator_timeout = Time.currentTimeMillis() + timeout;
         }
-        Detect2DRequest req = clientTrigger.newMessage();
+        DetectObjectsRequest req = clientTrigger.newMessage();
         //set data
-        final ResponseFuture<Detect2DResponse> res = new ResponseFuture<Detect2DResponse>();
+        final ResponseFuture<DetectObjectsResponse> res = new ResponseFuture<>();
         clientTrigger.call(req, res);
         while (!res.isDone()) {
-            if(actuator_timeout < System.currentTimeMillis()){
+            if(actuator_timeout < Time.currentTimeMillis()){
                 logger.error("service call timed out!");
                 return null;
             }
@@ -97,14 +96,10 @@ import java.util.Iterator;
             return null;
         }
         List<ObjectShapeData> ret = new List(ObjectShapeData.class);
-        for (int i = 0; i < res.get().getDetections().size(); ++i) {
+        for (int i = 0; i < res.get().getObjectLocationList().size(); ++i) {
             try {
-                ObjectShapeData osd = new ObjectShapeData(MsgTypeFactory.getInstance().createType(res.get().getDetections().get(i), ObjectLocationData.class));
-                for (Iterator<ObjectData.Hypothesis> it = osd.getHypotheses().iterator(); it.hasNext(); ) {
-                    ObjectData.Hypothesis hyp = it.next();
-                    hyp.setClassLabel(idLabelMap.get(hyp.getClassLabel()));
-                }
-                ret.add(osd);
+                ret.add(new ObjectShapeData(MsgTypeFactory.getInstance().createType(res.get().getObjectLocationList().get(i), ObjectLocationData.class)));
+                
             } catch (RosSerializer.DeserializationException ex) {
                 Logger.getLogger(RosDetectObjectsActuator.class.getName()).log(Level.SEVERE, null, ex);
             }

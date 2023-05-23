@@ -1,6 +1,6 @@
 package de.unibi.citec.clf.bonsai.ros.actuators;
 
-import de.unibi.citec.clf.bonsai.actuators.TWMActuator;
+import de.unibi.citec.clf.bonsai.actuators.deprecated.TWMActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 import org.ros.namespace.GraphName;
