@@ -20,7 +20,7 @@ import augmented_manipulation_msgs.AugmentedPickupActionResult;
 import augmented_manipulation_msgs.GraspConfigSet;
 import com.github.rosjava_actionlib.ActionClient;
 import com.github.rosjava_actionlib.ActionClientListener;
-import de.unibi.citec.clf.bonsai.actuators.PicknPlaceActuator;
+import de.unibi.citec.clf.bonsai.actuators.deprecated.PicknPlaceActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 import org.apache.commons.lang.NotImplementedException;

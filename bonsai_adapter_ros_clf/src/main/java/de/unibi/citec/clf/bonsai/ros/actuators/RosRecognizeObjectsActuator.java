@@ -2,7 +2,7 @@
 package de.unibi.citec.clf.bonsai.ros.actuators;
 
 
-import de.unibi.citec.clf.bonsai.actuators.RecognizeObjectsActuator;
+import de.unibi.citec.clf.bonsai.actuators.deprecated.RecognizeObjectsActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 import de.unibi.citec.clf.bonsai.ros.RosNode;

@@ -1,7 +1,7 @@
 
 package de.unibi.citec.clf.bonsai.ros.actuators;
 
-import de.unibi.citec.clf.bonsai.actuators.BimanualGraspActuator;
+import de.unibi.citec.clf.bonsai.actuators.deprecated.BimanualGraspActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 import de.unibi.citec.clf.bonsai.ros.RosNode;

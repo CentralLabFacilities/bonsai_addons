@@ -1,6 +1,6 @@
-package de.unibi.citec.clf.bonsai.ros.actuators;
+package de.unibi.citec.clf.bonsai.ros.actuators.deprecated;
 
-import de.unibi.citec.clf.bonsai.actuators.KBaseActuator;
+import de.unibi.citec.clf.bonsai.actuators.deprecated.KBaseActuator;
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
@@ -30,6 +30,7 @@ import java.util.concurrent.TimeoutException;
  * @author ffriese
  * @author rfeldhans
  */
+@Deprecated
 public class RosKBaseActuator extends RosNode implements KBaseActuator {
 
     String querytopic;
