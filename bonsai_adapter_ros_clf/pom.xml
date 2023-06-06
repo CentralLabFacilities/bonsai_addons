@@ -84,7 +84,7 @@
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>openpose_ros_msgs</artifactId>
-            <version>0.0.17</version>
+            <version>0.0.18</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
