@@ -24,7 +24,7 @@ public class PersonAttributesWithPoseSerializer extends RosSerializer<PersonData
         Point3D localLocation = MsgTypeFactory.getInstance().createType( msg.getPoseStamped().getPose().getPosition(), Point3D.class);
 
         PositionData positionData = new PositionData();
-        positionData.setFrameId(ReferenceFrame.LOCAL);
+        positionData.setFrameId(msg.getPoseStamped().getHeader().getFrameId());
         positionData.setX(localLocation.getX(iLU), iLU);
         positionData.setY(localLocation.getY(iLU), iLU);
         positionData.setYaw(0.0, iAU);
