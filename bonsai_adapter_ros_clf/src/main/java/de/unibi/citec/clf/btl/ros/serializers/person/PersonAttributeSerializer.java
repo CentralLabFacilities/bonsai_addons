@@ -61,6 +61,8 @@ public class PersonAttributeSerializer extends RosSerializer<PersonAttribute, op
                 case Gesture.RAISING_RIGHT_ARM: gestures.add(PersonAttribute.Gesture.RAISING_RIGHT_ARM); break;
                 case Gesture.WAVING: gestures.add(PersonAttribute.Gesture.WAVING); break;
                 case Gesture.NEUTRAL: gestures.add(PersonAttribute.Gesture.NEUTRAL); break;
+                case Gesture.POINTING_LEFT_DOWN: gestures.add(PersonAttribute.Gesture.POINTING_LEFT_DOWN); break;
+                case Gesture.POINTING_RIGHT_DOWN: gestures.add(PersonAttribute.Gesture.POINTING_RIGHT_DOWN); break;
                 default: throw new DeserializationException("unhandled Gesture: " + g);
             }
         }
