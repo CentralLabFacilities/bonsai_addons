@@ -40,6 +40,7 @@ class RosTrackingActuator(gn: GraphName) : RosNode(), TrackingActuator {
         return nodeName
     }
 
+
     override fun connectionsAlive(): Boolean {
         return clientTrigger?.isConnected ?: false;
     }

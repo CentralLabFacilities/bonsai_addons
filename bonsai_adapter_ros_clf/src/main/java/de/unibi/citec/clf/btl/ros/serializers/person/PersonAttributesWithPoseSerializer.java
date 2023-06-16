@@ -48,6 +48,8 @@ public class PersonAttributesWithPoseSerializer extends RosSerializer<PersonData
 
         PersonAttribute attribute = MsgTypeFactory.getInstance().createType(msg.getAttributes(),PersonAttribute.class);
 
+        personData.setEstimateAngle(((double) msg.getEstimateAngle()));
+
         personData.setName(msg.getAttributes().getName());
         personData.setPersonAttribute(attribute);
 
