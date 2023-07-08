@@ -98,6 +98,7 @@ class ClfObjectDetection3D(private val nodeName: GraphName) : RosNode(), ObjectD
                     val data = ObjectShapeList()
                     for (i in 0 until msg?.detections?.size!!) {
                         val detection3d = msg.detections[i]
+                        logger.fatal("Message box : ${detection3d.bbox.center.position.x} ${detection3d.bbox.center.position.y} ${detection3d.bbox.center.position.z} ")
                         //logger.debug("Number of hypothesis: " + detection3d.results.size)
                         val osd = MsgTypeFactory.getInstance().createType(detection3d, ObjectShapeData::class.java)
                         osd.id = "${detection3d.header.stamp}_$i"
