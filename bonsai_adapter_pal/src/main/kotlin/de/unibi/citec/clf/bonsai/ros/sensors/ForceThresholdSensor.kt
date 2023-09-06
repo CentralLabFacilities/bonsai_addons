@@ -4,7 +4,6 @@ import de.unibi.citec.clf.bonsai.core.SensorListener
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException
 import de.unibi.citec.clf.bonsai.ros.RosSensor
-import geometry_msgs.Wrench
 import geometry_msgs.WrenchStamped
 import org.apache.log4j.Logger
 import org.ros.message.MessageListener
@@ -16,7 +15,7 @@ import java.util.*
 
 class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<WrenchStamped>, val nodeName: GraphName) : RosSensor<Boolean, WrenchStamped>(typeClass, rosType), MessageListener<WrenchStamped> {
 
-    private val logger = Logger.getLogger(ForceThresholdSensor::class.java)
+    private val logger = Logger.getLogger(this.javaClass)
     private var subscriber: Subscriber<WrenchStamped>? = null
 
     private val listeners = HashSet<SensorListener<Boolean>>()
@@ -36,7 +35,11 @@ class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wre
         this.higher = conf.requestOptionalBool("needOverThreshold", higher)
         this.component = conf.requestOptionalValue("component", component)
 
-        if(component !in listOf("x","y","z")) throw ConfigurationException("${this.javaClass}: Configuration 'component' not in $values (is $component)")
+        if(component !in values) throw ConfigurationException("${this.javaClass}: Configuration 'component' not in $values (is $component)")
+    }
+
+    override fun getTarget(): String {
+        return "$topic/wrench.force.$component"
     }
 
     override fun addSensorListener(listener: SensorListener<Boolean>) {

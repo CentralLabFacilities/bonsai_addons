@@ -13,7 +13,6 @@ import de.unibi.citec.clf.btl.data.geometry.BoundingBox3D
 import de.unibi.citec.clf.btl.data.`object`.ObjectShapeData
 import de.unibi.citec.clf.btl.data.`object`.ObjectShapeList
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory
-import org.apache.commons.lang.NotImplementedException
 import org.ros.exception.RosRuntimeException
 import org.ros.exception.ServiceNotFoundException
 import org.ros.namespace.GraphName
@@ -115,6 +114,6 @@ class ClfObjectDetection3D(private val nodeName: GraphName) : RosNode(), ObjectD
     }
 
     override fun detectSurface(): Future<BoundingBox3D> {
-        throw NotImplementedException()
+        throw RosRuntimeException("not implemented")
     }
 }

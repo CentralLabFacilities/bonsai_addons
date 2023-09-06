@@ -1,5 +1,6 @@
 package de.unibi.citec.clf.bonsai.skills.pal
 
+import de.unibi.citec.clf.bonsai.core.SensorListener
 import de.unibi.citec.clf.bonsai.core.`object`.Sensor
 import de.unibi.citec.clf.bonsai.engine.model.AbstractSkill
 import de.unibi.citec.clf.bonsai.engine.model.ExitStatus
@@ -8,10 +9,12 @@ import de.unibi.citec.clf.bonsai.engine.model.config.ISkillConfigurator
 import de.unibi.citec.clf.btl.data.speechrec.Utterance
 import std_msgs.Bool
 
-class IsSomethingInGripper : AbstractSkill(){
+class IsSomethingInGripper : AbstractSkill(), SensorListener<Boolean> {
+
     private lateinit var tokenSuccessYes: ExitToken
     private lateinit var tokenSuccessNo: ExitToken
     private var gripperSensor: Sensor<Boolean>? = null
+    private var full = false
 
     override fun configure(configurator: ISkillConfigurator) {
         tokenSuccessYes = configurator.requestExitToken(ExitStatus.SUCCESS().ps("yes"))
@@ -20,6 +23,7 @@ class IsSomethingInGripper : AbstractSkill(){
     }
 
     override fun init(): Boolean {
+        gripperSensor?.addSensorListener(this)
         return true
     }
 
@@ -30,5 +34,9 @@ class IsSomethingInGripper : AbstractSkill(){
 
     override fun end(curToken: ExitToken): ExitToken {
         return  curToken
+    }
+
+    override fun newDataAvailable(newData: Boolean) {
+        if(newData) full = true
     }
 }
