@@ -28,22 +28,27 @@ public class PersonAttributesWithPoseSerializer extends RosSerializer<PersonData
         positionData.setX(localLocation.getX(iLU), iLU);
         positionData.setY(localLocation.getY(iLU), iLU);
         positionData.setYaw(0.0, iAU);
+        MsgTypeFactory.setHeader(positionData, msg.getPoseStamped().getHeader());
 
         PersonData personData = new PersonData();
+        MsgTypeFactory.setHeader(personData, msg.getPoseStamped().getHeader());
 
         personData.setPosition(positionData);
         personData.setFrameId(positionData.getFrameId());
 
         Point3D localHeadLocation = MsgTypeFactory.getInstance().createType( msg.getHeadPoseStamped().getPose().getPosition(), Point3D.class);
         localHeadLocation.setFrameId(msg.getHeadPoseStamped().getHeader().getFrameId());
+        MsgTypeFactory.setHeader(localHeadLocation, msg.getPoseStamped().getHeader());
         personData.setHeadPosition(localHeadLocation);
 
         Point3D leftHandLocation = MsgTypeFactory.getInstance().createType( msg.getLeftHand().getPose().getPosition(), Point3D.class);
         leftHandLocation.setFrameId(msg.getLeftHand().getHeader().getFrameId());
+        MsgTypeFactory.setHeader(leftHandLocation, msg.getPoseStamped().getHeader());
         personData.setLeftHandPosition(leftHandLocation);
 
         Point3D rightHandLocation = MsgTypeFactory.getInstance().createType( msg.getRightHand().getPose().getPosition(), Point3D.class);
         rightHandLocation.setFrameId(msg.getRightHand().getHeader().getFrameId());
+        MsgTypeFactory.setHeader(rightHandLocation, msg.getPoseStamped().getHeader());
         personData.setRightHandPosition(rightHandLocation);
 
         PersonAttribute attribute = MsgTypeFactory.getInstance().createType(msg.getAttributes(),PersonAttribute.class);
