@@ -15,7 +15,11 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+
+import org.apache.commons.lang.NotImplementedException;
 import org.apache.log4j.Logger;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.ros.exception.RosRuntimeException;
 import org.ros.exception.ServiceNotFoundException;
 import org.ros.namespace.GraphName;
@@ -133,6 +137,11 @@ public class RosPostureExecutionActuator extends RosNode implements PostureActua
         this.namedTargetSC.call(req, res);
         
         return res.toBooleanFuture();        
+    }
+
+    @Override
+    public Future<Boolean> isInPose(@NotNull String pose, @Nullable String group) {
+        throw new NotImplementedException();
     }
 
 

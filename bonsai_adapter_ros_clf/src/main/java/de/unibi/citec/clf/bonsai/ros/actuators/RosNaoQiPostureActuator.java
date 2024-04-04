@@ -8,6 +8,8 @@ import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 import de.unibi.citec.clf.bonsai.core.time.Time;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
+import org.apache.commons.lang.NotImplementedException;
+import org.jetbrains.annotations.NotNull;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 import pepper_clf_msgs.*;
@@ -109,5 +111,10 @@ public class RosNaoQiPostureActuator extends RosNode implements PostureActuator 
     @Override
     public Future<Boolean> assumePose(String pose, String group) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public Future<Boolean> isInPose(@NotNull String pose, @org.jetbrains.annotations.Nullable String group) {
+        throw new NotImplementedException();
     }
 }

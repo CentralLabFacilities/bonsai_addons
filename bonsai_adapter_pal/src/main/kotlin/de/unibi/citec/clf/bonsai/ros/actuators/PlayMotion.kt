@@ -1,20 +1,23 @@
 package de.unibi.citec.clf.bonsai.ros.actuators
 
-import actionlib_msgs.GoalStatus
 import com.github.rosjava_actionlib.ActionClient
 import de.unibi.citec.clf.bonsai.actuators.PostureActuator
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import de.unibi.citec.clf.bonsai.ros.RosNode
+import de.unibi.citec.clf.bonsai.ros.helper.ResponseFuture
 import org.ros.exception.RosException
+import org.ros.exception.RosRuntimeException
+import org.ros.exception.ServiceNotFoundException
 import org.ros.message.Duration
 import org.ros.namespace.GraphName
 import org.ros.node.ConnectedNode
+import org.ros.node.service.ServiceClient
+import play_motion_msgs.*
+import std_srvs.SetBoolResponse
+import std_srvs.Trigger
+import std_srvs.TriggerRequest
+import std_srvs.TriggerResponse
 import java.util.concurrent.Future
-
-import play_motion_msgs.PlayMotionActionGoal
-import play_motion_msgs.PlayMotionActionFeedback
-import play_motion_msgs.PlayMotionActionResult
-import play_motion_msgs.PlayMotionResult
 import java.util.concurrent.TimeUnit
 
 
@@ -23,9 +26,23 @@ class PlayMotion(private val nodeName: GraphName) : RosNode(), PostureActuator {
         TODO("not implemented")
     }
 
+    override fun isInPose(pose: String, group: String?): Future<Boolean?> {
+        client_iat?.let { client ->
+            val req = client.newMessage()
+            req.motionName = pose
+            req.tolerance = 0.05f
+            val res = ResponseFuture<IsAlreadyThereResponse>()
+            client.call(req, res)
+            return res.toTypeFuture { it.alreadyThere }
+        }
+        throw RosException("is_already_there client not connected on topic $topic_iat")
+    }
+
     private val logger = org.apache.log4j.Logger.getLogger(javaClass)
     private var ac: ActionClient<PlayMotionActionGoal, PlayMotionActionFeedback, PlayMotionActionResult>? = null
+    private var client_iat: ServiceClient<IsAlreadyThereRequest, IsAlreadyThereResponse>? = null
     private lateinit var topic: String
+    private var topic_iat: String? = null
 
     init {
         initialized = false
@@ -37,10 +54,20 @@ class PlayMotion(private val nodeName: GraphName) : RosNode(), PostureActuator {
 
     override fun configure(conf: IObjectConfigurator) {
         topic = conf.requestValue("topic")
+        topic_iat = conf.requestOptionalValue("topic_is_already_there", topic_iat)
     }
 
     override fun onStart(connectedNode: ConnectedNode) {
         ac = ActionClient(connectedNode, this.topic, PlayMotionActionGoal._TYPE, PlayMotionActionFeedback._TYPE, PlayMotionActionResult._TYPE)
+
+        topic_iat?.let {
+            try {
+                client_iat = connectedNode.newServiceClient(topic_iat, IsAlreadyThere._TYPE)
+            } catch (e: ServiceNotFoundException) {
+                logger.error("PlayMotion: is_already_there not provided on $topic_iat")
+                throw e
+            }
+        }
 
         if(ac?.waitForActionServerToStart(Duration(20.0)) ==  true) {
             logger.info("PlayMotion server connected $topic")
