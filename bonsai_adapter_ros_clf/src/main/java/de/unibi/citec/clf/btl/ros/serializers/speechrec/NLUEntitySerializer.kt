@@ -26,7 +26,7 @@ class NLUEntitySerializer : RosSerializer<NLUEntity, clf_speech_msgs.Entity>() {
     @Throws(SerializationException::class)
     override fun serialize(data: NLUEntity, fact: MessageFactory): clf_speech_msgs.Entity {
         val e : clf_speech_msgs.Entity = fact.newFromType(clf_speech_msgs.Entity._TYPE)
-        e.value = data.entity
+        e.value = data.value
         e.key = data.key
         e.role = data.role
         return e

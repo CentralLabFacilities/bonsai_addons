@@ -41,7 +41,7 @@ class NLUSerializer : RosSerializer<NLU, clf_speech_msgs.NLU>() {
             entities.addAll(data.map {
                 val emsg : clf_speech_msgs.Entity = fact.newFromType(clf_speech_msgs.Entity._TYPE)
                 emsg.key = it?.key
-                emsg.value = it?.entity
+                emsg.value = it?.value
                 emsg.role = it?.role
                 emsg
             })
