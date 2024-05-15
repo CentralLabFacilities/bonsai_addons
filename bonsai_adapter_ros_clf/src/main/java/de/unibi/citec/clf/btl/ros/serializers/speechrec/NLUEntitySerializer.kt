@@ -20,7 +20,7 @@ class NLUEntitySerializer : RosSerializer<NLUEntity, clf_speech_msgs.Entity>() {
 
     @Throws(DeserializationException::class)
     override fun deserialize(msg: clf_speech_msgs.Entity): NLUEntity {
-        return NLUEntity(msg.key, msg.value, msg.role)
+        return NLUEntity(msg.key, msg.value, msg.role, msg.group)
     }
 
     @Throws(SerializationException::class)
