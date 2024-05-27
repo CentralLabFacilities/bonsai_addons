@@ -21,25 +21,32 @@ class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wre
     private val listeners = HashSet<SensorListener<Boolean>>()
     private var topic: String? = null
 
+    private val mutex = Any()
+
+    private var last_value: WrenchStamped? = null
     private var last = false
     private var threshold = -12.0
     private var higher = false
-    private var component = "z"
+    private var component = components.z
 
-    val values = listOf("x","y","z")
+    enum class components {
+        x, y, z
+    }
+    val values = components.entries.map { it.name }
 
     @Throws(ConfigurationException::class)
     override fun configure(conf: IObjectConfigurator) {
         this.topic = conf.requestValue("topic")
         this.threshold = conf.requestOptionalDouble("threshold", threshold)
         this.higher = conf.requestOptionalBool("needOverThreshold", higher)
-        this.component = conf.requestOptionalValue("component", component)
+        val componentString = conf.requestOptionalValue("component", "z")
 
-        if(component !in values) throw ConfigurationException("${this.javaClass}: Configuration 'component' not in $values (is $component)")
+        if(componentString !in values) throw ConfigurationException("${this.javaClass}: Configuration 'component' not in $values (is $component)")
+        component = components.valueOf(componentString)
     }
 
     override fun getTarget(): String {
-        return "$topic/wrench.force.$component"
+        return "$topic/wrench.force.${component.name}"
     }
 
     override fun addSensorListener(listener: SensorListener<Boolean>) {
@@ -57,8 +64,12 @@ class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wre
 
     @Throws(IOException::class, InterruptedException::class)
     override fun readLast(timeout: Long): Boolean? {
-        logger.debug("sensor read")
-        return last
+        synchronized (mutex) {
+            logger.debug("sensor read")
+            logger.error("current state is $last, last wrench was $last_value")
+            logger.error("checked if '$target' () ${if (higher) ">" else "<"} $threshold")
+            return last
+        }
     }
 
     override fun hasNext(): Boolean {
@@ -87,8 +98,17 @@ class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wre
 
     //Message Handler
     override fun onNewMessage(t: WrenchStamped) {
-        val value = t.wrench.force.z
-        last = if (higher) value > threshold else value < threshold
+        synchronized (mutex) {
+            last_value = t
+            val value = when (component){
+                components.x -> t.wrench.force.x
+                components.y -> t.wrench.force.y
+                components.z -> t.wrench.force.z
+            }
+
+            last = if (higher) value > threshold else value < threshold
+        }
+
         listeners.forEach { l: SensorListener<Boolean> -> l.newDataAvailable(last) }
     }
 }
