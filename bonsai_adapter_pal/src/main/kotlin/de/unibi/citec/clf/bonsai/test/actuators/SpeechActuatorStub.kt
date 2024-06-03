@@ -21,6 +21,10 @@ class SpeechActuatorStub : SpeechActuator {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun enableASR(enable: Boolean): Future<Boolean> {
+        TODO("Not yet implemented")
+    }
+
     override fun sayAccentuated(accented_text: String?) {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }

@@ -1,5 +1,7 @@
 package de.unibi.citec.clf.bonsai.ros.actuators
 
+import actionlib_msgs.GoalID
+import actionlib_msgs.GoalStatus
 import actionlib_msgs.GoalStatusArray
 import com.github.rosjava_actionlib.ActionClient
 import com.github.rosjava_actionlib.ActionClientListener
@@ -29,11 +31,17 @@ import java.util.concurrent.TimeUnit
  * @author lruegeme
  */
 class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, ActionClientListener<TtsActionFeedback, TtsActionResult> {
+
+    private val statesFinished = setOf(GoalStatus.SUCCEEDED)
     override fun statusReceived(status: GoalStatusArray) {
-        for(state in status.statusList) {
-            if(state.status !in 2..5 && state.status < 8) return
+        for (state in status.statusList) {
+            if(state.goalId.id != lastGoalId?.id) continue
+            if(statesFinished.contains(state.status)) {
+                enableSpeech(true)
+                lastGoalId = null
+                return
+            }
         }
-        enableSpeech(true)
     }
 
     override fun feedbackReceived(feedback: TtsActionFeedback) {
@@ -43,6 +51,8 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
     override fun resultReceived(result: TtsActionResult) {
         //NOP
     }
+
+    private var lastGoalId: GoalID? = null
 
     private val logger = org.apache.log4j.Logger.getLogger(javaClass)
     private var ac: ActionClient<TtsActionGoal, TtsActionFeedback, TtsActionResult>? = null
@@ -67,6 +77,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
 
     override fun onStart(connectedNode: ConnectedNode) {
         ac = ActionClient(connectedNode, this.topic, TtsActionGoal._TYPE, TtsActionFeedback._TYPE, TtsActionResult._TYPE)
+
         if(disableSpeechTopic.isNotEmpty()) {
             try {
                 clientDisableSpeech = connectedNode.newServiceClient(disableSpeechTopic,SetBool._TYPE)
@@ -74,6 +85,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
                 throw RosRuntimeException(e)
             }
         }
+
         if(ac?.waitForActionServerToStart(Duration(20.0)) ==  true) {
             logger.info("PalSpeech server connected $topic")
             ac?.attachListener(this)
@@ -96,6 +108,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
             goal.goal.rawtext.langId = langId
 
             val sendGoal = client.sendGoal(goal)
+            lastGoalId = sendGoal.goalId
             logger.info("PAL TTS: $data")
 
             return sendGoal
@@ -108,20 +121,10 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
 
     private fun enableSpeech(enabled: Boolean) {
         if (speechEnabled == enabled) return
-
         speechEnabled = enabled;
-        clientDisableSpeech?.let {
-            logger.debug("enabling speech $enabled")
-            val a = it.newMessage()
-            a.data = enabled
-            val res = ResponseFuture<SetBoolResponse>()
-            it.call(a, res)
-            try {
-                res.get(500,TimeUnit.MILLISECONDS)
-            } catch (e: Exception) {
-                logger.warn("enableSpeech Timeout")
-            }
 
+        clientDisableSpeech?.run {
+            enableASR(enabled).get()
         } ?: logger.warn("SpeechRec not connected")
 
     }
@@ -136,37 +139,19 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
     override fun sayAsync(text: String): Future<Void> {
         enableSpeech(false)
         val ret = sendToTTS(text)
-        return object : Future<Void> {
-            override fun isDone(): Boolean {
-                val done = ret.isDone()
-                if(done) enableSpeech(true)
-                return done
-            }
+        return ret.toVoidFuture()
+    }
 
-            override fun get(): Void? {
-                val a = ret.toVoidFuture().get()
-                enableSpeech(true)
-                return null
-            }
+    override fun enableASR(enable: Boolean): Future<Boolean> {
+        clientDisableSpeech?.let {
+            logger.debug("enabling speech $enable")
+            val a = it.newMessage()
+            a.data = enable
+            val res = ResponseFuture<SetBoolResponse>()
+            it.call(a, res)
+            return res.toBooleanFuture()
 
-            override fun get(p0: Long, p1: TimeUnit): Void? {
-                val a = ret.toVoidFuture().get(p0,p1)
-                enableSpeech(true)
-                return null
-            }
-
-            override fun cancel(p0: Boolean): Boolean {
-                val b = ret.cancel(p0)
-                enableSpeech(true)
-                return b
-            }
-
-            override fun isCancelled(): Boolean {
-                return ret.isCancelled()
-            }
-
-        }
-
+        } ?: throw NotImplementedError("SpeechRec not connected")
     }
 
     override fun sayAccentuated(accented_text: String?) {

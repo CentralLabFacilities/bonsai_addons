@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import org.jetbrains.annotations.NotNull;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
@@ -76,6 +77,11 @@ public class RosNaoQiSpeechActuator extends RosNode implements SpeechActuator {
         Future<Void> ret = sendToTTS(text).toVoidFuture();
 
         return ret;
+    }
+
+    @Override
+    public Future<Boolean> enableASR(@NotNull Boolean b) throws IOException {
+        return null;
     }
 
     @Override
