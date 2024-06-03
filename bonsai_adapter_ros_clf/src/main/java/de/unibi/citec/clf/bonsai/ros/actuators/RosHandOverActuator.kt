@@ -5,6 +5,7 @@ import de.unibi.citec.clf.bonsai.actuators.HandOverActuator
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException
 import de.unibi.citec.clf.bonsai.ros.RosNode
+import de.unibi.citec.clf.btl.ros.MsgTypeFactory
 import hand_over_msgs.*
 import org.ros.message.Duration
 import org.ros.namespace.GraphName

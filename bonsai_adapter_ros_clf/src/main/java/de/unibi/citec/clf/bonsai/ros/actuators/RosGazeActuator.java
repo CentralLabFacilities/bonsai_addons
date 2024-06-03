@@ -158,6 +158,11 @@ public class RosGazeActuator extends RosNode implements GazeActuator {
     }
 
     @Override
+    public Future<Void> lookAt(Point3D point, double maxVelocity, long minDuration) {
+        throw new UnsupportedOperationException("Not supported yet.");
+    }
+
+    @Override
     public void configure(IObjectConfigurator ioc) throws ConfigurationException {
         this.topic = ioc.requestValue("topic");
         this.actionTopic = ioc.requestValue("actionTopic");

@@ -82,7 +82,11 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
     }
 
     @Throws(IOException::class)
-    override fun lookAt(point: Point3D, duration: Long ): Future<Void>? {
+    override fun lookAt(point: Point3D, duration: Long ): Future<Void> {
+        return lookAt(point,2.0,duration)
+    }
+
+    override fun lookAt(point: Point3D, maxVelocity: Double, minDuration: Long): Future<Void> {
         ac?.let { client ->
             val goal = client.newGoalMessage()
 
@@ -95,8 +99,8 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
             }
 
             goal.goal.pointingFrame = this.pointing_frame
-
-            goal.goal.minDuration = Duration.fromMillis(duration)
+            goal.goal.minDuration = Duration.fromMillis(minDuration)
+            goal.goal.maxVelocity = maxVelocity
 
             val sendGoal = client.sendGoal(goal)
 

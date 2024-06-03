@@ -27,12 +27,12 @@ class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wre
     private var last = false
     private var threshold = -12.0
     private var higher = false
-    private var component = components.z
+    private var component = WrenchForceComponent.z
 
-    enum class components {
+    enum class WrenchForceComponent {
         x, y, z
     }
-    val values = components.entries.map { it.name }
+    val values = WrenchForceComponent.entries.map { it.name }
 
     @Throws(ConfigurationException::class)
     override fun configure(conf: IObjectConfigurator) {
@@ -41,8 +41,8 @@ class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wre
         this.higher = conf.requestOptionalBool("needOverThreshold", higher)
         val componentString = conf.requestOptionalValue("component", "z")
 
-        if(componentString !in values) throw ConfigurationException("${this.javaClass}: Configuration 'component' not in $values (is $component)")
-        component = components.valueOf(componentString)
+        if(componentString !in values) throw ConfigurationException("${this.javaClass}: Configuration 'component' not in $values (is $componentString)")
+        component = WrenchForceComponent.valueOf(componentString)
     }
 
     override fun getTarget(): String {
@@ -101,9 +101,9 @@ class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wre
         synchronized (mutex) {
             last_value = t
             val value = when (component){
-                components.x -> t.wrench.force.x
-                components.y -> t.wrench.force.y
-                components.z -> t.wrench.force.z
+                WrenchForceComponent.x -> t.wrench.force.x
+                WrenchForceComponent.y -> t.wrench.force.y
+                WrenchForceComponent.z -> t.wrench.force.z
             }
 
             last = if (higher) value > threshold else value < threshold
