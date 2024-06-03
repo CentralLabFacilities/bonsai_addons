@@ -12,6 +12,9 @@ import de.unibi.citec.clf.btl.units.AngleUnit;
 import de.unibi.citec.clf.btl.units.LengthUnit;
 import org.ros.message.MessageFactory;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class PersonSerializer extends RosSerializer<PersonData, people_msgs.Person> {
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PersonSerializer.class);
@@ -45,29 +48,14 @@ public class PersonSerializer extends RosSerializer<PersonData, people_msgs.Pers
 
     @Override
     public people_msgs.Person serialize(PersonData data, MessageFactory fact) throws SerializationException {
-        people_msgs.Person person = fact.newFromType(people_msgs.Person._TYPE);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
-//        LengthUnit iLU = LengthUnit.METER;
-//        AngleUnit iAU = AngleUnit.RADIAN;
-//
-//        person.setPosition((geometry_msgs.Point)MsgTypeFactory.getInstance().createMsg(data.getPosition()));
-//        Body.Builder bodyBuilder = builder.getBodyBuilder();
-//
-//        PositionData position = data.getPosition();
-//
-//        Rotation3D globalOrientation = new Rotation3D(new Vector3d(0, 0, 1), position.getYaw(iAU), iAU);
-//        globalOrientation.setFrameId(position.getFrameId());
-//        Point3D globalLocation = new Point3D(position.getX(iLU), position.getY(iLU), 0.0, iLU);
-//        globalLocation.setFrameId(position.getFrameId());
-//
-//        Rotation3DSerializer rot = new Rotation3DSerializer();
-//        rot.serialize(globalOrientation, bodyBuilder.getOrientationBuilder());
-//
-//        Point3DSerializer p = new Point3DSerializer();
-//        p.serialize(globalLocation, bodyBuilder.getLocationBuilder());
-//
-//        builder.getTrackingInfoBuilder().setId(data.getId());
+        people_msgs.Person person = fact.newFromType(people_msgs.Person._TYPE);
+
+        person.setName(data.getUuid());
+        person.setPosition(MsgTypeFactory.getInstance().createMsg(data.getPosition(), geometry_msgs.Point.class));
+        person.setReliability(data.getReliability());
+
+        return person;
     }
 
     @Override
