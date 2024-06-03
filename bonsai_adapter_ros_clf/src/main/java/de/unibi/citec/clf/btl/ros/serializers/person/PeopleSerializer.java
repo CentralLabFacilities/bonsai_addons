@@ -9,15 +9,20 @@ import de.unibi.citec.clf.btl.data.person.PersonData;
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
 import org.ros.message.MessageFactory;
+import std_msgs.Header;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class PeopleSerializer extends RosSerializer<PersonDataList, People> {
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PeopleSerializer.class);
+
     @Override
     public PersonDataList deserialize(People msg) throws DeserializationException {
         PersonDataList persons = new PersonDataList();
 
-        for(Person p: msg.getPeople()){
+        for (Person p : msg.getPeople()) {
             PersonData person = MsgTypeFactory.getInstance().createType(p, PersonData.class);
             String frame_id = msg.getHeader().getFrameId().startsWith("/") ? msg.getHeader().getFrameId().substring(1) : msg.getHeader().getFrameId();
 //            logger.trace("Frame id of deserialized person: "+frame_id);
@@ -31,29 +36,19 @@ public class PeopleSerializer extends RosSerializer<PersonDataList, People> {
 
     @Override
     public People serialize(PersonDataList data, MessageFactory fact) throws SerializationException {
-        People people = fact.newFromType(People._TYPE);
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
-//        LengthUnit iLU = LengthUnit.METER;
-//        AngleUnit iAU = AngleUnit.RADIAN;
-//
-//        person.setPosition((geometry_msgs.Point)MsgTypeFactory.getInstance().createMsg(data.getPosition()));
-//        Body.Builder bodyBuilder = builder.getBodyBuilder();
-//
-//        PositionData position = data.getPosition();
-//
-//        Rotation3D globalOrientation = new Rotation3D(new Vector3d(0, 0, 1), position.getYaw(iAU), iAU);
-//        globalOrientation.setFrameId(position.getFrameId());
-//        Point3D globalLocation = new Point3D(position.getX(iLU), position.getY(iLU), 0.0, iLU);
-//        globalLocation.setFrameId(position.getFrameId());
-//
-//        Rotation3DSerializer rot = new Rotation3DSerializer();
-//        rot.serialize(globalOrientation, bodyBuilder.getOrientationBuilder());
-//
-//        Point3DSerializer p = new Point3DSerializer();
-//        p.serialize(globalLocation, bodyBuilder.getLocationBuilder());
-//
-//        builder.getTrackingInfoBuilder().setId(data.getId());
+        People people = fact.newFromType(People._TYPE);
+
+        List<Person> personList = new ArrayList<>();
+
+        for (PersonData personData : data) {
+            personList.add(MsgTypeFactory.getInstance().createMsg(personData, Person.class));
+        }
+
+        people.setPeople(personList);
+        people.setHeader(MsgTypeFactory.getInstance().makeHeader(data));
+
+        return people;
     }
 
     @Override
