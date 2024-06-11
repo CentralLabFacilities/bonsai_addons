@@ -23,8 +23,10 @@ import java.util.concurrent.Future;
  *                      -> Horizontal direction to look to in rad (right - left) (Tiago: -1.24 to 1.24)
  *  #_VERTICAL:     [String] Optional (Default: 0)
  *                      -> Vertical direction to look to in rad (down - up) (Tiago: -0.98 to 0.79)
- *  #_MOVE_DURATION:[String] Optional (Default: 2000)
- *                      -> Time the head takes to move to the position in milliseconds
+ *  #_MOVE_DURATION:[Integer] Optional (Default: 2000)
+ *                      -> Minimal Time the head takes to move to the position in milliseconds
+ *  #_MAX_VELOCITY: [double] Optional (Default 1.0)
+ *                      -> Max Velocity the head moves
  *  #_BLOCKING:     [boolean] Optional (default: true)
  *                      -> If true skill ends after head movement was completed
  *  #_TIMEOUT:     [integer] Optional (default: 5000)
@@ -53,11 +55,13 @@ public class SetTiagoGaze extends AbstractSkill {
     private static final String KEY_MOVE_DURATION = "#_MOVE_DURATION";
     private static final String KEY_BLOCKING = "#_BLOCKING";
     private static final String KEY_TIMEOUT = "#_TIMEOUT";
+    private static final String KEY_VELOCITY = "#_MAX_VELOCITY";
 
     private double horizontal = 0.0;
     private double vertical = 0.0;
 
-    private int move_duration = 2000;
+    private int minDuration = 2000;
+    private double maxVelocity = 1.0;
 
     private boolean blocking = true;
 
@@ -77,8 +81,9 @@ public class SetTiagoGaze extends AbstractSkill {
         blocking = configurator.requestOptionalBool(KEY_BLOCKING, blocking);
         horizontal = configurator.requestOptionalDouble(KEY_HORIZONTAL, horizontal); // TODO check if angles are in range?
         vertical = configurator.requestOptionalDouble(KEY_VERTICAL, vertical);
-        move_duration = configurator.requestOptionalInt(KEY_MOVE_DURATION, move_duration);
+        minDuration = configurator.requestOptionalInt(KEY_MOVE_DURATION, minDuration);
         timeout = configurator.requestOptionalInt(KEY_TIMEOUT, (int) timeout);
+        maxVelocity = configurator.requestOptionalDouble(KEY_VELOCITY,maxVelocity);
 
         gazeActuator = configurator.getActuator("GazeActuator", GazeActuator.class);
 
@@ -104,7 +109,7 @@ public class SetTiagoGaze extends AbstractSkill {
             logger.warn("Could not cancel gaze action goal.");
         }
 
-        logger.debug("setting head pose to: (" + vertical + " / " + horizontal + ") with duration: " + move_duration);
+        logger.debug("setting head pose to: (" + vertical + " / " + horizontal + ") with min_duration: " + minDuration);
 
         int scaling_factor = 10;
 
@@ -114,9 +119,9 @@ public class SetTiagoGaze extends AbstractSkill {
 
         Point3D target = new Point3D(x_rel, y_rel, z_rel, LengthUnit.METER, "torso_lift_link");
 
-        logger.info("Looking at point: (x: " + x_rel+ " / y: " +y_rel+ " / z:  "+ z_rel +" / frame: torso_lift_link) with duration: " + move_duration);
+        logger.info("Looking at point: (x: " + x_rel+ " / y: " +y_rel+ " / z:  "+ z_rel +" / frame: torso_lift_link) with min_duration: " + minDuration + " and max_velocity: " + maxVelocity);
 
-        gazeFuture = gazeActuator.lookAt(target, move_duration);
+        gazeFuture = gazeActuator.lookAt(target, maxVelocity, minDuration);
 
         return true;
     }
