@@ -77,7 +77,7 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
     }
 
     @Throws(IOException::class)
-    override fun lookAt(pose: Point3D): Future<Void>? {
+    override fun lookAt(pose: Point3D): Future<Void> {
         return lookAt(pose,1000)
     }
 

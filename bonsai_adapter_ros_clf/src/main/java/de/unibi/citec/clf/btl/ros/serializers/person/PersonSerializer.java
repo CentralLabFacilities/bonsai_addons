@@ -52,7 +52,8 @@ public class PersonSerializer extends RosSerializer<PersonData, people_msgs.Pers
         people_msgs.Person person = fact.newFromType(people_msgs.Person._TYPE);
 
         person.setName(data.getUuid());
-        person.setPosition(MsgTypeFactory.getInstance().createMsg(data.getPosition(), geometry_msgs.Point.class));
+        person.getPosition().setX(data.getPosition().getX(LengthUnit.METER));
+        person.getPosition().setY(data.getPosition().getY(LengthUnit.METER));
         person.setReliability(data.getReliability());
 
         return person;
