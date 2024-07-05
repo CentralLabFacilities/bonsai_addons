@@ -1,14 +1,10 @@
 package de.unibi.citec.clf.bonsai.skills.pal
 
-import de.unibi.citec.clf.bonsai.core.SensorListener
 import de.unibi.citec.clf.bonsai.core.`object`.Sensor
 import de.unibi.citec.clf.bonsai.engine.model.AbstractSkill
 import de.unibi.citec.clf.bonsai.engine.model.ExitStatus
 import de.unibi.citec.clf.bonsai.engine.model.ExitToken
 import de.unibi.citec.clf.bonsai.engine.model.config.ISkillConfigurator
-import de.unibi.citec.clf.btl.data.speechrec.Utterance
-import net.sf.saxon.functions.ConstantFunction.True
-import std_msgs.Bool
 
 class IsSomethingInGripper : AbstractSkill() {
     private var use_both = true
