@@ -65,7 +65,7 @@ class ForceThresholdSensor(val typeClass: Class<Boolean>, val rosType: Class<Wre
     @Throws(IOException::class, InterruptedException::class)
     override fun readLast(timeout: Long): Boolean? {
         synchronized (mutex) {
-            logger.debug("sensor read")
+            logger.debug("sensor read $topic")
             logger.error("current state is $last, last wrench was $last_value")
             logger.error("checked if '$target' () ${if (higher) ">" else "<"} $threshold")
             return last
