@@ -22,6 +22,7 @@ class HttpClientActuator(private val nodeName: GraphName) : RosNode(),
     URIActuator {
 
     private val logger = org.apache.log4j.Logger.getLogger(javaClass)
+    private var endpoint: String? = null
 
     init {
         initialized = false
@@ -29,6 +30,7 @@ class HttpClientActuator(private val nodeName: GraphName) : RosNode(),
 
     @Throws(ConfigurationException::class)
     override fun configure(conf: IObjectConfigurator) {
+        endpoint = conf.requestOptionalValue("endpoint", null)
     }
 
     override fun onStart(connectedNode: ConnectedNode) {
@@ -40,10 +42,10 @@ class HttpClientActuator(private val nodeName: GraphName) : RosNode(),
         return nodeName
     }
 
-    override fun getRequest(uri: URI, query: Map<String, String>): Future<String>? {
+    override fun getRequest(uri: URI, query: Map<String, String>): Future<String> {
         val client = HttpClient.newHttpClient()
         val full = URI(uri.toString() + getQueryString(query))
-        var request = HttpRequest.newBuilder()
+        val request = HttpRequest.newBuilder()
             .uri(full)
             .build()
         logger.info("Sending request: $request")
@@ -74,8 +76,48 @@ class HttpClientActuator(private val nodeName: GraphName) : RosNode(),
         }
     }
 
+    override fun getRequest(path: String, query: Map<String, String>?): Future<String> {
+        if (endpoint == null) throw ConfigurationException("endpoint not configured")
+        val client = HttpClient.newHttpClient()
+        val full = URI(endpoint + path + getQueryString(query))
+        val request = HttpRequest.newBuilder()
+                .uri(full)
+                .build()
+        logger.info("Sending request: $request")
+
+        val a = client.sendAsync(request, HttpResponse.BodyHandlers.ofString())
+        return object : Future<String> {
+            override fun cancel(b: Boolean): Boolean {
+                return a.cancel(b)
+            }
+
+            override fun isCancelled(): Boolean {
+                return a.isCancelled
+            }
+
+            override fun isDone(): Boolean {
+                return a.isDone
+            }
+
+            @Throws(InterruptedException::class, ExecutionException::class)
+            override fun get(): String {
+                return a.get().body();
+            }
+
+            @Throws(InterruptedException::class, ExecutionException::class, TimeoutException::class)
+            override fun get(l: Long, timeUnit: TimeUnit): String {
+                return a[l, timeUnit].body()
+            }
+        }
+    }
+
+    override fun getRequest(path: String): Future<String> {
+        return getRequest(path, null)
+    }
+
     @Throws(UnsupportedEncodingException::class)
-    private fun getQueryString(params: Map<String, String>): String {
+    private fun getQueryString(params: Map<String, String>?): String {
+        if (params == null) return ""
         val result = StringBuilder()
         var first = true
         for ((key, value) in params) {
