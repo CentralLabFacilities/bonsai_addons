@@ -54,7 +54,10 @@ class PlayMotion(private val nodeName: GraphName) : RosNode(), PostureActuator {
 
     override fun configure(conf: IObjectConfigurator) {
         topic = conf.requestValue("topic")
-        topic_iat = conf.requestOptionalValue("topic_is_already_there", topic_iat)
+        topic_iat = conf.requestOptionalValue("topic_is_already_there", "")
+        if(topic_iat?.isEmpty() == true){
+            topic_iat = null
+        }
     }
 
     override fun onStart(connectedNode: ConnectedNode) {
