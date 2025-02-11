@@ -1,5 +1,6 @@
 package de.unibi.citec.clf.btl.ros.serializers.speechrec
 
+import de.unibi.citec.clf.btl.data.speechrec.Language
 import de.unibi.citec.clf.btl.data.speechrec.NLU
 import de.unibi.citec.clf.btl.data.speechrec.NLUEntity
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory
@@ -7,14 +8,6 @@ import de.unibi.citec.clf.btl.ros.RosSerializer
 import org.apache.log4j.Logger
 import org.ros.message.MessageFactory
 
-
-fun code_to_lang(b : Byte) : NLU.Language{
-    return when(b) {
-        clf_speech_msgs.ASR.DE -> NLU.Language.DE
-        clf_speech_msgs.ASR.EN -> NLU.Language.EN
-        else -> NLU.Language.OTHER
-    }
-}
 /**
  *
  * @author lruegeme
@@ -35,7 +28,7 @@ class NLUSerializer : RosSerializer<NLU, clf_speech_msgs.NLU>() {
             MsgTypeFactory.getInstance().createType(it, NLUEntity::class.java)
         }.toList()
 
-        return NLU(msg.text, msg.intent, msg.conf, nluentities, code_to_lang(msg.lang))
+        return NLU(msg.text, msg.intent, msg.conf, nluentities, Language.valueOf(msg.lang))
     }
 
     @Throws(SerializationException::class)

@@ -19,9 +19,10 @@ import org.ros.message.Duration
 import org.ros.namespace.GraphName
 import org.ros.node.ConnectedNode
 import org.ros.node.service.ServiceClient
-import pal_interaction_msgs.TtsActionFeedback
-import pal_interaction_msgs.TtsActionGoal
-import pal_interaction_msgs.TtsActionResult
+import clf_speech_msgs.TTSActionGoal
+import clf_speech_msgs.TTSActionFeedback
+import clf_speech_msgs.TTSActionResult
+import net.sf.saxon.functions.Lang
 import std_srvs.*
 import java.io.IOException
 import java.util.concurrent.*
@@ -30,7 +31,7 @@ import java.util.concurrent.*
  *
  * @author lruegeme
  */
-class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, ActionClientListener<TtsActionFeedback, TtsActionResult> {
+class ClfSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, ActionClientListener<TTSActionFeedback, TTSActionResult> {
 
     private val statesFinished = setOf(GoalStatus.SUCCEEDED)
     override fun statusReceived(status: GoalStatusArray) {
@@ -44,18 +45,18 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
         }
     }
 
-    override fun feedbackReceived(feedback: TtsActionFeedback) {
+    override fun feedbackReceived(feedback: TTSActionFeedback) {
         //NOP
     }
 
-    override fun resultReceived(result: TtsActionResult) {
+    override fun resultReceived(result: TTSActionResult) {
         //NOP
     }
 
     private var lastGoalId: GoalID? = null
 
     private val logger = org.apache.log4j.Logger.getLogger(javaClass)
-    private var ac: ActionClient<TtsActionGoal, TtsActionFeedback, TtsActionResult>? = null
+    private var ac: ActionClient<TTSActionGoal, TTSActionFeedback, TTSActionResult>? = null
     private var clientDisableSpeech: ServiceClient<SetBoolRequest, SetBoolResponse>? = null
     private lateinit var topic: String
     private var disableSpeechTopic: String = ""
@@ -76,7 +77,7 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
     }
 
     override fun onStart(connectedNode: ConnectedNode) {
-        ac = ActionClient(connectedNode, this.topic, TtsActionGoal._TYPE, TtsActionFeedback._TYPE, TtsActionResult._TYPE)
+        ac = ActionClient(connectedNode, this.topic, TTSActionGoal._TYPE, TTSActionFeedback._TYPE, TTSActionResult._TYPE)
 
         if(disableSpeechTopic.isNotEmpty()) {
             try {
@@ -87,11 +88,11 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
         }
 
         if(ac?.waitForActionServerToStart(Duration(20.0)) ==  true) {
-            logger.info("PalSpeech server connected $topic")
+            logger.info("ClfSpeech server connected $topic")
             ac?.attachListener(this)
             initialized = true
         } else {
-            logger.error("PalSpeech server timeout after 20sec $topic")
+            logger.error("ClfSpeech server timeout after 20sec $topic")
         }
 
     }
@@ -100,16 +101,16 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
         ac?.finish()
     }
 
-    private fun sendToTTS(data: String, langId : String = "en_GB"): ActionFuture<TtsActionGoal, TtsActionFeedback, TtsActionResult> {
+    private fun sendToTTS(data: String, lang: Language = Language.EN): ActionFuture<TTSActionGoal, TTSActionFeedback, TTSActionResult> {
 
         ac?.let { client ->
             val goal = client.newGoalMessage()
-            goal.goal.rawtext.text = data
-            goal.goal.rawtext.langId = langId
+            goal.goal.text = data
+            goal.goal.speakerLang = lang.value
 
             val sendGoal = client.sendGoal(goal)
             lastGoalId = sendGoal.goalId
-            logger.info("PAL TTS: $data")
+            logger.info("CLF TTS: $data")
 
             return sendGoal
 
@@ -159,15 +160,12 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
             }
 
             override fun get(): String {
-                ret.get()
-                return ""
+                return ret.get().result.text
             }
 
             override fun get(p0: Long, p1: TimeUnit): String? {
-                ret.get(p0,p1)
-                return ""
+                return ret.get(p0,p1).result.text
             }
-
         }
     }
 

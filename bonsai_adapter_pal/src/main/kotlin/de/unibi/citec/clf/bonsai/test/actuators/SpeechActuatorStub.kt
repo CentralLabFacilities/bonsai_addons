@@ -2,6 +2,7 @@ package de.unibi.citec.clf.bonsai.test.actuators
 
 import de.unibi.citec.clf.bonsai.actuators.SpeechActuator
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
+import de.unibi.citec.clf.btl.data.speechrec.Language
 import java.util.concurrent.Future
 
 class SpeechActuatorStub : SpeechActuator {
@@ -21,23 +22,13 @@ class SpeechActuatorStub : SpeechActuator {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun sayTranslated(text: String, language: Language): Future<String?> {
+        TODO("Not yet implemented")
+    }
+
     override fun enableASR(enable: Boolean): Future<Boolean> {
         TODO("Not yet implemented")
     }
 
-    override fun sayAccentuated(accented_text: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 
-    override fun sayAccentuated(accented_text: String?, prosodyConfig: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun sayAccentuated(accented_text: String?, async: Boolean) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
-
-    override fun sayAccentuated(accented_text: String?, async: Boolean, prosodyConfig: String?) {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-    }
 }

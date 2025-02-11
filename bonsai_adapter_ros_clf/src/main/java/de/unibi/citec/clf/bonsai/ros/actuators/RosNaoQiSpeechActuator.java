@@ -10,7 +10,9 @@ import java.io.IOException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
+import de.unibi.citec.clf.btl.data.speechrec.Language;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.ros.namespace.GraphName;
 import org.ros.node.ConnectedNode;
 import de.unibi.citec.clf.bonsai.ros.RosNode;
@@ -80,11 +82,6 @@ public class RosNaoQiSpeechActuator extends RosNode implements SpeechActuator {
     }
 
     @Override
-    public Future<Boolean> enableASR(@NotNull Boolean b) throws IOException {
-        return null;
-    }
-
-    @Override
     public void say(String text) throws IOException {
         logger.info("NaoQi TTS: " + text);
         try {
@@ -94,28 +91,16 @@ public class RosNaoQiSpeechActuator extends RosNode implements SpeechActuator {
         }
     }
 
+
+    @Nullable
     @Override
-    public void sayAccentuated(String accented_text) throws IOException {
-        logger.info("sayAccentuated not supported atm, saying" + accented_text + "it anyway.");
-        sendToTTS(accented_text);
+    public Future<String> sayTranslated(@NotNull String text, @NotNull Language language) throws IOException {
+        return null;
     }
 
+    @Nullable
     @Override
-    public void sayAccentuated(String accented_text, String prosodyConfig) throws IOException {
-        logger.info("sayAccentuated not supported atm, saying" + accented_text + "it anyway.");
-        sendToTTS(accented_text);
+    public Future<Boolean> enableASR(boolean enable) throws IOException {
+        return null;
     }
-
-    @Override
-    public void sayAccentuated(String accented_text, boolean async) throws IOException {
-        logger.info("sayAccentuated not supported atm, saying" + accented_text + "it anyway.");
-        sendToTTS(accented_text);
-    }
-
-    @Override
-    public void sayAccentuated(String accented_text, boolean async, String prosodyConfig) throws IOException {
-        logger.info("sayAccentuated not supported atm, saying" + accented_text + "it anyway.");
-        sendToTTS(accented_text);
-    }
-    
 }
