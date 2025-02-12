@@ -22,6 +22,10 @@ class SpeechActuatorStub : SpeechActuator {
         TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
+    override fun sayAsync(text: String, language: Language): Future<Void> {
+        TODO("Not yet implemented")
+    }
+
     override fun sayTranslated(text: String, language: Language): Future<String?> {
         TODO("Not yet implemented")
     }

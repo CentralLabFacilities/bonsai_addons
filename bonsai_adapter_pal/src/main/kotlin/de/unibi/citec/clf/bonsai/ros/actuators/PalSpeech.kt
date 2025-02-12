@@ -142,6 +142,10 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
         return ret.toVoidFuture()
     }
 
+    override fun sayAsync(text: String, language: Language): Future<Void> {
+        return sayAsync(text)
+    }
+
     override fun sayTranslated(text: String, language: Language): Future<String?> {
         enableSpeech(false)
         val ret = sendToTTS(text)

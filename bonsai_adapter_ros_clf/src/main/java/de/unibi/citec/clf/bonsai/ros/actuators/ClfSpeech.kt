@@ -22,7 +22,6 @@ import org.ros.node.service.ServiceClient
 import clf_speech_msgs.TTSActionGoal
 import clf_speech_msgs.TTSActionFeedback
 import clf_speech_msgs.TTSActionResult
-import net.sf.saxon.functions.Lang
 import std_srvs.*
 import java.io.IOException
 import java.util.concurrent.*
@@ -101,12 +100,14 @@ class ClfSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
         ac?.finish()
     }
 
-    private fun sendToTTS(data: String, lang: Language = Language.EN): ActionFuture<TTSActionGoal, TTSActionFeedback, TTSActionResult> {
+    private fun sendToTTS(data: String, speakLang : Language = Language.EN, textLang: Language = Language.EN,): ActionFuture<TTSActionGoal, TTSActionFeedback, TTSActionResult> {
 
         ac?.let { client ->
+
             val goal = client.newGoalMessage()
             goal.goal.text = data
-            goal.goal.speakerLang = lang.value
+            goal.goal.textLang = textLang.value
+            goal.goal.speakerLang = speakLang.value
 
             val sendGoal = client.sendGoal(goal)
             lastGoalId = sendGoal.goalId
@@ -136,16 +137,20 @@ class ClfSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
         sayAsync(text).get()
     }
 
-    @Throws(IOException::class)
     override fun sayAsync(text: String): Future<Void> {
+        return sayAsync(text, Language.EN)
+    }
+
+    @Throws(IOException::class)
+    override fun sayAsync(text: String, language: Language): Future<Void> {
         enableSpeech(false)
-        val ret = sendToTTS(text)
+        val ret = sendToTTS(text, speakLang = language, textLang = language)
         return ret.toVoidFuture()
     }
 
     override fun sayTranslated(text: String, language: Language): Future<String?> {
         enableSpeech(false)
-        val ret = sendToTTS(text)
+        val ret = sendToTTS(text, speakLang = language)
         return object : Future<String?> {
             override fun cancel(p0: Boolean): Boolean {
                return ret.cancel(p0)
