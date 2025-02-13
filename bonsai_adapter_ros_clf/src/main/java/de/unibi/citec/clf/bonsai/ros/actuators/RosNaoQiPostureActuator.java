@@ -104,12 +104,17 @@ public class RosNaoQiPostureActuator extends RosNode implements PostureActuator 
     }
 
     @Override
+    public Future<Boolean> moveTo(@NotNull String pose, @org.jetbrains.annotations.Nullable String group, boolean upright) {
+        return moveTo(pose,group);
+    }
+
+    @Override
     public List<String> listMotions(@Nullable String group) {
         return null;
     }
 
     @Override
-    public Future<Boolean> assumePose(String pose, String group) {
+    public Future<Boolean> moveTo(String pose, String group) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 

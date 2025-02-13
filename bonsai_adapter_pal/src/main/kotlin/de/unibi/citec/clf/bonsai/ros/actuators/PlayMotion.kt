@@ -22,7 +22,7 @@ import java.util.concurrent.TimeUnit
 
 
 class PlayMotion(private val nodeName: GraphName) : RosNode(), PostureActuator {
-    override fun assumePose(pose: String, group: String?): Future<Boolean> {
+    override fun moveTo(pose: String, group: String?): Future<Boolean> {
         TODO("not implemented")
     }
 
@@ -114,6 +114,10 @@ class PlayMotion(private val nodeName: GraphName) : RosNode(), PostureActuator {
         }
 
         throw RosException("action server failure ${this.topic}")
+    }
+
+    override fun moveTo(pose: String, group: String?, upright: Boolean): Future<Boolean> {
+        return moveTo(pose,group)
     }
 
     override fun listMotions(group: String?): MutableList<String> {

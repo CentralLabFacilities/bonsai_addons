@@ -122,13 +122,18 @@ public class RosPostureExecutionActuator extends RosNode implements PostureActua
     }
 
     @Override
+    public Future<Boolean> moveTo(@NotNull String pose, @Nullable String group, boolean upright) {
+        return moveTo(pose,group);
+    }
+
+    @Override
     public List<String> listMotions(String group) {
         // those who want it may implement it.
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Future<Boolean> assumePose(String pose, String group) {
+    public Future<Boolean> moveTo(String pose, String group) {
         ExecuteNamedTargetRequest req = namedTargetSC.newMessage();
         req.setGroupName(group);
         req.setTarget(pose);
