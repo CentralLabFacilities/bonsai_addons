@@ -26,7 +26,7 @@ class SpeechActuatorStub : SpeechActuator {
         TODO("Not yet implemented")
     }
 
-    override fun sayTranslated(text: String, language: Language): Future<String?> {
+    override fun sayTranslated(text: String, speakLanguage: Language, textLanguage: Language): Future<String?> {
         TODO("Not yet implemented")
     }
 

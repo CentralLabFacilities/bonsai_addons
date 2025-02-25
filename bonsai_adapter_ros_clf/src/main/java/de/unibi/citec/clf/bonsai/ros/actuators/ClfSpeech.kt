@@ -148,9 +148,9 @@ class ClfSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
         return ret.toVoidFuture()
     }
 
-    override fun sayTranslated(text: String, language: Language): Future<String?> {
+    override fun sayTranslated(text: String, speakLanguage: Language, textLanguage: Language): Future<String?> {
         enableSpeech(false)
-        val ret = sendToTTS(text, speakLang = language)
+        val ret = sendToTTS(text, speakLang = speakLanguage, textLang = textLanguage)
         return object : Future<String?> {
             override fun cancel(p0: Boolean): Boolean {
                return ret.cancel(p0)
