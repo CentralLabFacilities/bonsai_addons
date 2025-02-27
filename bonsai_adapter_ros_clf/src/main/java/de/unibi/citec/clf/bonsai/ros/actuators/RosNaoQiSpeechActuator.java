@@ -94,7 +94,7 @@ public class RosNaoQiSpeechActuator extends RosNode implements SpeechActuator {
 
     @Nullable
     @Override
-    public Future<String> sayTranslated(@NotNull String text, @NotNull Language language) throws IOException {
+    public Future<String> sayTranslated(@NotNull String text, @NotNull Language language, @NotNull Language lang) throws IOException {
         return null;
     }
 
