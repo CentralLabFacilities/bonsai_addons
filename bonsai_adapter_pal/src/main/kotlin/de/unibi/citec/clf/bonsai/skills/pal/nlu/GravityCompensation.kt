@@ -9,6 +9,7 @@ import de.unibi.citec.clf.bonsai.engine.model.ExitToken
 import de.unibi.citec.clf.bonsai.engine.model.config.ISkillConfigurator
 import de.unibi.citec.clf.bonsai.util.helper.SimpleNLUHelper
 import de.unibi.citec.clf.bonsai.util.helper.SimpleSpeechHelper
+import de.unibi.citec.clf.btl.data.speechrec.Language
 import de.unibi.citec.clf.btl.data.speechrec.NLU
 import java.util.concurrent.Future
 
@@ -71,7 +72,7 @@ class GravityCompensation : AbstractSkill() {
         }
 
         if (speechManager!!.allUnderstoodIntents.contains(intent)) {
-            speechActuator?.say("should we stop?")
+            speechActuator?.sayAsync("should we stop?",Language.EN)?.get()
             stateConfirm = true
             return ExitToken.loop()
         }
@@ -88,7 +89,7 @@ class GravityCompensation : AbstractSkill() {
         if (speechManager!!.allUnderstoodIntents.contains(intentYes)) {
             return tokenSuccess
         } else if (speechManager!!.allUnderstoodIntents.contains(intentNo)) {
-            speechActuator?.say("continue")
+            speechActuator?.sayAsync("continue",Language.EN)?.get()
             speechManager?.startListening()
             stateConfirm = false
             return ExitToken.loop()
@@ -99,7 +100,7 @@ class GravityCompensation : AbstractSkill() {
     }
 
     override fun end(curToken: ExitToken): ExitToken {
-        speechActuator?.say("please let go")
+        speechActuator?.sayAsync("please let go",Language.EN)?.get()
         action?.cancel(true)
         return curToken
     }

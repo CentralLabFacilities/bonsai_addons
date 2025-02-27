@@ -9,6 +9,7 @@ import de.unibi.citec.clf.bonsai.engine.model.ExitStatus
 import de.unibi.citec.clf.bonsai.engine.model.ExitToken
 import de.unibi.citec.clf.bonsai.engine.model.config.ISkillConfigurator
 import de.unibi.citec.clf.bonsai.util.helper.SimpleSpeechHelper
+import de.unibi.citec.clf.btl.data.speechrec.Language
 import de.unibi.citec.clf.btl.data.speechrec.Utterance
 import java.util.concurrent.Future
 
@@ -75,7 +76,7 @@ class FollowByHand : AbstractSkill() {
 
         if (!(speechManager?.getUnderstoodWords(nonTerminal)?.isEmpty() ?: true)) {
             stateConfirm = true
-            speechActuator?.say("should we stop?")
+            speechActuator?.sayAsync("should we stop?", Language.EN)?.get()
             speechManagerConfirm?.startListening()
             return ExitToken.loop()
         }
@@ -92,7 +93,7 @@ class FollowByHand : AbstractSkill() {
         if (!(speechManagerConfirm?.getUnderstoodWords(nonTerminalYes)?.isEmpty() ?: false)) {
             return tokenSuccess
         } else if (!(speechManagerConfirm?.getUnderstoodWords(nonTerminalNo)?.isEmpty() ?: false)) {
-            speechActuator?.say("continue")
+            speechActuator?.sayAsync("continue", Language.EN)?.get()
             speechManager?.startListening()
             stateConfirm = false
             return ExitToken.loop()
@@ -105,7 +106,7 @@ class FollowByHand : AbstractSkill() {
     override fun end(curToken: ExitToken): ExitToken {
         speechManager?.removeHelper()
         speechManagerConfirm?.removeHelper()
-        speechActuator?.say("please let go")
+        speechActuator?.sayAsync("please let go")?.get()
         action?.cancel(true)
         return curToken
     }

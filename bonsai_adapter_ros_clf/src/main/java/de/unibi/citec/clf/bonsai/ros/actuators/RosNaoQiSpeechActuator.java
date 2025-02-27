@@ -72,26 +72,6 @@ public class RosNaoQiSpeechActuator extends RosNode implements SpeechActuator {
         if(ac!=null) ac.finish();
     }
 
-    @Override
-    public Future<Void> sayAsync(String text) throws IOException {
-        logger.info("NaoQi TTS: " + text);
-
-        Future<Void> ret = sendToTTS(text).toVoidFuture();
-
-        return ret;
-    }
-
-    @Override
-    public void say(String text) throws IOException {
-        logger.info("NaoQi TTS: " + text);
-        try {
-            sendToTTS(text).get();
-        } catch (InterruptedException | ExecutionException ex) {
-            throw new IOException("get failed");
-        }
-    }
-
-
     @Nullable
     @Override
     public Future<String> sayTranslated(@NotNull String text, @NotNull Language language, @NotNull Language lang) throws IOException {
@@ -107,6 +87,10 @@ public class RosNaoQiSpeechActuator extends RosNode implements SpeechActuator {
     @NotNull
     @Override
     public Future<Void> sayAsync(@NotNull String text, @NotNull Language language) throws IOException {
-        return null;
+        logger.info("NaoQi TTS: " + text);
+
+        Future<Void> ret = sendToTTS(text).toVoidFuture();
+
+        return ret;
     }
 }

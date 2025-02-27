@@ -131,16 +131,6 @@ class ClfSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
 
     }
 
-    @Deprecated("Deprecated in Java")
-    @Throws(IOException::class)
-    override fun say(text: String) {
-        sayAsync(text).get()
-    }
-
-    override fun sayAsync(text: String): Future<Void> {
-        return sayAsync(text, Language.EN)
-    }
-
     @Throws(IOException::class)
     override fun sayAsync(text: String, language: Language): Future<Void> {
         enableSpeech(false)

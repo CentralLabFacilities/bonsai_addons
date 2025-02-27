@@ -6,20 +6,12 @@ import de.unibi.citec.clf.btl.data.speechrec.Language
 import java.util.concurrent.Future
 
 class SpeechActuatorStub : SpeechActuator {
-    @Deprecated("Deprecated in Java")
-    override fun say(text: String) {
-        return
-    }
 
     override fun configure(conf: IObjectConfigurator?) {
 
     }
 
     override fun cleanUp() {
-    }
-
-    override fun sayAsync(text: String): Future<Void> {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
     }
 
     override fun sayAsync(text: String, language: Language): Future<Void> {

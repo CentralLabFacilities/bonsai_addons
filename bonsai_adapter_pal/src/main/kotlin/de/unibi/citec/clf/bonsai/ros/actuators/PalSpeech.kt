@@ -129,21 +129,10 @@ class PalSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
 
     }
 
-    @Deprecated("Deprecated in Java")
-    @Throws(IOException::class)
-    override fun say(text: String) {
-        sayAsync(text).get()
-    }
-
-    @Throws(IOException::class)
-    override fun sayAsync(text: String): Future<Void> {
+    override fun sayAsync(text: String, language: Language): Future<Void> {
         enableSpeech(false)
         val ret = sendToTTS(text)
         return ret.toVoidFuture()
-    }
-
-    override fun sayAsync(text: String, language: Language): Future<Void> {
-        return sayAsync(text)
     }
 
     override fun sayTranslated(text: String, speakLanguage: Language, textLanguage: Language): Future<String?> {
