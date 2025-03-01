@@ -10,6 +10,7 @@ import de.unibi.citec.clf.bonsai.engine.model.config.ISkillConfigurator;
 import de.unibi.citec.clf.bonsai.engine.model.config.SkillConfigurationException;
 import de.unibi.citec.clf.btl.data.geometry.Point3D;
 import de.unibi.citec.clf.btl.units.LengthUnit;
+import de.unibi.citec.clf.btl.units.TimeUnit;
 
 import java.io.IOException;
 import java.util.concurrent.Future;
@@ -125,7 +126,7 @@ public class TiagoGazeAndLift extends AbstractSkill {
         gazeFuture = gazeActuator.lookAt(target, move_duration);
 
         try {
-            liftFuture = liftActuator.moveTo((float) lift_pos, 1000.0f/move_duration);
+            liftFuture = liftActuator.moveTo((float) lift_pos, move_duration, TimeUnit.MILLISECONDS);
         } catch (IOException ex) {
             logger.error(ex);
             gazeFuture.cancel(true);
