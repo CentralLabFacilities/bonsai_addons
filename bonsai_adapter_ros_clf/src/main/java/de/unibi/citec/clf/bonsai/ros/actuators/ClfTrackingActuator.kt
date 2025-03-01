@@ -1,15 +1,16 @@
 package de.unibi.citec.clf.bonsai.ros.actuators
 
-import clf_perception_vision_msgs.ToggleCFtldTrackingWithBB
-import clf_perception_vision_msgs.ToggleCFtldTrackingWithBBRequest
-import clf_perception_vision_msgs.ToggleCFtldTrackingWithBBResponse
+
+import clf_person_recognition_msgs.TrackPerson
+import clf_person_recognition_msgs.TrackPersonRequest
+import clf_person_recognition_msgs.TrackPersonResponse
 import de.unibi.citec.clf.bonsai.actuators.TrackingActuator
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
-import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException
 import de.unibi.citec.clf.bonsai.ros.RosNode
 import de.unibi.citec.clf.bonsai.ros.helper.ResponseFuture
 import de.unibi.citec.clf.btl.data.geometry.Point3D
 import de.unibi.citec.clf.btl.data.geometry.Pose3D
+import de.unibi.citec.clf.btl.ros.MsgTypeFactory
 import org.apache.log4j.Logger
 import org.ros.exception.RosRuntimeException
 import org.ros.exception.ServiceNotFoundException
@@ -20,13 +21,13 @@ import java.util.concurrent.Future
 
 /**
  *
- * @author jkummert
+ * @author lruegeme
  */
-class RosTrackingActuator(gn: GraphName) : RosNode(), TrackingActuator {
+class ClfTrackingActuator(gn: GraphName) : RosNode(), TrackingActuator {
     private lateinit var topic: String
     private val nodeName: GraphName
     private val logger = Logger.getLogger(javaClass)
-    private var clientTrigger: ServiceClient<ToggleCFtldTrackingWithBBRequest, ToggleCFtldTrackingWithBBResponse>? =
+    private var clientTrigger: ServiceClient<TrackPersonRequest, TrackPersonResponse>? =
         null
 
     init {
@@ -35,7 +36,7 @@ class RosTrackingActuator(gn: GraphName) : RosNode(), TrackingActuator {
     }
 
     override fun configure(conf: IObjectConfigurator) {
-        topic = conf.requestValue("topic")
+        topic = conf.requestValue("topic") // /person_rec_lw/track_person
     }
 
     override fun getDefaultNodeName(): GraphName {
@@ -49,7 +50,7 @@ class RosTrackingActuator(gn: GraphName) : RosNode(), TrackingActuator {
 
     override fun onStart(connectedNode: ConnectedNode) {
         clientTrigger = try {
-            connectedNode.newServiceClient(topic, ToggleCFtldTrackingWithBB._TYPE)
+            connectedNode.newServiceClient(topic, TrackPerson._TYPE)
         } catch (e: ServiceNotFoundException) {
             throw RosRuntimeException(e)
         }
@@ -61,29 +62,21 @@ class RosTrackingActuator(gn: GraphName) : RosNode(), TrackingActuator {
     }
 
     override fun startTracking(boundingbox: List<Int>): Future<Boolean> {
+        TODO("not implemented")
+    }
+
+    override fun startTracking(lastPose: Point3D?, threshold: Double?): Future<Boolean> {
         clientTrigger?.let { client ->
             val req = client.newMessage()
-            //set data
-            req.roi.xOffset = boundingbox[0]
-            req.roi.yOffset = boundingbox[1]
-            req.roi.height = boundingbox[2]
-            req.roi.width = boundingbox[3]
-            val res = ResponseFuture<ToggleCFtldTrackingWithBBResponse>()
+            req.lastKnownPosition = MsgTypeFactory.getInstance().createMsg(lastPose, geometry_msgs.Point._TYPE);
+            val res = ResponseFuture<TrackPersonResponse>()
             client.call(req, res)
             return res.toBooleanFuture()
         }
         throw RosRuntimeException("client error")
-
-    }
-
-    override fun startTracking(lastPose: Point3D?, threshold: Double?): Future<Boolean>? {
-        TODO("Not yet implemented")
     }
 
     override fun stopTracking() {
-        val req = clientTrigger!!.newMessage()
-        //dont set data
-        val res = ResponseFuture<ToggleCFtldTrackingWithBBResponse>()
-        clientTrigger!!.call(req, res)
+        TODO("not implemented")
     }
 }
