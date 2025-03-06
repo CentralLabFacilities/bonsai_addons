@@ -68,7 +68,7 @@ class ClfTrackingActuator(gn: GraphName) : RosNode(), TrackingActuator {
     override fun startTracking(lastPose: Point3D?, threshold: Double?): Future<Boolean> {
         clientTrigger?.let { client ->
             val req = client.newMessage()
-            req.lastKnownPosition = MsgTypeFactory.getInstance().createMsg(lastPose, geometry_msgs.Point._TYPE);
+            req.lastKnownPosition = MsgTypeFactory.getInstance().createMsg(lastPose, geometry_msgs.PointStamped._TYPE);
             val res = ResponseFuture<TrackPersonResponse>()
             client.call(req, res)
             return res.toBooleanFuture()
