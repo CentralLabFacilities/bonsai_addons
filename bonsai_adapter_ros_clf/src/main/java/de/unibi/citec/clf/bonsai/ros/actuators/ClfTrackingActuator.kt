@@ -70,6 +70,7 @@ class ClfTrackingActuator(gn: GraphName) : RosNode(), TrackingActuator {
             val req = client.newMessage()
             req.lastKnownPosition = MsgTypeFactory.getInstance().createMsg(lastPose, geometry_msgs.PointStamped._TYPE)
             req.lastKnownPosition.header.frameId = "base_link"
+            req.distanceThreshold = threshold?.toFloat() ?: 1.0f
             val res = ResponseFuture<TrackPersonResponse>()
             client.call(req, res)
             return res.toTypeFuture { it.success }
