@@ -65,14 +65,14 @@ class ClfTrackingActuator(gn: GraphName) : RosNode(), TrackingActuator {
         TODO("not implemented")
     }
 
-    override fun startTracking(lastPose: Point3D?, threshold: Double?): Future<Boolean> {
+    override fun startTracking(lastPose: Point3D?, threshold: Double?): Future<Boolean?> {
         clientTrigger?.let { client ->
             val req = client.newMessage()
             req.lastKnownPosition = MsgTypeFactory.getInstance().createMsg(lastPose, geometry_msgs.PointStamped._TYPE)
             req.lastKnownPosition.header.frameId = "base_link"
             val res = ResponseFuture<TrackPersonResponse>()
             client.call(req, res)
-            return res.toBooleanFuture()
+            return res.toTypeFuture { it.success }
         }
         throw RosRuntimeException("client error")
     }
