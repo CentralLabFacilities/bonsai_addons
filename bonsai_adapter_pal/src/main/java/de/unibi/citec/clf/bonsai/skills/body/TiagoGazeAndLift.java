@@ -62,6 +62,7 @@ public class TiagoGazeAndLift extends AbstractSkill {
     private double horizontal = 0.0;
     private double vertical = 0.0;
     private double lift_pos;
+    private double lift_speed = 0.7;
 
     private int move_duration = 4000;
 
@@ -77,6 +78,8 @@ public class TiagoGazeAndLift extends AbstractSkill {
 
     private Future<Void> gazeFuture;
     private Future<Boolean> liftFuture;
+    private double gaze_speed = 1.4;
+    private long min_gaze_time = 200;
 
     @Override
     public void configure(ISkillConfigurator configurator) throws SkillConfigurationException {
@@ -123,15 +126,11 @@ public class TiagoGazeAndLift extends AbstractSkill {
 
         logger.info("Looking at point: (x: " + x_rel+ " / y: " +y_rel+ " / z:  "+ z_rel +" / frame: torso_lift_link) with duration: " + move_duration);
 
-        gazeFuture = gazeActuator.lookAt(target, move_duration);
+        //gazeFuture = gazeActuator.lookAt(target, move_duration);
+        gazeFuture = gazeActuator.lookAt(target, gaze_speed, min_gaze_time);
 
-        try {
-            liftFuture = liftActuator.moveTo((float) lift_pos, move_duration, TimeUnit.MILLISECONDS);
-        } catch (IOException ex) {
-            logger.error(ex);
-            gazeFuture.cancel(true);
-            return false;
-        }
+        //liftFuture = liftActuator.moveTo((float) lift_pos, move_duration, TimeUnit.MILLISECONDS);
+        liftFuture = liftActuator.moveTo((float) lift_pos, lift_speed);
 
         return true;
     }
