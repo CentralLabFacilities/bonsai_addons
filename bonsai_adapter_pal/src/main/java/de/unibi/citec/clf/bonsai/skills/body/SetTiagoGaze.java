@@ -71,7 +71,7 @@ public class SetTiagoGaze extends AbstractSkill {
 
     private ExitToken tokenSuccess;
 
-    private ExitToken tokenSuccessTimeout;
+    private ExitToken tokenErrorTimeout;
 
     private Future<Void> gazeFuture;
 
@@ -90,7 +90,7 @@ public class SetTiagoGaze extends AbstractSkill {
         tokenSuccess = configurator.requestExitToken(ExitStatus.SUCCESS());
 
         if (timeout > 0) {
-            tokenSuccessTimeout = configurator.requestExitToken(ExitStatus.SUCCESS().ps("timeout"));
+            tokenErrorTimeout = configurator.requestExitToken(ExitStatus.ERROR().ps("timeout"));
         }
 
     }
@@ -133,7 +133,7 @@ public class SetTiagoGaze extends AbstractSkill {
             if (Time.currentTimeMillis() > timeout) {
                 logger.info("SetTiagoGaze timeout");
                 gazeFuture.cancel(true);
-                return tokenSuccessTimeout;
+                return tokenErrorTimeout;
             }
         }
 
@@ -147,6 +147,13 @@ public class SetTiagoGaze extends AbstractSkill {
 
     @Override
     public ExitToken end(ExitToken curToken) {
+        if (!curToken.getExitStatus().isSuccess()) {
+            try {
+                gazeActuator.manualStop();
+            } catch (Exception e) {
+                logger.error(e);
+            }
+        }
         return curToken;
     }
 }

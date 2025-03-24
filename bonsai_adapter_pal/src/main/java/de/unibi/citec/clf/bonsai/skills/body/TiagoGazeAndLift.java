@@ -10,7 +10,6 @@ import de.unibi.citec.clf.bonsai.engine.model.config.ISkillConfigurator;
 import de.unibi.citec.clf.bonsai.engine.model.config.SkillConfigurationException;
 import de.unibi.citec.clf.btl.data.geometry.Point3D;
 import de.unibi.citec.clf.btl.units.LengthUnit;
-import de.unibi.citec.clf.btl.units.TimeUnit;
 
 import java.io.IOException;
 import java.util.concurrent.Future;
@@ -61,10 +60,12 @@ public class TiagoGazeAndLift extends AbstractSkill {
 
     private double horizontal = 0.0;
     private double vertical = 0.0;
-    private double lift_pos;
-    private double lift_speed = 0.7;
+    private double liftPos;
+    private double zliftspeed = 0.7;
+    private double maxGazeSpeed = 1.5;
 
-    private int move_duration = 4000;
+
+    private long minGazeTime = 500;
 
     private long timeout = 6000;
     private boolean blocking = true;
@@ -78,15 +79,13 @@ public class TiagoGazeAndLift extends AbstractSkill {
 
     private Future<Void> gazeFuture;
     private Future<Boolean> liftFuture;
-    private double gaze_speed = 1.4;
-    private long min_gaze_time = 200;
 
     @Override
     public void configure(ISkillConfigurator configurator) throws SkillConfigurationException {
         horizontal = configurator.requestOptionalDouble(KEY_HORIZONTAL, horizontal); // TODO check if angles are in range?
         vertical = configurator.requestOptionalDouble(KEY_VERTICAL, vertical);
-        lift_pos = configurator.requestDouble(KEY_LIFT);
-        move_duration = configurator.requestOptionalInt(KEY_MOVE_DURATION, move_duration);
+        liftPos = configurator.requestDouble(KEY_LIFT);
+        minGazeTime = configurator.requestOptionalInt(KEY_MOVE_DURATION, (int) minGazeTime);
         timeout = configurator.requestOptionalInt(KEY_TIMEOUT, (int) timeout);
         blocking = configurator.requestOptionalBool(KEY_BLOCKING, blocking);
 
@@ -96,7 +95,7 @@ public class TiagoGazeAndLift extends AbstractSkill {
         tokenSuccess = configurator.requestExitToken(ExitStatus.SUCCESS());
 
         if (timeout > 0) {
-            tokenTimeout = configurator.requestExitToken(ExitStatus.SUCCESS().ps("timeout")); // TODO SUCCESS or ERROR?
+            tokenTimeout = configurator.requestExitToken(ExitStatus.ERROR().ps("timeout"));
         }
     }
 
@@ -107,14 +106,7 @@ public class TiagoGazeAndLift extends AbstractSkill {
             timeout += Time.currentTimeMillis();
         }
 
-        // TODO is this necessary?
-        // try {
-        //     gazeActuator.manualStop();
-        // } catch (IOException ex) {
-        //     logger.warn("Could not cancel gaze action goal.");
-        // }
-
-        logger.debug("setting head pose to: (" + vertical + " / " + horizontal + ") with duration: " + move_duration);
+        logger.debug("setting head pose to: (" + vertical + " / " + horizontal + ") with gaze duration: " + minGazeTime);
 
         int scaling_factor = 10;
 
@@ -124,13 +116,11 @@ public class TiagoGazeAndLift extends AbstractSkill {
 
         Point3D target = new Point3D(x_rel, y_rel, z_rel, LengthUnit.METER, "torso_lift_link");
 
-        logger.info("Looking at point: (x: " + x_rel+ " / y: " +y_rel+ " / z:  "+ z_rel +" / frame: torso_lift_link) with duration: " + move_duration);
-
-        //gazeFuture = gazeActuator.lookAt(target, move_duration);
-        gazeFuture = gazeActuator.lookAt(target, gaze_speed, min_gaze_time);
+        logger.info("Looking at point: (x: " + x_rel+ " / y: " +y_rel+ " / z:  "+ z_rel +" / frame: torso_lift_link) with duration: " + minGazeTime);
+        gazeFuture = gazeActuator.lookAt(target, maxGazeSpeed, minGazeTime);
 
         //liftFuture = liftActuator.moveTo((float) lift_pos, move_duration, TimeUnit.MILLISECONDS);
-        liftFuture = liftActuator.moveTo((float) lift_pos, lift_speed);
+        liftFuture = liftActuator.moveTo((float) liftPos, zliftspeed);
 
         return true;
     }
@@ -154,6 +144,14 @@ public class TiagoGazeAndLift extends AbstractSkill {
 
     @Override
     public ExitToken end(ExitToken curToken) {
+        if (!curToken.getExitStatus().isSuccess()) {
+            try {
+                gazeActuator.manualStop();
+                liftFuture.cancel(true);
+            } catch (Exception e) {
+                logger.error(e);
+            }
+        }
         return curToken;
     }
 }

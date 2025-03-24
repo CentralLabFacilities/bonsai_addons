@@ -42,7 +42,7 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
     override fun onStart(connectedNode: ConnectedNode) {
         ac = ActionClient(connectedNode, this.topic, PointHeadActionGoal._TYPE, PointHeadActionFeedback._TYPE, PointHeadActionResult._TYPE)
 
-        logger.info("Gaze Actuator connecting to $topic")
+        logger.info("Gaze Actuator connecting to $topic...")
 
         if (ac?.waitForActionServerToStart(Duration(2.0)) == true) {
                 initialized = true
