@@ -103,12 +103,6 @@ public class SetTiagoGaze extends AbstractSkill {
             timeout += Time.currentTimeMillis();
         }
 
-        try {
-            gazeActuator.manualStop();
-        } catch (IOException ex) {
-            logger.warn("Could not cancel gaze action goal.");
-        }
-
         logger.debug("setting head pose to: (" + vertical + " / " + horizontal + ") with min_duration: " + minDuration);
 
         int scaling_factor = 10;
