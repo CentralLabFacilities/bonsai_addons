@@ -113,7 +113,11 @@ class FollowByHand : AbstractSkill() {
     }
 
     override fun end(curToken: ExitToken): ExitToken {
-        speechActuator?.sayTranslated("please let go", speakerlang, Language.EN)?.get()
+        if (speakerlang == Language.DE) {
+            speechActuator?.sayAsync("Bitte lasse meinen Greifer los", Language.DE)?.get()
+        } else {
+            speechActuator?.sayTranslated("please let go", speakerlang, Language.EN)?.get()
+        }
         action?.cancel(true)
         return curToken
     }
