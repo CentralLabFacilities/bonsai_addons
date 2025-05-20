@@ -2,14 +2,17 @@ package de.unibi.citec.clf.bonsai.skills.pal.nlu
 
 import de.unibi.citec.clf.bonsai.actuators.ExecuteUntilCancelActuator
 import de.unibi.citec.clf.bonsai.actuators.SpeechActuator
+import de.unibi.citec.clf.bonsai.core.`object`.MemorySlotReader
 import de.unibi.citec.clf.bonsai.core.`object`.Sensor
 import de.unibi.citec.clf.bonsai.engine.model.AbstractSkill
 import de.unibi.citec.clf.bonsai.engine.model.ExitStatus
 import de.unibi.citec.clf.bonsai.engine.model.ExitToken
 import de.unibi.citec.clf.bonsai.engine.model.config.ISkillConfigurator
+import de.unibi.citec.clf.bonsai.skills.dialog.Talk
 import de.unibi.citec.clf.bonsai.util.helper.SimpleNLUHelper
 import de.unibi.citec.clf.bonsai.util.helper.SimpleSpeechHelper
 import de.unibi.citec.clf.btl.data.speechrec.Language
+import de.unibi.citec.clf.btl.data.speechrec.LanguageType
 import de.unibi.citec.clf.btl.data.speechrec.NLU
 import java.util.concurrent.Future
 
@@ -21,6 +24,10 @@ import java.util.concurrent.Future
  */
 class FollowByHand : AbstractSkill() {
 
+    companion object {
+        private const val KEY_USE_LANGUAGE = "#_USE_LANGUAGE"
+    }
+
     // used tokens
     private var tokenSuccess: ExitToken? = null
 
@@ -31,7 +38,9 @@ class FollowByHand : AbstractSkill() {
     private var speechManager: SimpleNLUHelper? = null
     private var speechSensor: Sensor<NLU>? = null
     private var speechActuator: SpeechActuator? = null
+    private var langSlot: MemorySlotReader<LanguageType>? = null
 
+    private var speakerlang: Language = Language.EN
 
     private var stateConfirm = false
 
@@ -48,12 +57,16 @@ class FollowByHand : AbstractSkill() {
             "FollowByHand",
             ExecuteUntilCancelActuator::class.java
         )
-        speechSensor = configurator.getSensor<NLU>(speechSensorName, NLU::class.java)
+        speechSensor = configurator.getSensor(speechSensorName, NLU::class.java)
         speechActuator = configurator.getActuator("SpeechActuator", SpeechActuator::class.java)
 
+        if(configurator.requestOptionalBool(KEY_USE_LANGUAGE, false)) {
+            langSlot = configurator.getReadSlot("Language", LanguageType::class.java)
+        }
     }
 
     override fun init(): Boolean {
+        speakerlang  = langSlot?.recall<LanguageType>()?.value ?: speakerlang
         action = followAct?.executeAction()
         speechManager = SimpleNLUHelper(speechSensor, true)
 
@@ -72,7 +85,7 @@ class FollowByHand : AbstractSkill() {
         }
 
         if (speechManager!!.allUnderstoodIntents.contains(intent)) {
-            speechActuator?.sayAsync("should we stop?", Language.EN)?.get()
+            speechActuator?.sayTranslated("should we stop?", speakerlang, Language.EN)?.get()
             stateConfirm = true
             return ExitToken.loop()
         }
@@ -89,7 +102,7 @@ class FollowByHand : AbstractSkill() {
         if (speechManager!!.allUnderstoodIntents.contains(intentYes)) {
             return tokenSuccess
         } else if (speechManager!!.allUnderstoodIntents.contains(intentNo)) {
-            speechActuator?.sayAsync("continue", Language.EN)?.get()
+            speechActuator?.sayTranslated("continue", speakerlang, Language.EN)?.get()
             speechManager?.startListening()
             stateConfirm = false
             return ExitToken.loop()
@@ -100,7 +113,7 @@ class FollowByHand : AbstractSkill() {
     }
 
     override fun end(curToken: ExitToken): ExitToken {
-        speechActuator?.sayAsync("please let go", Language.EN)?.get()
+        speechActuator?.sayTranslated("please let go", speakerlang, Language.EN)?.get()
         action?.cancel(true)
         return curToken
     }
