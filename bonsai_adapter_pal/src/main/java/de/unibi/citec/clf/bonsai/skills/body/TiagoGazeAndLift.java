@@ -9,6 +9,7 @@ import de.unibi.citec.clf.bonsai.engine.model.ExitToken;
 import de.unibi.citec.clf.bonsai.engine.model.config.ISkillConfigurator;
 import de.unibi.citec.clf.bonsai.engine.model.config.SkillConfigurationException;
 import de.unibi.citec.clf.btl.data.geometry.Point3D;
+import de.unibi.citec.clf.btl.data.geometry.Point3DStamped;
 import de.unibi.citec.clf.btl.units.LengthUnit;
 
 import java.io.IOException;
@@ -114,7 +115,7 @@ public class TiagoGazeAndLift extends AbstractSkill {
         float y_rel = (float) (Math.sin(horizontal) * Math.cos(vertical) * scaling_factor);
         float z_rel = (float) (Math.sin(vertical) * scaling_factor);
 
-        Point3D target = new Point3D(x_rel, y_rel, z_rel, LengthUnit.METER, "torso_lift_link");
+        Point3DStamped target = new Point3DStamped(x_rel, y_rel, z_rel, LengthUnit.METER, "torso_lift_link");
 
         logger.info("Looking at point: (x: " + x_rel+ " / y: " +y_rel+ " / z:  "+ z_rel +" / frame: torso_lift_link) with duration: " + minGazeTime);
         gazeFuture = gazeActuator.lookAt(target, maxGazeSpeed, minGazeTime);

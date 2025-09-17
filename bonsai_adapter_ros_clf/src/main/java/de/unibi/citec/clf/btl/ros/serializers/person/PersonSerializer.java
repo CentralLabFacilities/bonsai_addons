@@ -3,17 +3,14 @@ package de.unibi.citec.clf.btl.ros.serializers.person;
 
 
 import de.unibi.citec.clf.btl.data.geometry.Point3D;
-import de.unibi.citec.clf.btl.data.navigation.PositionData;
-import de.unibi.citec.clf.btl.data.navigation.PositionData.ReferenceFrame;
+import de.unibi.citec.clf.btl.data.geometry.Pose2D;
+import de.unibi.citec.clf.btl.data.geometry.Pose2D.ReferenceFrame;
 import de.unibi.citec.clf.btl.data.person.PersonData;
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
 import de.unibi.citec.clf.btl.units.AngleUnit;
 import de.unibi.citec.clf.btl.units.LengthUnit;
 import org.ros.message.MessageFactory;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class PersonSerializer extends RosSerializer<PersonData, people_msgs.Person> {
 
@@ -27,20 +24,20 @@ public class PersonSerializer extends RosSerializer<PersonData, people_msgs.Pers
         Point3D globalLocation = MsgTypeFactory.getInstance().createType(msg.getPosition(), Point3D.class);
         Point3D globalVelocity = MsgTypeFactory.getInstance().createType(msg.getVelocity(), Point3D.class);
 
-        PositionData positionData = new PositionData();
-        positionData.setFrameId(ReferenceFrame.GLOBAL);
-        positionData.setX(globalLocation.getX(iLU), iLU);
-        positionData.setY(globalLocation.getY(iLU), iLU);
+        Pose2D pose2D = new Pose2D();
+        pose2D.setFrameId(ReferenceFrame.GLOBAL);
+        pose2D.setX(globalLocation.getX(iLU), iLU);
+        pose2D.setY(globalLocation.getY(iLU), iLU);
         //TODO: velocity to yaw
-        positionData.setYaw(0.0, iAU);
+        pose2D.setYaw(0.0, iAU);
 
         PersonData personData = new PersonData();
         //id is written in name attr        
         String id = msg.getName();
         personData.setUuid(id);
 
-        personData.setPosition(positionData);
-        personData.setFrameId(positionData.getFrameId());
+        personData.setPosition(pose2D);
+        personData.setFrameId(pose2D.getFrameId());
         personData.setReliability(msg.getReliability());
 
         return personData;

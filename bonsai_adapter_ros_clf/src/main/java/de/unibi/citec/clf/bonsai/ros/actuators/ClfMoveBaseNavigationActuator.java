@@ -4,6 +4,7 @@ import com.github.rosjava_actionlib.ActionClient;
 import actionlib_msgs.GoalID;
 
 import de.unibi.citec.clf.bonsai.core.exception.InitializationException;
+import de.unibi.citec.clf.btl.data.geometry.Pose2D;
 import geometry_msgs.Twist;
 import org.ros.exception.ServiceNotFoundException;
 import org.ros.message.Duration;
@@ -30,7 +31,6 @@ import de.unibi.citec.clf.btl.units.LengthUnit;
 import de.unibi.citec.clf.btl.units.RotationalSpeedUnit;
 import de.unibi.citec.clf.btl.units.SpeedUnit;
 import de.unibi.citec.clf.btl.data.geometry.Rotation3D;
-import de.unibi.citec.clf.btl.data.navigation.PositionData;
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
 import geometry_msgs.PoseStamped;
@@ -128,7 +128,7 @@ public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator
     }
 
     @Override
-    public Future<GlobalPlan> getPlan(NavigationGoalData data, PositionData startPos) throws IOException {
+    public Future<GlobalPlan> getPlan(NavigationGoalData data, Pose2D startPos) throws IOException {
         final GetPlanRequest req = getPlanClient.newMessage();
 
         Point startPosition = req.getStart().getPose().getPosition();

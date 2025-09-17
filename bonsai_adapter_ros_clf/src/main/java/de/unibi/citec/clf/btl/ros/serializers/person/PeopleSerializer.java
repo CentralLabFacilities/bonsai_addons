@@ -45,9 +45,11 @@ public class PeopleSerializer extends RosSerializer<PersonDataList, People> {
             personList.add(MsgTypeFactory.getInstance().createMsg(personData, Person.class));
         }
 
-        people.setPeople(personList);
-        people.setHeader(MsgTypeFactory.getInstance().makeHeader(data));
+        if (!data.isEmpty()) {
+            people.setHeader(MsgTypeFactory.getInstance().makeHeader(data.get(0)));
+        }
 
+        people.setPeople(personList);
         return people;
     }
 

@@ -9,13 +9,12 @@ import de.unibi.citec.clf.bonsai.actuators.GazeActuator
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException
 import de.unibi.citec.clf.bonsai.ros.RosNode
-import de.unibi.citec.clf.btl.data.geometry.Point3D
+import de.unibi.citec.clf.btl.data.geometry.Point3DStamped
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory
 import org.ros.message.Duration
 import org.ros.namespace.GraphName
 import org.ros.node.ConnectedNode
 import java.io.IOException
-
 import java.util.concurrent.Future
 
 /**
@@ -76,17 +75,19 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
         }
     }
 
+    @Deprecated("Deprecated in Java")
     @Throws(IOException::class)
-    override fun lookAt(pose: Point3D): Future<Void> {
+    override fun lookAt(pose: Point3DStamped): Future<Void> {
         return lookAt(pose,1000)
     }
 
+    @Deprecated("Deprecated in Java")
     @Throws(IOException::class)
-    override fun lookAt(point: Point3D, duration: Long ): Future<Void> {
+    override fun lookAt(point: Point3DStamped, duration: Long ): Future<Void> {
         return lookAt(point,2.0,duration)
     }
 
-    override fun lookAt(point: Point3D, maxVelocity: Double, minDuration: Long): Future<Void> {
+    override fun lookAt(point: Point3DStamped, maxVelocity: Double, minDuration: Long): Future<Void> {
         ac?.let { client ->
             val goal = client.newGoalMessage()
 
@@ -135,6 +136,7 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
         TODO("not implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun manualStop() {
         ac?.let { client ->
             lastGoalId?.let { client.sendCancel(lastGoalId) }

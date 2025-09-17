@@ -3,8 +3,8 @@ package de.unibi.citec.clf.btl.ros.serializers.person;
 
 import clf_perception_vision_msgs.ExtendedPersonStamped;
 import de.unibi.citec.clf.btl.data.geometry.Pose3D;
-import de.unibi.citec.clf.btl.data.navigation.PositionData;
-import de.unibi.citec.clf.btl.data.navigation.PositionData.ReferenceFrame;
+import de.unibi.citec.clf.btl.data.geometry.Pose2D;
+import de.unibi.citec.clf.btl.data.geometry.Pose2D.ReferenceFrame;
 import de.unibi.citec.clf.btl.data.person.PersonData;
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
@@ -26,24 +26,24 @@ public class ExtendedPersonStampedSerializer extends RosSerializer<PersonData, c
         //Point3D globalLocation = MsgTypeFactory.getInstance().createType(msg.getPosition(), Point3D.class);
         //Point3D globalVelocity = MsgTypeFactory.getInstance().createType(msg.getVelocity(), Point3D.class);
 
-        PositionData positionData = new PositionData();
-        positionData.setFrameId(ReferenceFrame.GLOBAL);
+        Pose2D pose2D = new Pose2D();
+        pose2D.setFrameId(ReferenceFrame.GLOBAL);
 
 
 
-        positionData.setX(pose.getTranslation().getX(iLU), iLU);
-        positionData.setY(pose.getTranslation().getY(iLU), iLU);
+        pose2D.setX(pose.getTranslation().getX(iLU), iLU);
+        pose2D.setY(pose.getTranslation().getY(iLU), iLU);
         //TODO: velocity to yaw
-        positionData.setYaw(pose.getRotation().getYaw(iAU), iAU);
-        positionData.setFrameId(msg.getPose().getHeader().getFrameId());
+        pose2D.setYaw(pose.getRotation().getYaw(iAU), iAU);
+        pose2D.setFrameId(msg.getPose().getHeader().getFrameId());
 
         PersonData personData = new PersonData();
         //id is written in name attr
         String id = msg.getTransformid();
         personData.setUuid(id);
         
-        personData.setPosition(positionData);
-        personData.setFrameId(positionData.getFrameId());
+        personData.setPosition(pose2D);
+        personData.setFrameId(pose2D.getFrameId());
 
         return personData;
     }
