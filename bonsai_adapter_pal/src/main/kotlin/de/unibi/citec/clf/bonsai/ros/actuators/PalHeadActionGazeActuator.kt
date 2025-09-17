@@ -76,11 +76,13 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
         }
     }
 
+    @Deprecated("Deprecated in Java")
     @Throws(IOException::class)
     override fun lookAt(pose: Point3D): Future<Void> {
         return lookAt(pose,1000)
     }
 
+    @Deprecated("Deprecated in Java")
     @Throws(IOException::class)
     override fun lookAt(point: Point3D, duration: Long ): Future<Void> {
         return lookAt(point,2.0,duration)
@@ -135,6 +137,7 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
         TODO("not implemented")
     }
 
+    @Deprecated("Deprecated in Java")
     override fun manualStop() {
         ac?.let { client ->
             lastGoalId?.let { client.sendCancel(lastGoalId) }
