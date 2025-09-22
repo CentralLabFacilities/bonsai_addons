@@ -7,10 +7,9 @@ import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator;
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
-import de.unibi.citec.clf.btl.data.speechrec.Language;
+import de.unibi.citec.clf.btl.data.speech.Language;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.ros.namespace.GraphName;

@@ -11,7 +11,7 @@ import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import de.unibi.citec.clf.bonsai.core.exception.ConfigurationException
 import de.unibi.citec.clf.bonsai.ros.RosNode
 import de.unibi.citec.clf.bonsai.ros.helper.ResponseFuture
-import de.unibi.citec.clf.btl.data.speechrec.Language
+import de.unibi.citec.clf.btl.data.speech.Language
 import org.ros.exception.RosException
 import org.ros.exception.RosRuntimeException
 import org.ros.exception.ServiceNotFoundException
@@ -23,7 +23,6 @@ import pal_interaction_msgs.TtsActionFeedback
 import pal_interaction_msgs.TtsActionGoal
 import pal_interaction_msgs.TtsActionResult
 import std_srvs.*
-import java.io.IOException
 import java.util.concurrent.*
 
 /**

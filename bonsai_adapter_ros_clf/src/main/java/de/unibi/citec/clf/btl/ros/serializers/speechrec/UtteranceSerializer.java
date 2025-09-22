@@ -2,7 +2,7 @@
 
 package de.unibi.citec.clf.btl.ros.serializers.speechrec;
 
-import de.unibi.citec.clf.btl.data.speechrec.Utterance;
+import de.unibi.citec.clf.btl.data.speech.Utterance;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
 import de.unibi.citec.clf.btl.xml.XomSerializer;
 import de.unibi.citec.clf.btl.xml.XomTypeFactory;

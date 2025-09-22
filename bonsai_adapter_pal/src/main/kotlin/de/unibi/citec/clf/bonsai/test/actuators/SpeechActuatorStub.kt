@@ -2,7 +2,7 @@ package de.unibi.citec.clf.bonsai.test.actuators
 
 import de.unibi.citec.clf.bonsai.actuators.SpeechActuator
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
-import de.unibi.citec.clf.btl.data.speechrec.Language
+import de.unibi.citec.clf.btl.data.speech.Language
 import java.util.concurrent.Future
 
 class SpeechActuatorStub : SpeechActuator {

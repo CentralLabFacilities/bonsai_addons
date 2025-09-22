@@ -1,8 +1,8 @@
 package de.unibi.citec.clf.btl.ros.serializers.speechrec
 
-import de.unibi.citec.clf.btl.data.speechrec.Language
-import de.unibi.citec.clf.btl.data.speechrec.NLU
-import de.unibi.citec.clf.btl.data.speechrec.NLUEntity
+import de.unibi.citec.clf.btl.data.speech.Language
+import de.unibi.citec.clf.btl.data.speech.NLU
+import de.unibi.citec.clf.btl.data.speech.NLUEntity
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory
 import de.unibi.citec.clf.btl.ros.RosSerializer
 import org.apache.log4j.Logger
