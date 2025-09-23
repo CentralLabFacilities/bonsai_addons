@@ -92,7 +92,7 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
             val goal = client.newGoalMessage()
 
             goal.goal.target.header.frameId = point.frameId
-            goal.goal.target.point = MsgTypeFactory.getInstance().createMsg(point, geometry_msgs.Point::class.java)
+            goal.goal.target.point = MsgTypeFactory.getInstance().createMsg(point.toUnstamped(), geometry_msgs.Point::class.java)
             when(pointing_axis) {
                 Axis.X -> goal.goal.pointingAxis.x = 1.0
                 Axis.Y -> goal.goal.pointingAxis.y = 1.0

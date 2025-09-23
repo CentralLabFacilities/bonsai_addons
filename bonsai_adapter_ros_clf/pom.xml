@@ -57,16 +57,7 @@
 
 
         <!-- Messages -->
-	    <dependency>
-            <groupId>org.ros.rosjava_messages</groupId>
-            <artifactId>force_guiding_msgs</artifactId>
-            <version>0.0.0</version>
-        </dependency>
-         <dependency>
-            <groupId>org.ros.rosjava_messages</groupId>
-            <artifactId>hand_shaker_msgs</artifactId>
-            <version>0.0.1</version>
-        </dependency>
+
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>hand_over_msgs</artifactId>
@@ -86,21 +77,6 @@
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>openpose_ros_msgs</artifactId>
             <version>0.0.20</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ros.rosjava_messages</groupId>
-            <artifactId>augmented_manipulation_msgs</artifactId>
-            <version>1.0.0</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ros.rosjava_messages</groupId>
-            <artifactId>gender_and_age_msgs</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ros.rosjava_messages</groupId>
-            <artifactId>posture_execution_msgs</artifactId>
-            <version>0.0.1</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
@@ -129,11 +105,6 @@
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
-            <artifactId>tobi_world_msgs</artifactId>
-            <version>0.1.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>uuid_msgs</artifactId>
             <version>[1.0.0,2.0.0)</version>
         </dependency>
@@ -146,11 +117,6 @@
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>pepper_clf_msgs</artifactId>
             <version>0.1.13</version>
-        </dependency>
-        <dependency>
-            <groupId>org.ros.rosjava_messages</groupId>
-            <artifactId>knowledge_base_msgs</artifactId>
-            <version>[0.1.1,1.0.0)</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
