@@ -63,7 +63,7 @@
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
             <artifactId>pal_interaction_msgs</artifactId>
-            <version>[0.11.3,0.18.0)</version>
+            <version>[0.11.3,0.19.0)</version>
         </dependency>
         <dependency>
             <groupId>org.ros.rosjava_messages</groupId>
