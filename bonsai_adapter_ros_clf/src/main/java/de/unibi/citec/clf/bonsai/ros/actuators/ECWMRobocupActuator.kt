@@ -8,6 +8,7 @@ import de.unibi.citec.clf.btl.data.ecwm.robocup.EntityStorage
 import de.unibi.citec.clf.btl.data.ecwm.robocup.EntityWithAttributes
 import de.unibi.citec.clf.btl.data.ecwm.robocup.ModelWithAttributes
 import de.unibi.citec.clf.btl.data.ecwm.robocup.ModelWithAttributesList
+import de.unibi.citec.clf.btl.data.knowledge.Attributes
 import de.unibi.citec.clf.btl.data.world.Entity
 import de.unibi.citec.clf.btl.data.world.EntityList
 import de.unibi.citec.clf.btl.data.world.Model
@@ -71,18 +72,18 @@ class ECWMRobocupActuator(private val nodeName: GraphName) : RosNode(), ECWMRobo
         initialized = true
     }
 
-    override fun getModelAttributes(type: String): Future<Map<String, List<String>>?> {
+    override fun getModelAttributes(type: String): Future<Attributes?> {
         clientModelAttributes?.let { client ->
             var req = client.newMessage()
             req.type = type
             val res = ResponseFuture<GetTypeAttributesResponse>()
             client.call(req,res)
             return res.toTypeFuture {
-                val attributes : MutableMap<String, List<String>> = HashMap()
-                for (a in it.attributes) {
-                    attributes[a.key] = a.values
+                Attributes("type:$type", HashMap()).also { attr ->
+                    for (a in it.attributes) {
+                        attr.addAttributes(a.key, a.values)
+                    }
                 }
-                attributes
             }
         }
         throw RosException("service server failure ${this.topicAttributes}")
@@ -108,7 +109,25 @@ class ECWMRobocupActuator(private val nodeName: GraphName) : RosNode(), ECWMRobo
         throw RosException("service server failure ${this.topicAttributes}")
     }
 
-    override fun getEntityAttributes(entity: Entity): Future<EntityWithAttributes?> {
+    override fun getEntityAttributes(entity: Entity): Future<Attributes?> {
+        clientEntityAttributes?.let { client ->
+            val req = client.newMessage()
+            req.overwrite = false
+            req.entity = entity.id
+            val res = ResponseFuture<GetEntityAttributesResponse>()
+            client.call(req,res)
+            return res.toTypeFuture {
+                Attributes("entity:${entity.id}", HashMap()).also { attr ->
+                    for (a in it.attributes) {
+                        attr.addAttributes(a.key, a.values)
+                    }
+                }
+            }
+        }
+        throw RosException("service server failure ${this.topicEntityAttributes}")
+    }
+
+    override fun getEntityAttributes(entity: EntityWithAttributes): Future<EntityWithAttributes?> {
         clientEntityAttributes?.let { client ->
             val req = client.newMessage()
             req.overwrite = false
