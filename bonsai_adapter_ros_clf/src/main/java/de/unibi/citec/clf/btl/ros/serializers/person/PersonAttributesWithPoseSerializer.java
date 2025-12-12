@@ -11,11 +11,11 @@ import de.unibi.citec.clf.btl.units.AngleUnit;
 import de.unibi.citec.clf.btl.units.LengthUnit;
 import org.ros.message.MessageFactory;
 
-public class PersonAttributesWithPoseSerializer extends RosSerializer<PersonData, openpose_ros_msgs.PersonAttributesWithPose> {
+public class PersonAttributesWithPoseSerializer extends RosSerializer<PersonData, clf_person_recognition_msgs.PersonAttributesWithPose> {
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PersonAttributesWithPoseSerializer.class);
     @Override
-    public PersonData deserialize(openpose_ros_msgs.PersonAttributesWithPose msg) throws DeserializationException {
+    public PersonData deserialize(clf_person_recognition_msgs.PersonAttributesWithPose msg) throws DeserializationException {
 
         LengthUnit iLU = LengthUnit.METER;
         AngleUnit iAU = AngleUnit.RADIAN;
@@ -47,6 +47,18 @@ public class PersonAttributesWithPoseSerializer extends RosSerializer<PersonData
 
         personData.setRightHandPosition(rightHandLocation);
 
+        Point3D leftEyeLocation = MsgTypeFactory.getInstance().createType( msg.getLeftEyeStamped().getPose().getPosition(), Point3D.class);
+
+        personData.setLeftEyePosition(leftEyeLocation);
+
+        Point3D rightEyeLocation = MsgTypeFactory.getInstance().createType( msg.getRightEyeStamped().getPose().getPosition(), Point3D.class);
+
+        personData.setRightEyePosition(rightEyeLocation);
+
+        Point3D noseLocation = MsgTypeFactory.getInstance().createType( msg.getNoseStamped().getPose().getPosition(), Point3D.class);
+
+        personData.setNosePosition(noseLocation);
+
         PersonAttribute attribute = MsgTypeFactory.getInstance().createType(msg.getAttributes(),PersonAttribute.class);
 
         personData.setEstimateAngle(((double) msg.getEstimateAngle()));
@@ -58,8 +70,8 @@ public class PersonAttributesWithPoseSerializer extends RosSerializer<PersonData
     }
 
     @Override
-    public openpose_ros_msgs.PersonAttributesWithPose serialize(PersonData data, MessageFactory fact) throws SerializationException {
-        openpose_ros_msgs.PersonAttributesWithPose person = fact.newFromType(openpose_ros_msgs.PersonAttributesWithPose._TYPE);
+    public clf_person_recognition_msgs.PersonAttributesWithPose serialize(PersonData data, MessageFactory fact) throws SerializationException {
+        clf_person_recognition_msgs.PersonAttributesWithPose person = fact.newFromType(clf_person_recognition_msgs.PersonAttributesWithPose._TYPE);
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
 //        LengthUnit iLU = LengthUnit.METER;
@@ -85,8 +97,8 @@ public class PersonAttributesWithPoseSerializer extends RosSerializer<PersonData
     }
 
     @Override
-    public Class<openpose_ros_msgs.PersonAttributesWithPose> getMessageType() {
-        return openpose_ros_msgs.PersonAttributesWithPose.class;
+    public Class<clf_person_recognition_msgs.PersonAttributesWithPose> getMessageType() {
+        return clf_person_recognition_msgs.PersonAttributesWithPose.class;
     }
 
     @Override
