@@ -3,34 +3,28 @@ package de.unibi.citec.clf.btl.ros.serializers.person;
 
 import de.unibi.citec.clf.btl.data.person.PersonAttribute;
 import de.unibi.citec.clf.btl.ros.RosSerializer;
-import openpose_ros_msgs.Gesture;
-import openpose_ros_msgs.PersonAttributes;
-import openpose_ros_msgs.Posture;
+import clf_person_recognition_msgs.Gesture;
+import clf_person_recognition_msgs.PersonAttributes;
+import clf_person_recognition_msgs.Posture;
 import org.ros.message.MessageFactory;
 
 import java.util.LinkedList;
 
 
-public class PersonAttributeSerializer extends RosSerializer<PersonAttribute, openpose_ros_msgs.PersonAttributes> {
+public class PersonAttributeSerializer extends RosSerializer<PersonAttribute, clf_person_recognition_msgs.PersonAttributes> {
 
     private static org.apache.log4j.Logger logger = org.apache.log4j.Logger.getLogger(PersonAttributeSerializer.class);
 
     @Override
-    public openpose_ros_msgs.PersonAttributes serialize(PersonAttribute data, MessageFactory fact) throws SerializationException {
+    public clf_person_recognition_msgs.PersonAttributes serialize(PersonAttribute data, MessageFactory fact) throws SerializationException {
         logger.fatal("We don't care, because we don't need this!");
         return null;
     }
 
     @Override
-    public PersonAttribute deserialize(openpose_ros_msgs.PersonAttributes msg) throws DeserializationException {
+    public PersonAttribute deserialize(clf_person_recognition_msgs.PersonAttributes msg) throws DeserializationException {
         PersonAttribute ret = new PersonAttribute();
 
-        ret.setAge(msg.getAgeHyp().getAge());
-        switch (msg.getGenderHyp().getGender()) {
-            default:
-            case "male": ret.setGender(PersonAttribute.Gender.MALE); break;
-            case "female": ret.setGender(PersonAttribute.Gender.FEMALE); break;
-        }
         switch(msg.getShirtcolor()) {
             default:
             case "no color":
@@ -52,7 +46,7 @@ public class PersonAttributeSerializer extends RosSerializer<PersonAttribute, op
             default: throw new DeserializationException("unhandled Gesture: " + msg.getPosture().getPosture());
         }
         LinkedList<PersonAttribute.Gesture> gestures = new LinkedList<>();
-        for(openpose_ros_msgs.Gesture gesture: msg.getGestures()){
+        for(clf_person_recognition_msgs.Gesture gesture: msg.getGestures()){
             int g = gesture.getGesture();
             switch(g) {
                 case Gesture.POINTING_LEFT: gestures.add(PersonAttribute.Gesture.POINTING_LEFT); break;
