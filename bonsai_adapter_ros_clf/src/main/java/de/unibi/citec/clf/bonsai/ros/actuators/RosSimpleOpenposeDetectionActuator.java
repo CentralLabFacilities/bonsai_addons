@@ -18,7 +18,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
-//import openpose_ros_msgs.*;
+import openpose_ros_msgs.GetFollowRoiResponse;
 import clf_person_recognition_msgs.*;
 import org.apache.commons.lang.NotImplementedException;
 import org.ros.namespace.GraphName;
