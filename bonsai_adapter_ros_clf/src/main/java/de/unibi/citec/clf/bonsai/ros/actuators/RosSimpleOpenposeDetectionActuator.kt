@@ -1,5 +1,9 @@
 package de.unibi.citec.clf.bonsai.ros.actuators
 
+import clf_person_recognition_msgs.GetCrowdAttributesWithPose
+import clf_person_recognition_msgs.GetCrowdAttributesWithPoseRequest
+import clf_person_recognition_msgs.GetCrowdAttributesWithPoseResponse
+import clf_person_recognition_msgs.PersonAttributesWithPose
 import de.unibi.citec.clf.bonsai.actuators.DetectPeopleActuator
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import de.unibi.citec.clf.bonsai.ros.RosNode
@@ -8,10 +12,6 @@ import de.unibi.citec.clf.btl.data.person.PersonData
 import de.unibi.citec.clf.btl.data.person.PersonDataList
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory
 import de.unibi.citec.clf.btl.ros.RosSerializer
-import openpose_ros_msgs.GetCrowdAttributesWithPose
-import openpose_ros_msgs.GetCrowdAttributesWithPoseRequest
-import openpose_ros_msgs.GetCrowdAttributesWithPoseResponse
-import openpose_ros_msgs.PersonAttributesWithPose
 import org.apache.log4j.Logger
 import org.ros.exception.RosRuntimeException
 import org.ros.exception.ServiceNotFoundException
