@@ -114,12 +114,13 @@ public class ClfMoveBaseNavigationActuator extends RosMoveBaseNavigationActuator
             return;
         }
 
-        if (ac.waitForActionServerToStart(new Duration(20.0))) {
-            initialized = true;
-            logger.debug("RosMoveBase NavAct started");
-        } else {
-            logger.error("RosMoveBase NavAct timeout after 20sec " + this.topic);
-        }
+        initialized = true;
+        //if (ac.waitForActionServerToStart(new Duration(20.0))) {
+        //    initialized = true;
+        //    logger.debug("RosMoveBase NavAct started");
+        //} else {
+        //    logger.error("RosMoveBase NavAct timeout after 20sec " + this.topic);
+        //}
     }
 
     @Override

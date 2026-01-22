@@ -72,12 +72,13 @@ class PlayMotion(private val nodeName: GraphName) : RosNode(), PostureActuator {
             }
         }
 
-        if(ac?.waitForActionServerToStart(Duration(20.0)) ==  true) {
-            logger.info("PlayMotion server connected $topic")
-            initialized = true
-        } else {
-            logger.info("PlayMotion server timeout after 20sec $topic")
-        }
+        initialized = true
+        //if(ac?.waitForActionServerToStart(Duration(20.0)) ==  true) {
+        //    logger.info("PlayMotion server connected $topic")
+        //    initialized = true
+        //} else {
+        //    logger.info("PlayMotion server timeout after 20sec $topic")
+        //}
 
     }
 

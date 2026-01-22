@@ -43,14 +43,15 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
 
         logger.info("Gaze Actuator connecting to $topic...")
 
-        if (ac?.waitForActionServerToStart(Duration(2.0)) == true) {
-                initialized = true
-        } else if(ac?.waitForActionServerToStart(Duration(18.0)) ==  true) {
-            logger.info("Gaze Actuator connected to $topic")
-            initialized = true
-        } else {
-            logger.error("Gaze Actuator timeout after 20sec")
-        }
+        initialized = true
+        //if (ac?.waitForActionServerToStart(Duration(5.0)) == true) {
+        //        initialized = true
+        //} else if(ac?.waitForActionServerToStart(Duration(15.0)) ==  true) {
+        //    logger.info("Gaze Actuator connected to $topic")
+        //    initialized = true
+        //} else {
+        //    logger.error("Gaze Actuator timeout after 20sec")
+        //}
 
     }
 
@@ -103,11 +104,9 @@ class PalHeadActionGazeActuator(private val nodeName: GraphName) : RosNode(), Ga
             goal.goal.minDuration = Duration.fromMillis(minDuration)
             goal.goal.maxVelocity = maxVelocity
 
-            val sendGoal = client.sendGoal(goal)
-
             lastGoalId = goal.goalId
-
-            logger.info("PAL Point Head Action: $goal")
+            val sendGoal = client.sendGoal(goal)
+            logger.info("Send PAL Point Head Action: $goal")
 
             return sendGoal.toVoidFuture()
 
