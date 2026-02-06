@@ -118,12 +118,22 @@ class ECWMSpiritActuator(private val nodeName: GraphName) : RosNode(), ECWMSpiri
         return getSpiritGoal(spirit.entity, spirit.affordance, spirit.storage, forceMoveThreshold, onBlocked, considerRoom)
     }
 
-    override fun getSpiritGoalCurrent(spirit: Spirit): Future<SpiritGoal?> {
+    override fun getSpiritGoalCurrent(
+        spirit: Spirit,
+        onBlocked: ECWMSpirit.BlockageHandling,
+        blockedMaxDist: Float
+    ): Future<SpiritGoal?> {
         clientSpirit?.let { client ->
             val req = client.newMessage()
             req.entity = spirit.entity.id
             req.spirit = spirit.affordance
             req.storage = spirit.storage
+            req.blocked = when (onBlocked) {
+                ECWMSpirit.BlockageHandling.USE_NEAREST -> GetSpiritGoalRequest.FORCE_NEAREST
+                ECWMSpirit.BlockageHandling.USE_BEST -> GetSpiritGoalRequest.FORCE_BEST
+                else -> GetSpiritGoalRequest.FAIL
+            }
+            req.blockedMaxDistance = blockedMaxDist
             val res = ResponseFuture<GetSpiritGoalResponse>()
             client.call(req, res)
             return res.toTypeFuture {
