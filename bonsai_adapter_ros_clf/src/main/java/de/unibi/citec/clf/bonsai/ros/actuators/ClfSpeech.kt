@@ -173,7 +173,7 @@ class ClfSpeech(private val nodeName: GraphName) : RosNode(), SpeechActuator, Ac
             it.call(a, res)
             return res.toBooleanFuture()
 
-        } ?: throw NotImplementedError("SpeechRec not connected")
+        } ?: throw RosException("SpeechRec not connected")
     }
 
 }
