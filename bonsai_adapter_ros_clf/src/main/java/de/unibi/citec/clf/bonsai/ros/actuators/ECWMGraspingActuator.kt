@@ -324,7 +324,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             req.goal.minPoseDist = MsgTypeFactory.getInstance().createMsg(min_dist, Point::class.java)
             req.goal.maxPoseDist = MsgTypeFactory.getInstance().createMsg(max_dist, Point::class.java)
             req.goal.keepScene = false
-            //req.goal.topDown = topdown
+            req.goal.topDown = topdown
             req.goal.uprightGrasping = upright
             var res = it.sendGoal(req)
             return object : Future<MoveitResult?> {
