@@ -290,7 +290,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             req.goal.attachedObjectType = attachedEntity?.modelName ?: ""
             req.goal.usePose = false
             req.goal.targetEntityName = target_entity.id
-            req.goal.targetStorage = targetStorage ?: ""
+            req.goal.targetFrame = targetStorage ?: ""
             req.goal.keepScene = false
             req.goal.uprightGrasping = upright
             var res = it.sendGoal(req)
@@ -354,7 +354,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             var req = it.newGoalMessage()
             req.goal.targetEntityName = target_entity.id
             logger.debug("set target_entity_name to ${target_entity.id}")
-            req.goal.targetStorage = point.frameId
+            req.goal.targetFrame = point.frameId
             logger.debug("set targetStorage to ${point.frameId}")
             req.goal.point =  MsgTypeFactory.getInstance().createMsg(point, Point::class.java)
             req.goal.area =  MsgTypeFactory.getInstance().createMsg(area, Point::class.java)
@@ -395,7 +395,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             var req = it.newGoalMessage()
             req.goal.targetEntityName = target_entity_name
             logger.debug("set target_entity_name to ${target_entity_name}")
-            req.goal.targetStorage = pose.frameId
+            req.goal.targetFrame = pose.frameId
             logger.debug("set targetStorage to ${pose.frameId}")
             req.goal.point =  MsgTypeFactory.getInstance().createMsg(pose, Point::class.java)
             req.goal.area =  MsgTypeFactory.getInstance().createMsg(area, Point::class.java)
