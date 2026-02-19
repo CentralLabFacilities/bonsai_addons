@@ -250,7 +250,8 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
         upright: Boolean,
         carryPose: String?,
         unknownEntity: Boolean,
-        keepScene: Boolean
+        keepScene: Boolean,
+        addFallback: Boolean = false
     ): Future<MoveitResult?> {
         clientGraspEntity?.let {
             val goal = it.newGoalMessage()
@@ -259,6 +260,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             goal.goal.onSuccess = GraspEntityGoal.NOTHING
             goal.goal.uprightGrasping = upright
             goal.goal.addGroundPlane = true
+            goal.goal.addFallback = addFallback
             if (unknownEntity) {
                 goal.goal.useEntity = true
                 goal.goal.entity = MsgTypeFactory.getInstance().createMsg(entity, ecwm_msgs.Entity::class.java)
@@ -322,7 +324,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             req.goal.minPoseDist = MsgTypeFactory.getInstance().createMsg(min_dist, Point::class.java)
             req.goal.maxPoseDist = MsgTypeFactory.getInstance().createMsg(max_dist, Point::class.java)
             req.goal.keepScene = false
-            req.goal.topDown = topdown
+            //req.goal.topDown = topdown
             req.goal.uprightGrasping = upright
             var res = it.sendGoal(req)
             return object : Future<MoveitResult?> {
