@@ -290,7 +290,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             req.goal.attachedObjectType = attachedEntity?.modelName ?: ""
             req.goal.usePose = false
             req.goal.targetEntityName = target_entity.id
-            req.goal.targetFrame = targetStorage ?: ""
+            req.goal.targetStorage = targetStorage ?: ""
             req.goal.keepScene = false
             req.goal.uprightGrasping = upright
             var res = it.sendGoal(req)
