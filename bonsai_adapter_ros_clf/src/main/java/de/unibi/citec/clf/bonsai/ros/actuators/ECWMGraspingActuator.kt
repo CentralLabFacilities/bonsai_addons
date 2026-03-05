@@ -472,7 +472,8 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
         size: Float,
         clear_scene: Boolean,
         clear_attached: Boolean,
-        no_graspable: Boolean
+        no_graspable: Boolean,
+        safetyHeight: Float?
     ): Future<Boolean> {
         clientSetupArea?.let {
             var req = it.newMessage();
@@ -482,6 +483,10 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             req.target.header.frameId = "base_link"
             req.target.pose.position.x = 1.0
             req.noGraspable = no_graspable
+            if (safetyHeight!=null) {
+                req.addSafetyPlane = true
+                req.safetyHeight = safetyHeight
+            }
             var res = ResponseFuture<SetupPlanningSceneAreaResponse>()
             it.call(req, res)
             return res.toBooleanFuture()
