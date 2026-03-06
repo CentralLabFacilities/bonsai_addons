@@ -51,6 +51,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
     private var clientPour: ActionClient<PourEntityActionGoal, PourEntityActionFeedback, PourEntityActionResult>? = null
     private var clientOpen: ActionClient<OpenDoorActionGoal, OpenDoorActionFeedback, OpenDoorActionResult>? = null
     private var clientClose: ActionClient<OpenDoorActionGoal, OpenDoorActionFeedback, OpenDoorActionResult>? = null
+    private var clientPulloutDishwasher: ActionClient<OpenDoorActionGoal, OpenDoorActionFeedback, OpenDoorActionResult>? = null
 
     private var clientWipe: ActionClient<WipeActionGoal, WipeActionFeedback, WipeActionResult>? = null
 
@@ -72,6 +73,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
     private var topicPour: String = "/ecwm/GraspServerMTC/pour"
     private var topicOpen: String = "/ecwm/GraspServerMTC/open_door"
     private var topicClose: String = "/ecwm/GraspServerMTC/close_door"
+    private var topicPullout: String = "/ecwm/GraspServerMTC/open_drawer"
 
     private var topicWipeArea: String = "/ecwm/GraspServerMTC/wipe"
 
@@ -100,6 +102,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
         topicAttach = conf.requestOptionalValue("topicAttach", topicAttach)
         topicOpen = conf.requestOptionalValue("topicOpen", topicOpen)
         topicClose = conf.requestOptionalValue("topicClose", topicClose)
+        topicPullout = conf.requestOptionalValue("topicPullout", topicPullout)
         topicWipeArea = conf.requestOptionalValue("topicWipeArea", topicWipeArea)
     }
 
@@ -149,6 +152,12 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             OpenDoorActionGoal._TYPE,
             OpenDoorActionFeedback._TYPE,
             OpenDoorActionResult._TYPE )
+        clientPulloutDishwasher = ActionClient(
+            connectedNode,
+            this.topicPullout,
+            OpenDoorActionGoal._TYPE,
+            OpenDoorActionFeedback._TYPE,
+            OpenDoorActionResult._TYPE )
         clientWipe = ActionClient(
             connectedNode,
             this.topicWipeArea,
@@ -177,6 +186,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
         clientPour?.let { it.finish() }
         clientOpen?.let { it.finish() }
         clientClose?.let { it.finish() }
+        clientPulloutDishwasher?.let { it.finish() }
         clientWipe?.let { it.finish() }
         clientRetract?.let { it.finish() }
     }
@@ -541,6 +551,22 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             }
         }
         throw RosException("service server failure ${this.topicClose}")
+    }
+
+    override fun pullOutDrawer(door: Entity): Future<MoveitResult?> {
+        clientPulloutDishwasher?.let {
+            val req = it.newGoalMessage();
+            req.goal.door = door.id
+            val res = it.sendGoal(req)
+            return object : Future<MoveitResult?> {
+                override fun cancel(p0: Boolean): Boolean = res.cancel(p0)
+                override fun isCancelled(): Boolean = res.isCancelled
+                override fun isDone(): Boolean = res.isDone
+                override fun get(): MoveitResult = MoveitResult.getById(res.get().result.code.`val`)
+                override fun get(p0: Long, p1: TimeUnit?): MoveitResult =  MoveitResult.getById(res.get(p0,p1).result.code.`val`)
+            }
+        }
+        throw RosException("service server failure ${this.topicPullout}")
     }
 
     override fun getBoundingBox(type: Model): Future<BoundingBox3D?> {
