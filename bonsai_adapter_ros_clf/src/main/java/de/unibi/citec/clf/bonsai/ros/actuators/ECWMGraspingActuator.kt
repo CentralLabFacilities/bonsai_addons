@@ -275,7 +275,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
                 goal.goal.useEntity = true
                 goal.goal.entity = MsgTypeFactory.getInstance().createMsg(entity, ecwm_msgs.Entity::class.java)
             }
-            if (carryPose != null && carryPose != "null") goal.goal.carryPose = carryPose
+            if (!carryPose.isNullOrEmpty()) goal.goal.carryPose = carryPose
             val res: ActionFuture<GraspEntityActionGoal, GraspEntityActionFeedback, GraspEntityActionResult> = it.sendGoal(goal)
             return object : Future<MoveitResult?> {
                 override fun cancel(p0: Boolean): Boolean = res.cancel(p0)

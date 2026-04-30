@@ -22,7 +22,7 @@ class HttpClientActuator(private val nodeName: GraphName) : RosNode(),
     URIActuator {
 
     private val logger = org.apache.log4j.Logger.getLogger(javaClass)
-    private var endpoint: String? = null
+    private var endpoint: String = ""
 
     init {
         initialized = false
@@ -30,7 +30,7 @@ class HttpClientActuator(private val nodeName: GraphName) : RosNode(),
 
     @Throws(ConfigurationException::class)
     override fun configure(conf: IObjectConfigurator) {
-        endpoint = conf.requestOptionalValue("endpoint", null)
+        endpoint = conf.requestOptionalValue("endpoint", endpoint)
     }
 
     override fun onStart(connectedNode: ConnectedNode) {
