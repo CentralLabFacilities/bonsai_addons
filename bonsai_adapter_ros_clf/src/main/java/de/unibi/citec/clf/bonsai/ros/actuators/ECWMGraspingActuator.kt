@@ -336,6 +336,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             req.goal.keepScene = false
             req.goal.topDown = topdown
             req.goal.uprightGrasping = upright
+            req.goal.onSuccess = PlaceEntityGoal.MOVE
             var res = it.sendGoal(req)
             return object : Future<MoveitResult?> {
                 override fun cancel(p0: Boolean): Boolean = res.cancel(p0)
