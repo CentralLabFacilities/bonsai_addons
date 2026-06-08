@@ -267,7 +267,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             val goal = it.newGoalMessage()
             goal.goal.entityName = entity.id
             goal.goal.keepScene = keepScene
-            goal.goal.onSuccess = GraspEntityGoal.NOTHING
+            goal.goal.onSuccess = GraspEntityGoal.SETFRAMED
             goal.goal.uprightGrasping = upright
             goal.goal.addGroundPlane = true
             goal.goal.addFallback = addFallback
