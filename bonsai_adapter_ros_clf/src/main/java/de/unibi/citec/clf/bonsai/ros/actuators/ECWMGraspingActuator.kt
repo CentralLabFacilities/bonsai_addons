@@ -199,7 +199,8 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
         fastPose: Boolean,
         addEntities: Boolean,
         clearStorage: Boolean,
-        padding: Float
+        padding: Float,
+        addPlane: Boolean
     ): Future<EntityList?> {
         clientRecognizeObjects?.let {
             var req = it.newMessage()
@@ -210,6 +211,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             req.minProb = minProb.toFloat()
             req.fast6dof = fastPose
             req.padding = padding
+            req.addSafetyPlane = addPlane
             //req.useEntity = false
             //req.addGroundPlane = false
             var res = ResponseFuture<RecognizeObjectsResponse>()
