@@ -295,6 +295,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
         targetStorage: String,
         attachedEntity: Entity?,
         upright: Boolean,
+        keepScene: Boolean
     ): Future<MoveitResult?> {
         clientPlaceEntity?.let {
             var req = it.newGoalMessage()
@@ -305,6 +306,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             req.goal.targetStorage = targetStorage ?: ""
             req.goal.keepScene = false
             req.goal.uprightGrasping = upright
+            req.goal.keepScene = keepScene
             var res = it.sendGoal(req)
             return object : Future<MoveitResult?> {
                 override fun cancel(p0: Boolean): Boolean = res.cancel(p0)
@@ -324,7 +326,8 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
         min_dist: Point3D?,
         max_dist: Point3D?,
         upright: Boolean,
-        topdown: Boolean
+        topdown: Boolean,
+        keepScene: Boolean
     ): Future<MoveitResult?> {
         clientPlaceEntity?.let {
             var req = it.newGoalMessage()
@@ -338,6 +341,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
             req.goal.keepScene = false
             req.goal.topDown = topdown
             req.goal.uprightGrasping = upright
+            req.goal.keepScene = keepScene
             req.goal.onSuccess = PlaceEntityGoal.MOVE
             var res = it.sendGoal(req)
             return object : Future<MoveitResult?> {
@@ -351,10 +355,16 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
         throw RosException("service server failure ${this.topicPlace}")
     }
 
-    override fun placeEntity(attached_entity: Entity?, pose: Pose3D, flip: Boolean, upright: Boolean): Future<MoveitResult?> {
+    override fun placeEntity(
+        attached_entity: Entity?,
+        pose: Pose3D,
+        flip: Boolean,
+        upright: Boolean,
+        keepScene: Boolean
+    ): Future<MoveitResult?> {
         val min_dist = Point3D(-0.15, -0.15, -0.05, LengthUnit.METER)
         val max_dist = Point3D(0.15, 0.15, 0.2, LengthUnit.METER)
-        return placeEntity(attached_entity, pose, flip, min_dist, max_dist, upright)
+        return placeEntity(attached_entity, pose = pose, flip = flip, min_dist = min_dist, max_dist = max_dist, upright = upright, keepScene = keepScene)
     }
 
     override fun wipeArea(
