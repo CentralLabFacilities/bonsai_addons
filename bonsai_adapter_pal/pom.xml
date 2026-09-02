@@ -26,19 +26,19 @@
         <dependency>
             <groupId>de.unibi.citec.clf</groupId>
             <artifactId>bonsai_interfaces</artifactId>
-            <version>0.8-SNAPSHOT</version>
+            <version>0.9-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>de.unibi.citec.clf</groupId>
             <artifactId>bonsai_skills</artifactId>
-            <version>0.8-SNAPSHOT</version>
+            <version>0.9-SNAPSHOT</version>
         </dependency>
 
         <dependency>
             <groupId>de.unibi.citec.clf</groupId>
             <artifactId>bonsai_adapter_ros</artifactId>
-            <version>0.8-SNAPSHOT</version>
+            <version>0.9-SNAPSHOT</version>
         </dependency>
 
         <dependency>
