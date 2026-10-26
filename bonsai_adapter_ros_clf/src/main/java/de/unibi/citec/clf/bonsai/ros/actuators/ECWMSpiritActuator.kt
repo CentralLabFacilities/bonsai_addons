@@ -84,13 +84,13 @@ class ECWMSpiritActuator(private val nodeName: GraphName) : RosNode(), ECWMSpiri
         clientNavigation?.let { client ->
             val req = client.newMessage()
             req.entity = entity.id
-            req.spirit = spirit ?: ""
+            req.affordance = spirit ?: ""
             req.storage = storage ?: ""
-            if (forceMoveThreshold < 255) {
-                req.useBest = true
-                req.useBestThreshold = forceMoveThreshold.toByte()
-            }
-            req.allBlocked = when (onBlocked) {
+
+            req.improveAnyway = true
+            req.improveThreshold = forceMoveThreshold.toByte()
+
+            req.allBlockedBehavior = when (onBlocked) {
                 ECWMSpirit.BlockageHandling.USE_NEAREST -> NavigateToRequest.FORCE_NEAREST
                 ECWMSpirit.BlockageHandling.USE_BEST -> NavigateToRequest.FORCE_BEST
                 else -> NavigateToRequest.NOTHING
@@ -126,9 +126,9 @@ class ECWMSpiritActuator(private val nodeName: GraphName) : RosNode(), ECWMSpiri
         clientSpirit?.let { client ->
             val req = client.newMessage()
             req.entity = spirit.entity.id
-            req.spirit = spirit.affordance
+            req.affordance = spirit.affordance
             req.storage = spirit.storage
-            req.blocked = when (onBlocked) {
+            req.allBlockedBehavior = when (onBlocked) {
                 ECWMSpirit.BlockageHandling.USE_NEAREST -> GetSpiritGoalRequest.FORCE_NEAREST
                 ECWMSpirit.BlockageHandling.USE_BEST -> GetSpiritGoalRequest.FORCE_BEST
                 else -> GetSpiritGoalRequest.FAIL
