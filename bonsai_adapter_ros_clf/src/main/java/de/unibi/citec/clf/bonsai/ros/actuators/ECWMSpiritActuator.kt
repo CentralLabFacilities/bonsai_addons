@@ -31,6 +31,7 @@ class ECWMSpiritActuator(private val nodeName: GraphName) : RosNode(), ECWMSpiri
 
     private var clientNavigation: ServiceClient<NavigateToRequest, NavigateToResponse>? = null
     private var clientSpirit: ServiceClient<GetSpiritGoalRequest, GetSpiritGoalResponse>? = null
+    private var clientSpiritSimple: ServiceClient<GetSpiritSimpleRequest, GetSpiritSimpleResponse>? = null
     private var clientRoomsFromPose: ServiceClient<GetRoomsFromPoseRequest, GetRoomsFromPoseResponse>? = null
     private var clientGetRoomPolygon: ServiceClient<GetRoomPolygonRequest, GetRoomPolygonResponse>? = null
     private var clientGetEntitiesInRoom: ServiceClient<GetEntitiesInRoomRequest, GetEntitiesInRoomResponse>? = null
@@ -39,6 +40,7 @@ class ECWMSpiritActuator(private val nodeName: GraphName) : RosNode(), ECWMSpiri
 
     private var navigationTopic: String = "/ecwm/SpiritNavigation/plan"
     private var spiritTopic: String = "/ecwm/SpiritNavigation/get_sg"
+    private var spiritSimpleTopic: String = "/ecwm/SpiritNavigation/get_spirit"
     private var topicListStorages: String = "/ecwm/AffordanceServices/get_entity_storages"
     private var topicGetRoomsFromPose = "/ecwm/LocationServices/from_pose"
     private var topicGetRoomPolygon = "/ecwm/LocationServices/room_polygon"
@@ -65,12 +67,14 @@ class ECWMSpiritActuator(private val nodeName: GraphName) : RosNode(), ECWMSpiri
         clientGetRoomPolygon = connectedNode.newServiceClient(topicGetRoomPolygon, GetRoomPolygon._TYPE)
         clientGetEntitiesInRoom = connectedNode.newServiceClient(topicGetEntitiesInRoom, GetEntitiesInRoom._TYPE)
         clientListEntityStorage = connectedNode.newServiceClient(topicListStorages, ListStorages._TYPE)
+        clientSpiritSimple = connectedNode.newServiceClient(spiritSimpleTopic, GetSpiritSimple._TYPE)
         initialized = true
     }
 
     override fun destroyNode() {
         clientNavigation?.shutdown()
         clientListEntityStorage?.shutdown()
+        clientSpiritSimple?.shutdown()
     }
 
     override fun getSpiritGoal(
@@ -135,6 +139,27 @@ class ECWMSpiritActuator(private val nodeName: GraphName) : RosNode(), ECWMSpiri
             }
             req.blockedMaxDistance = blockedMaxDist
             val res = ResponseFuture<GetSpiritGoalResponse>()
+            client.call(req, res)
+            return res.toTypeFuture {
+                val targetPose = MsgTypeFactory.getInstance().createType(it.goal.target, Pose2D::class.java)
+                val viewTarget = MsgTypeFactory.getInstance().createType(it.goal.viewTarget, Pose3D::class.java)
+                SpiritGoal(it.goal.camHeigth, viewTarget, targetPose, false)
+            }
+        }
+        throw RosException("service server failure ${this.spiritTopic}")
+    }
+
+    override fun checkSpirit(
+        entity: Entity,
+        affordance: String,
+        storage: String?
+    ): Future<SpiritGoal?> {
+        clientSpiritSimple?.let { client ->
+            val req = client.newMessage()
+            req.entity = entity.id
+            req.affordance = affordance
+            req.storage = storage
+            val res = ResponseFuture<GetSpiritSimpleResponse>()
             client.call(req, res)
             return res.toTypeFuture {
                 val targetPose = MsgTypeFactory.getInstance().createType(it.goal.target, Pose2D::class.java)
