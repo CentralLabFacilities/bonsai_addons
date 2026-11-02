@@ -7,13 +7,13 @@ import de.unibi.citec.clf.bonsai.actuators.ManipulationActuator.MoveitResult
 import de.unibi.citec.clf.bonsai.core.configuration.IObjectConfigurator
 import de.unibi.citec.clf.bonsai.ros.RosNode
 import de.unibi.citec.clf.bonsai.ros.helper.ResponseFuture
-import de.unibi.citec.clf.btl.data.world.Entity
-import de.unibi.citec.clf.btl.data.world.EntityList
-import de.unibi.citec.clf.btl.data.world.Model
 import de.unibi.citec.clf.btl.data.geometry.BoundingBox3D
 import de.unibi.citec.clf.btl.data.geometry.Point3D
 import de.unibi.citec.clf.btl.data.geometry.Point3DStamped
 import de.unibi.citec.clf.btl.data.geometry.Pose3D
+import de.unibi.citec.clf.btl.data.world.Entity
+import de.unibi.citec.clf.btl.data.world.EntityList
+import de.unibi.citec.clf.btl.data.world.Model
 import de.unibi.citec.clf.btl.ros.MsgTypeFactory
 import de.unibi.citec.clf.btl.units.LengthUnit
 import ecwm_msgs.*
@@ -481,7 +481,7 @@ class ECWMGraspingActuator(private val nodeName: GraphName) : RosNode(), ECWMGra
     ): Future<Boolean> {
         clientSetup?.let {
             var req = it.newMessage();
-            req.entitiyNames.addAll(entities.map { it.id })
+            req.entityNames.addAll(entities.map { it.id })
             req.clearAttached = clear_attached
             req.clearScene = clear_scene
             var res = ResponseFuture<SetupPlanningSceneResponse>()
